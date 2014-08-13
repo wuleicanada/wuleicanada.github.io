@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-13T13:14:51+00:00</updated>
+  <updated>2014-08-13T13:19:58+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,11 +14,15 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Title]]></title>
+    <title type="html"><![CDATA[HOTW Web Interface Updates]]></title>
     <link href="http://wuleicanada.github.io/blog/2014/08/13/title/"/>
     <updated>2014-08-13T13:14:32+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/13/title</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>Web framework: Sinatra
+UI: Twitter Bootstrap
+ORM: ActiveRecord
+Database: SQL Server, JDBC
+Deployment: Warbler to package WAR file, and then deploy to JBoss</p>
 ]]></content>
   </entry>
   
