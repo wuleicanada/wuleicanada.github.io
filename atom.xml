@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-18T19:55:26+00:00</updated>
+  <updated>2014-08-18T20:12:12+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -18,13 +18,15 @@
     <link href="http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/"/>
     <updated>2014-08-18T17:58:16+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord</id>
-    <content type="html"><![CDATA[<p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss6. I use JDBC and ActiveRecord to interact with a SQL Server database.</p>
+    <content type="html"><![CDATA[<p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6. I use JDBC and ActiveRecord to interact with a SQL Server database.</p>
 
 <h2>Set up dev environment on Windows 7</h2>
 
 <h3>Install JRuby</h3>
 
 <p>For Windows 7, just download and install the <code>exe(x64)</code> executable.</p>
+
+<h2>Create the App</h2>
 
 <h3>Install necessary gems</h3>
 
