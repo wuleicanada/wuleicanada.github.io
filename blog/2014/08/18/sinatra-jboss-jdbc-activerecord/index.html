@@ -123,7 +123,7 @@ end
 
 <p>The JDBC driver (<code>sqljdbc4.jar</code>) for SQL Server can be downloaded from Microsoft&rsquo;s web site.</p>
 
-<h2>Deploy to JBoss</h2>
+<h2>Deploy to JBoss 6</h2>
 
 <h3>Create WAR file using Warbler</h3>
 
@@ -149,6 +149,11 @@ end
 <p>Now we&rsquo;re ready to rock and roll: <code>jruby --command warble</code></p>
 
 <p>A war file will be created.</p>
+
+<h3>Deployment</h3>
+
+<p>I tried the JBoss 6 Admin console first, unfortuantely I got an Out of Memory error. I worked around it by copying the WAR file to the deploy folder (in my case
+<code>/usr/jboss6/server/default/deploy/</code>) and restarting JBoss.</p>
 </div>
 
 
