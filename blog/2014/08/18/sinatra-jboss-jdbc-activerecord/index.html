@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>HOTW Web Interface Updates - My Octopress Blog</title>
+  <title>Sinatra, JBoss6, JDBC and ActiveRecord - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="Web framework Sinatra UI Twitter Bootstrap
-Bootbox for modal confirmation Database SQL Server
-ActiveRecord as ORM
-JDBC Deployment Warler to package &hellip;">
+  <meta name="description" content="The article describes how to create a JRuby Sinatra web application and deploy it on JBoss6. I use JDBC and ActiveRecord to interact with a SQL &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ JDBC Deployment Warler to package &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wuleicanada.github.io/blog/2014/08/13/title">
+  <link rel="canonical" href="http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
@@ -71,7 +68,7 @@ JDBC Deployment Warler to package &hellip;">
   
   <header>
     
-      <h1 class="entry-title">HOTW Web Interface Updates</h1>
+      <h1 class="entry-title">Sinatra, JBoss6, JDBC and ActiveRecord</h1>
     
     
       <p class="meta">
@@ -87,41 +84,40 @@ JDBC Deployment Warler to package &hellip;">
   
 
 
-<time datetime="2014-08-13T13:14:32+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-08-18T17:58:16+00:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>Web framework</h2>
+<div class="entry-content"><p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss6. I use JDBC and ActiveRecord to interact with a SQL Server database.</p>
 
-<p>Sinatra</p>
+<h2>Set up dev environment on Windows 7</h2>
 
-<h2>UI</h2>
+<h3>Install JRuby</h3>
 
-<ul>
-<li>Twitter Bootstrap</li>
-<li>Bootbox for modal confirmation</li>
-</ul>
+<h3>Install necessary gems</h3>
 
+<p>First, create the Gemfile with the following content:</p>
 
-<h2>Database</h2>
+<pre><code class="ruby">source "http://rubygems.org"
 
-<ul>
-<li>SQL Server</li>
-<li>ActiveRecord as ORM</li>
-<li>JDBC</li>
-</ul>
+gem "sinatra"
+gem "activerecord"
+gem "sinatra-activerecord"
+gem 'activerecord-jdbc-adapter'
+gem 'sinatra-formhelpers-ng'
 
 
-<h2>Deployment</h2>
+group :development do
+  gem "tux"
+end
+</code></pre>
 
-<ul>
-<li>Warler to package project into a WAR file</li>
-<li>deploy to JBoss (upload WAR file using WinSCP, instead of using JBoss web admin console, which throws out of memory error)</li>
-</ul>
+<p>And run <code>jruby --command bundle install</code> to install the gems.</p>
 
+<p>Note: The <code>tux</code> gem works as a console to interact with my Sinatra application. I would love to have the <code>shotgun</code> gem, too, but unfortuantely it&rsquo;s unavaible for JRuby.</p>
 </div>
 
 
@@ -144,7 +140,7 @@ JDBC Deployment Warler to package &hellip;">
   
 
 
-<time datetime="2014-08-13T13:14:32+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-08-18T17:58:16+00:00" pubdate data-updated="true"></time>
       
 
 
@@ -152,7 +148,7 @@ JDBC Deployment Warler to package &hellip;">
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2014/08/13/title/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2014/08/13/title/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/" >Tweet</a>
   
   
   
@@ -175,7 +171,7 @@ JDBC Deployment Warler to package &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/08/13/title/">HOTW Web Interface Updates</a>
+        <a href="/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/">Sinatra, JBoss6, JDBC and ActiveRecord</a>
       </li>
     
   </ul>
