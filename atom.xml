@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-18T19:42:18+00:00</updated>
+  <updated>2014-08-18T19:46:33+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -54,22 +54,24 @@ end
 
 <h3>Create WAR file using Warbler</h3>
 
-<p>First step is to install Warbler as a gem <code>jruby --command gem install warbler</code>. Next, we need to configure Warbler:
-* Create a new folder called <code>config</code> under our application root
-* Run <code>jruby --command warble config</code>, which generates a configuration template called <code>warble.rb</code> under the <code>config</code> folder
-* Edit <code>config\warble.rb</code> and update these lines:
-&#8220;`ruby
-    # Application directories to be included in the webapp.
-    config.dirs = %w(views)</p>
+<p>First step is to install Warbler as a gem <code>jruby --command gem install warbler</code>. Next, we need to configure Warbler:</p>
 
-<pre><code># Additional files/directories to include, above those in config.dirs
-config.includes = FileList['app.rb', 'sqljdbc4.jar']
+<ul>
+<li>Create a new folder called <code>config</code> under our application root</li>
+<li>Run <code>jruby --command warble config</code>, which generates a configuration template called <code>warble.rb</code> under the <code>config</code> folder</li>
+<li>Edit <code>config\warble.rb</code> and update these lines:</li>
+</ul>
 
-# Uncomment this if you don't want to package rails gem.
-config.gems -= ["rails"]
+
+<pre><code class="ruby">    # Application directories to be included in the webapp.
+    config.dirs = %w(views)
+
+    # Additional files/directories to include, above those in config.dirs
+    config.includes = FileList['app.rb', 'sqljdbc4.jar']
+
+    # Uncomment this if you don't want to package rails gem.
+    config.gems -= ["rails"]
 </code></pre>
-
-<p>&#8220;`</p>
 
 <p>Now we&rsquo;re ready to rock and roll: <code>jruby --command warble</code></p>
 
