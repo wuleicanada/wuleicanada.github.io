@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-18T19:40:45+00:00</updated>
+  <updated>2014-08-18T19:42:18+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -70,6 +70,10 @@ config.gems -= ["rails"]
 </code></pre>
 
 <p>&#8220;`</p>
+
+<p>Now we&rsquo;re ready to rock and roll: <code>jruby --command warble</code></p>
+
+<p>A war file will be created.</p>
 ]]></content>
   </entry>
   
