@@ -122,6 +122,27 @@ end
 <p>Note: The <code>tux</code> gem works as a console to interact with my Sinatra application. I would also love to have the <code>shotgun</code> gem, but unfortuantely it&rsquo;s unavaible for JRuby.</p>
 
 <p>The JDBC driver (<code>sqljdbc4.jar</code>) for SQL Server can be downloaded from Microsoft&rsquo;s web site.</p>
+
+<h2>Deploy to JBoss</h2>
+
+<h3>Create WAR file using Warbler</h3>
+
+<p>First step is to install Warbler as a gem <code>jruby --command gem install warbler</code>. Next, we need to configure Warbler:
+* Create a new folder called <code>config</code> under our application root
+* Run <code>jruby --command warble config</code>, which generates a configuration template called <code>warble.rb</code> under the <code>config</code> folder
+* Edit <code>config\warble.rb</code> and update these lines:
+```ruby
+    # Application directories to be included in the webapp.
+    config.dirs = %w(views)</p>
+
+<pre><code># Additional files/directories to include, above those in config.dirs
+config.includes = FileList['app.rb', 'sqljdbc4.jar']
+
+# Uncomment this if you don't want to package rails gem.
+config.gems -= ["rails"]
+</code></pre>
+
+<p>```</p>
 </div>
 
 
