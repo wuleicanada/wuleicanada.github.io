@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-18T18:32:54+00:00</updated>
+  <updated>2014-08-18T18:45:53+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -47,6 +47,8 @@ end
 <p>And run <code>jruby --command bundle install</code> to install the gems.</p>
 
 <p>Note: The <code>tux</code> gem works as a console to interact with my Sinatra application. I would also love to have the <code>shotgun</code> gem, but unfortuantely it&rsquo;s unavaible for JRuby.</p>
+
+<p>The JDBC driver (<code>sqljdbc4.jar</code>) for SQL Server can be downloaded from Microsoft&rsquo;s web site.</p>
 ]]></content>
   </entry>
   
