@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-19T14:13:53+00:00</updated>
+  <updated>2014-08-19T14:14:33+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -28,9 +28,11 @@
 
 <h2>Create the App</h2>
 
-<p>Let&rsquo;s create a folder with the same name of our JBoss application context.
-<code>md myapp</code>
-<code>cd myapp</code></p>
+<p>Let&rsquo;s create a folder with the same name of our JBoss application context.</p>
+
+<p><code>md myapp</code></p>
+
+<p><code>cd myapp</code></p>
 
 <h3>Install necessary gems</h3>
 
