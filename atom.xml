@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-19T14:01:15+00:00</updated>
+  <updated>2014-08-19T14:04:25+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Sinatra, JBoss6, JDBC and ActiveRecord]]></title>
+    <title type="html"><![CDATA[Sinatra, JBoss 6, JDBC and ActiveRecord]]></title>
     <link href="http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/"/>
     <updated>2014-08-18T17:58:16+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord</id>
@@ -81,7 +81,7 @@ end
 
 <h3>Deploy the WAR file</h3>
 
-<p>I tried the JBoss 6 Admin console first, unfortuantely I got an Out of Memory error. I worked around it by copying the WAR file to the deploy folder (in my case
+<p>I tried the JBoss 6 Admin console first, but got an Out of Memory error. I worked around it by copying the WAR file to the deploy folder (in my case
 <code>/usr/jboss6/server/default/deploy/</code>) and restarting JBoss.</p>
 ]]></content>
   </entry>
