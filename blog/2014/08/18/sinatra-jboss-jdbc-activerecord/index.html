@@ -149,23 +149,19 @@ end
 ) ON [PRIMARY]
 </code></pre>
 
+<p>Let&rsquo;s insert a user <code>insert users (firstname, lastname, email) values ('John', 'Smith', 'john@smith.com')</code></p>
+
 <h3>Code the application</h3>
 
 <p>Our classic style Sinatra application consists of the following files:</p>
 
-<ol>
-<li>config.ru</li>
-</ol>
-
+<p><em>config.ru</em></p>
 
 <pre><code class="ruby">require File.join(File.dirname(__FILE__), 'app')
 run Sinatra::Application
 </code></pre>
 
-<ol>
-<li>app.rb</li>
-</ol>
-
+<p><em>app.rb</em></p>
 
 <pre><code class="ruby">require 'rubygems'
 require "sinatra"
@@ -227,6 +223,46 @@ put "/users/:id" do
     end
 end
 </code></pre>
+
+<p>Our layouts and templates sit in the <em>views</em> folder with the following content.</p>
+
+<p><em>layout.erb</em></p>
+
+<pre><code class="ruby">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;MyApp&lt;/title&gt;
+    &lt;link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"&gt;&lt;/script&gt;   
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;%= yield %&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p><em>users/index.erb</em></p>
+
+<pre><code class="ruby">&lt;%= h @users %&gt;
+</code></pre>
+
+<p><em>users/show.erb</em></p>
+
+<pre><code class="ruby">&lt;%= form('/users/' + @user.id.to_s, :put) %&gt;
+    &lt;div&gt;First Name: &lt;%= input(:user, :firstname, :value=&gt;h(@user.firstname), :size=&gt;20)%&gt;&lt;/div&gt;
+    &lt;div&gt;Last Name: &lt;%= input(:user, :lastname, :value=&gt;h(@user.lastname), :size=&gt;20)%&gt;&lt;/div&gt;
+    &lt;div&gt;Email: &lt;%= input(:user, :email, :value=&gt;h(@user.email), :size=&gt;40, :disabled=&gt;:disabled)%&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;%= checkbox(:user, :consent, '1', :label=&gt; false) %&gt;&lt;/span&gt; Yes! I accept the term of service.&lt;/div&gt;
+    &lt;button type="submit" class="btn btn-default"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<h3>Start our dev server</h3>
+
+<p>Run <code>jruby app.rb</code> and now our wonderful little app will be available at <a href="http://localhost:4567/users/">http://localhost:4567/users/</a></p>
 
 <h2>Deploy to JBoss 6</h2>
 
