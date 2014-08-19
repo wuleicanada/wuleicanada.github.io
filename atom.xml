@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-19T15:50:56+00:00</updated>
+  <updated>2014-08-19T15:54:44+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -195,7 +195,7 @@ end
 
 <h3>Create WAR file using Warbler</h3>
 
-<p>First step is to install Warbler as a gem <code>jruby --command gem install warbler</code>. Next, we need to configure Warbler:</p>
+<p>Let&rsquo;s get started by installing Warbler as a gem <code>jruby --command gem install warbler</code>. Next, we need to configure Warbler:</p>
 
 <ul>
 <li>Create a new folder called <code>config</code> under our application root</li>
