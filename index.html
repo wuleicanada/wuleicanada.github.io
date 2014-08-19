@@ -112,9 +112,9 @@
 
 <h3>Install necessary gems</h3>
 
-<p>First, install Bundler <code>jruby --command gem install bundler</code>.</p>
+<p>First things first, install Bundler <code>jruby --command gem install bundler</code>.</p>
 
-<p>Next, create the Gemfile with the following content:</p>
+<p>Now we&rsquo;ll create the Gemfile with the following content:</p>
 
 <pre><code class="ruby">source "http://rubygems.org"
 
@@ -130,11 +130,27 @@ group :development do
 end
 </code></pre>
 
-<p>And run <code>jruby --command bundle install</code> to install the gems.</p>
+<p>And run <code>jruby --command bundle install</code> to get the gems ready.</p>
 
 <p>Note: The <code>tux</code> gem works as a console to interact with my Sinatra application. I would also love to have the <code>shotgun</code> gem, but unfortuantely it&rsquo;s unavaible for JRuby.</p>
 
-<p>The JDBC driver (<code>sqljdbc4.jar</code>) for SQL Server can be downloaded from Microsoft&rsquo;s web site.</p>
+<p>The JDBC driver (<code>sqljdbc4.jar</code>) for SQL Server can be downloaded from Microsoft&rsquo;s web site. We&rsquo;ll just save it to our application root.</p>
+
+<h3>SQL Server table</h3>
+
+<p>Our application will use one table called &ldquo;users&rdquo;.</p>
+
+<pre><code class="sql">CREATE TABLE [users](
+    [id] [int] IDENTITY(1,1) NOT NULL,
+    [firstname] [varchar](32) NULL,
+    [lastname] [varchar](32) NULL,
+    [email] [varchar](64) NULL,
+ CONSTRAINT [PK_users] PRIMARY KEY CLUSTERED 
+(
+    [id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+</code></pre>
 
 <h2>Deploy to JBoss 6</h2>
 
