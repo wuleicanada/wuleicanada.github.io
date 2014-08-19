@@ -153,70 +153,74 @@ end
 
 <p>Our classic style Sinatra application consists of the following</p>
 
-<p>config.ru
-<code>ruby
-require File.join(File.dirname(__FILE__), 'app')
+<p>config.ru</p>
+
+<pre><code class="ruby">require File.join(File.dirname(__FILE__), 'app')
 run Sinatra::Application
-</code></p>
+</code></pre>
 
-<p>app.rb
-```ruby
-require &lsquo;rubygems&rsquo;
-require &ldquo;sinatra&rdquo;
-require &ldquo;sinatra/activerecord&rdquo;
-require &lsquo;sinatra/form_helpers&rsquo;
-require &lsquo;active_record&rsquo;
-require &lsquo;active_record/connection_adapters/jdbc_adapter&rsquo;
-require &lsquo;sqljdbc4.jar&rsquo;</p>
+<p>app.rb</p>
 
-<p>config_dev = {
-    :adapter => &ldquo;jdbc&rdquo;,
-    :driver => &ldquo;com.microsoft.sqlserver.jdbc.SQLServerDriver&rdquo;,<br/>
-    :url => &ldquo;jdbc:sqlserver://172.26.6.70:1433;databaseName=ccn_list&rdquo;,
-    :username => &ldquo;ccndbo&rdquo;,
-    :password => &ldquo;monday&rdquo;
-}</p>
+<pre><code class="ruby">require 'rubygems'
+require "sinatra"
+require "sinatra/activerecord"
+require 'sinatra/form_helpers'
+require 'active_record'
+require 'active_record/connection_adapters/jdbc_adapter'
+require 'sqljdbc4.jar'
 
-<p>config_jboss = {
-    :adapter => &ldquo;jdbc&rdquo;,
-    :driver => &ldquo;com.microsoft.sqlserver.jdbc.SQLServerDriver&rdquo;,<br/>
-    :jndi => &ldquo;ccn_list_production&rdquo;
-}</p>
 
-<p>ActiveRecord::Base.establish_connection(defined?($servlet_context) ? config_jboss : config_dev)</p>
+config_dev = {
+    :adapter =&gt; "jdbc", 
+    :driver =&gt; "com.microsoft.sqlserver.jdbc.SQLServerDriver",  
+    :url =&gt; "jdbc:sqlserver://SERVER:1433;databaseName=DB_NAME", 
+    :username =&gt; "USER", 
+    :password =&gt; "PASS"
+}
 
-<p>class User &lt; ActiveRecord::Base
+config_jboss = {
+    :adapter =&gt; "jdbc", 
+    :driver =&gt; "com.microsoft.sqlserver.jdbc.SQLServerDriver",  
+    :jndi =&gt; "DATASOURCE_NAME"
+}
+
+ActiveRecord::Base.establish_connection(defined?($servlet_context) ? config_jboss : config_dev)
+
+class User &lt; ActiveRecord::Base
     validates :consent, acceptance: true, presence: true
     validates :firstname, presence: true
     validates :lastname, presence: true
-    validates :email, presence: true, format: { with: /\A[^@]+@([^@.]+.)+[^@.]+\z/ }
-end</p>
+    validates :email, presence: true, format: { with: /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/ }
+end
 
-<p>helpers do
+
+helpers do
     def h(text)
         Rack::Utils.escape_html(text)
     end
-end</p>
+end
 
-<p>get &ldquo;/users&rdquo; do
+
+get "/users" do
     @users = User.take(10)
-    erb :&ldquo;users/index&rdquo;
-end</p>
+    erb :"users/index"
+end
 
-<p>get &ldquo;/users/:id&rdquo; do
+
+get "/users/:id" do
     @user = User.find(params[:id])
-    erb :&ldquo;users/show&rdquo;
-end</p>
+    erb :"users/show"
+end
 
-<p>put &ldquo;/users/:id&rdquo; do
+put "/users/:id" do
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-        redirect &lsquo;/users&rsquo;
+        redirect '/users'
     else
-        erb :&ldquo;users/show&rdquo;
+        erb :"users/show"
     end
 end
-```</p>
+</code></pre>
 
 <h2>Deploy to JBoss 6</h2>
 
