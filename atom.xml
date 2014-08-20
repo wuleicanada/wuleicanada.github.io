@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-20T17:11:47+00:00</updated>
+  <updated>2014-08-20T17:12:46+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -85,7 +85,7 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
 
 <p>We also use a little bit of Twitter Bootstrap for our views.</p>
 
-<p>The source code of the application is available for download at <a href="https://github.com/wuleicanada/myapp">https://github.com/wuleicanada/myapp</a> .</p>
+<p>The source code of the application is available on GitHub at <a href="https://github.com/wuleicanada/myapp">https://github.com/wuleicanada/myapp</a> .</p>
 
 <h2>Set up dev environment on Windows 7</h2>
 
