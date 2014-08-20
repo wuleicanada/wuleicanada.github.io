@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-20T14:41:55+00:00</updated>
+  <updated>2014-08-20T15:26:31+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging With GitHub]]></title>
+    <link href="http://wuleicanada.github.io/blog/2014/08/20/blogging-with-github/"/>
+    <updated>2014-08-20T15:07:03+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2014/08/20/blogging-with-github</id>
+    <content type="html"><![CDATA[<p>This blog is hosted by <a href="https://pages.github.com/">GitHub Pages</a> and built with <a href="http://octopress.org/">Octopress</a>.</p>
+
+<p>I&rsquo;m using <a href="https://c9.io/">Cloud 9</a> as a web-based IDE.</p>
+
+<p>As a Ubuntu user and a Ruby enthusiast who prefers simple solutions, they&rsquo;re a perfect combo.</p>
+
+<p>I was just about to blog on how to set them up, when I found out <a href="http://www.vaccinekeeper.com/blog/2013/08/22/octopress-with-github-pages-and-cloud9/">this guy&rsquo;s post</a> beat me by a year. :-)
+It&rsquo;s a well written post which gives you step by step instructions.</p>
+
+<p>I have just the following to add:</p>
+
+<p>To set up your SSH key authentication, you can locate you Cloud 9 SSH key by going to &ldquo;Your Account&rdquo;, and then &ldquo;Show SSH Key&rdquo; under &ldquo;Account Settings&rdquo; on the right hand side.
+Copy that key, click the Settings icon on the top right corner of your GitHub page, and then &ldquo;SSH Keys&rdquo; on the left side. Click &ldquo;Add SSH Key&rdquo; on the right to add your Cloud 9 SSH Key.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sinatra, JBoss 6, JDBC and ActiveRecord]]></title>
