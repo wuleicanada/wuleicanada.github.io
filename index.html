@@ -321,6 +321,7 @@ run Sinatra::Application
 <span class='line-number'>59</span>
 <span class='line-number'>60</span>
 <span class='line-number'>61</span>
+<span class='line-number'>62</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 </span><span class='line'><span class="nb">require</span> <span class="s2">&quot;sinatra&quot;</span>
 </span><span class='line'><span class="nb">require</span> <span class="s2">&quot;sinatra/activerecord&quot;</span>
@@ -346,7 +347,8 @@ run Sinatra::Application
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1"># On JBoss $servlet_context is defined</span>
-</span><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span><span class="n">defined?</span><span class="p">(</span><span class="vg">$servlet_context</span><span class="p">)</span> <span class="p">?</span> <span class="n">config_jboss</span> <span class="p">:</span> <span class="n">config_dev</span><span class="p">)</span>
+</span><span class='line'><span class="n">config</span> <span class="o">=</span> <span class="n">defined?</span><span class="p">(</span><span class="vg">$servlet_context</span><span class="p">)</span> <span class="p">?</span> <span class="n">config_jboss</span> <span class="p">:</span> <span class="n">config_dev</span>
+</span><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
 </span><span class='line'>  <span class="n">validates</span> <span class="ss">:consent</span><span class="p">,</span> <span class="ss">acceptance</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
