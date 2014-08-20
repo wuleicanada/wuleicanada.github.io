@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6. I use JDBC and ActiveRecord to interact with a SQL &hellip;">
+  <meta name="description" content="The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6. It covers these key points: ActiveRecord (including &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,7 +91,19 @@
   </header>
 
 
-<div class="entry-content"><p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6. I use JDBC and ActiveRecord to interact with a SQL Server database.</p>
+<div class="entry-content"><p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6.</p>
+
+<p>It covers these key points:</p>
+
+<ul>
+<li>ActiveRecord (including validation)</li>
+<li>JDBC (including JBoss connection pool)</li>
+<li>SQL Server</li>
+<li>Form Helpers</li>
+<li>tux</li>
+<li>Warbler</li>
+</ul>
+
 
 <h2>Set up dev environment on Windows 7</h2>
 
@@ -180,12 +192,14 @@ config_dev = {
     :password =&gt; "PASS"
 }
 
+# JBoss connectoin pool. Need to set up datasource in JBoss
 config_jboss = {
     :adapter =&gt; "jdbc", 
     :driver =&gt; "com.microsoft.sqlserver.jdbc.SQLServerDriver",  
     :jndi =&gt; "DATASOURCE_NAME"
 }
 
+# On JBoss $servlet_context is defined
 ActiveRecord::Base.establish_connection(defined?($servlet_context) ? config_jboss : config_dev)
 
 class User &lt; ActiveRecord::Base
