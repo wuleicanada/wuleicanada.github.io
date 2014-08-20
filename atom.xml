@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-20T14:37:26+00:00</updated>
+  <updated>2014-08-20T14:38:15+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -31,6 +31,10 @@
 <li>Warbler</li>
 </ul>
 
+
+<p>We also use a little bit of Twitter Bootstrap for our views.</p>
+
+<p>The source code of our application is available for download at <a href="https://github.com/wuleicanada/myapp">https://github.com/wuleicanada/myapp</a> .</p>
 
 <h2>Set up dev environment on Windows 7</h2>
 
