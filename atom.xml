@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-20T15:38:09+00:00</updated>
+  <updated>2014-08-20T15:43:19+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -57,7 +57,7 @@ Copy that key, click the Settings icon on the top right corner of your GitHub pa
         from /usr/local/rvm/gems/ruby-2.1.1@rails4/bin/ruby_executable_hooks:15:in `&lt;main&gt;'
 </code></pre>
 
-<p>The solution is run <code>export LC_ALL=en_US.UTF-8</code> first. To save time, I would join the commands as <code>export LC_ALL=en_US.UTF-8 &amp;&amp; rake generate</code>.</p>
+<p>The solution is run <code>export LC_ALL=C.UTF-8</code> first. To save time, I would join the commands as <code>export LC_ALL=C.UTF-8 &amp;&amp; rake generate</code>.</p>
 ]]></content>
   </entry>
   
