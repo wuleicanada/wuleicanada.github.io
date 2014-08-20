@@ -131,6 +131,9 @@ Copy that key, click the Settings icon on the top right corner of your GitHub pa
 </code></pre>
 
 <p>The solution is run <code>export LC_ALL=C.UTF-8</code> first. To save time, I would join the commands as <code>export LC_ALL=C.UTF-8 &amp;&amp; rake generate</code>.</p>
+
+<p>(Some posts on the web suggest <code>expoort LC_ALL=en_US.UTF-8</code>, but that won&rsquo;t work for the current version Cloud 9 at the time of writing.
+To be sure, you can run <code>locale -a</code> to get a list of available locales.)</p>
 </div>
 
 
