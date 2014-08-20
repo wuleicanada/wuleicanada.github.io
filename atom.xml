@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-20T15:43:52+00:00</updated>
+  <updated>2014-08-20T15:46:51+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -32,7 +32,7 @@ It&rsquo;s a well written post which gives you step by step instructions.</p>
 <ol>
 <li><p>To set up your SSH key authentication, you can locate you Cloud 9 SSH key by going to &ldquo;Your Account&rdquo;, and then &ldquo;Show SSH Key&rdquo; under &ldquo;Account Settings&rdquo; on the right hand side.
 Copy that key, click the Settings icon on the top right corner of your GitHub page, and then &ldquo;SSH Keys&rdquo; on the left side. Click &ldquo;Add SSH Key&rdquo; on the right to add your Cloud 9 SSH Key.</p></li>
-<li><p>If you use non-ASCII characters, for example, if you&rsquo;re writing in German, you may get the followoing error when you run <code>rake generate</code>:</p></li>
+<li><p>In case you use non-ASCII characters, for example, if you&rsquo;re writing in German, you may get the followoing error when you run <code>rake generate</code>:</p></li>
 </ol>
 
 
