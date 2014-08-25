@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-20T17:12:46+00:00</updated>
+  <updated>2014-08-25T14:51:11+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Load Test With Gatling]]></title>
+    <link href="http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling/"/>
+    <updated>2014-08-25T14:24:09+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling</id>
+    <content type="html"><![CDATA[<p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>. I used it to test a Kentico 7 web site.
+I love it so much that I&rsquo;ll ditch Apache JMeter from now on.</p>
+
+<p>While both have a GUI to record tests, the major difference between them is JMeter tests are saved as .jmx files (XML),
+but Gatling tests are .scala scripts written in Scala-based DSL.</p>
+
+<p>Another interesting option would be <a href="https://github.com/flood-io/ruby-jmeter">Ruby JMeter</a>, but I haven&rsquo;t had a chance to try it yet.</p>
+
+<p>This <a href="https://flood.io/blog/13-stress-testing-jmeter-and-gatling">blog from flood.io</a> points out that Gatling outperformances JMeter with over 20,000 concurrent users.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogging With GitHub, Octopress and Cloud 9]]></title>
