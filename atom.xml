@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-26T15:29:24+00:00</updated>
+  <updated>2014-08-26T15:34:08+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Load Test With Gatling]]></title>
     <link href="http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling/"/>
-    <updated>2014-08-25T14:24:09+00:00</updated>
+    <updated>2014-08-25T14:25:09+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling</id>
     <content type="html"><![CDATA[<p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>, and used it to test a Kentico 7 web site.
 I love it so much that I&rsquo;ll ditch Apache JMeter from now on.</p>
@@ -44,7 +44,7 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
   <entry>
     <title type="html"><![CDATA[Blogging With GitHub, Octopress and Cloud 9]]></title>
     <link href="http://wuleicanada.github.io/blog/2014/08/20/blogging-with-github/"/>
-    <updated>2014-08-20T15:07:03+00:00</updated>
+    <updated>2014-08-20T15:08:03+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/20/blogging-with-github</id>
     <content type="html"><![CDATA[<p>This blog is hosted by <a href="https://pages.github.com/">GitHub Pages</a> and built with <a href="http://octopress.org/">Octopress</a>.</p>
 
@@ -95,7 +95,7 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
   <entry>
     <title type="html"><![CDATA[Sinatra, JBoss 6, JDBC and ActiveRecord]]></title>
     <link href="http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/"/>
-    <updated>2014-08-18T17:58:16+00:00</updated>
+    <updated>2014-08-18T17:58:17+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/18/sinatra-jboss-jdbc-activerecord</id>
     <content type="html"><![CDATA[<p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6.</p>
 
