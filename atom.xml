@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-26T14:54:31+00:00</updated>
+  <updated>2014-08-26T14:57:40+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -18,7 +18,7 @@
     <link href="http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling/"/>
     <updated>2014-08-25T14:24:09+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling</id>
-    <content type="html"><![CDATA[<p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>. I used it to test a Kentico 7 web site.
+    <content type="html"><![CDATA[<p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>, and used it to test a Kentico 7 web site.
 I love it so much that I&rsquo;ll ditch Apache JMeter from now on.</p>
 
 <p>While both have a GUI to record tests, the major difference between them is JMeter tests are saved as .jmx files (XML),
