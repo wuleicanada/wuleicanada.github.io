@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-26T15:01:48+00:00</updated>
+  <updated>2014-08-26T15:11:11+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -31,12 +31,13 @@ but Gatling tests are .scala scripts written in Scala-based DSL.</p>
 <p>I must admit, however, that Gatling stil has a few rough edges, at least on Windows.
 For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;s file name was too long for Windows (260 characters maximum).</p>
 
-<p>Similarly, Gatling&rsquo;s QuickStart documentation warns:
-&#8220;`
-We ask you to not use a path containing spaces, as this can cause issues.</p>
+<p>Additionally, Gatling&rsquo;s QuickStart documentation warns:</p>
 
-<p>For Windows users, we also recommend that you do not place Gatling in the Programs folder as there may be permission issues.
-&#8220;`</p>
+<ul>
+<li>We ask you to not use a path containing spaces, as this can cause issues.</li>
+<li>For Windows users, we also recommend that you do not place Gatling in the Programs folder as there may be permission issues.</li>
+</ul>
+
 ]]></content>
   </entry>
   
