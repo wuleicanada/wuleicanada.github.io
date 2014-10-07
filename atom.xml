@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-08-26T15:34:08+00:00</updated>
+  <updated>2014-10-07T17:57:28+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Logging Real Client IPs in IIS 7]]></title>
+    <link href="http://wuleicanada.github.io/blog/2014/10/07/logging-real-client-ips-in-iis-7/"/>
+    <updated>2014-10-07T17:48:26+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2014/10/07/logging-real-client-ips-in-iis-7</id>
+    <content type="html"><![CDATA[<p>If your IIS 7 server sits behind a load balancer or a proxy server, it will always
+record the IP of the proxy or load balancer as the client IP, which makes it impossible
+to determine the origin of your visitors.</p>
+
+<p>The solution is to install <a href="https://devcentral.f5.com/articles/x-forwarded-for-log-filter-for-windows-servers">an ISAPI</a> to capture the <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For</a> header.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Load Test With Gatling]]></title>
