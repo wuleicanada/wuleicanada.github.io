@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-10-07T17:57:28+00:00</updated>
+  <updated>2014-11-05T19:52:12+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Online Contrast Ratio Checker]]></title>
+    <link href="http://wuleicanada.github.io/blog/2014/11/05/online-contrast-ratio-checker/"/>
+    <updated>2014-11-05T19:39:54+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2014/11/05/online-contrast-ratio-checker</id>
+    <content type="html"><![CDATA[<p>While working on a web accessibility project, I came across this online contrast ratio checker:</p>
+
+<p><a href="http://leaverou.github.io/">http://leaverou.github.io/</a></p>
+
+<p>It lets you enter background colour and text colour (as RGB, hex, HSLA, colour names, etc.), and calculates the contrast.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Logging Real Client IPs in IIS 7]]></title>
