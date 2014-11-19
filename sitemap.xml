@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7/</loc>
+    <lastmod>2014-11-19T15:42:57+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2014/11/05/online-contrast-ratio-checker/</loc>
     <lastmod>2014-11-05T19:39:54+00:00</lastmod>
     <priority>0.8</priority>
@@ -34,17 +40,17 @@
   
   
   <url>
-    <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2014-11-05T19:52:12+00:00</lastmod>
+    <loc>http://wuleicanada.github.io/</loc>
+    <lastmod>2014-11-19T16:04:14+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2014-11-05T19:52:12+00:00</lastmod>
+    <loc>http://wuleicanada.github.io/blog/archives/</loc>
+    <lastmod>2014-11-19T16:04:14+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.7</priority>
   </url>
   
   

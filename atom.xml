@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-11-05T19:52:12+00:00</updated>
+  <updated>2014-11-19T16:04:14+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Failed Attempt to Upgrade Lucene.Net for Kentico 7]]></title>
+    <link href="http://wuleicanada.github.io/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7/"/>
+    <updated>2014-11-19T15:42:57+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7</id>
+    <content type="html"><![CDATA[<p>A web site I&rsquo;m working on uses Kentico CMS version 7. Occasionally its search function would break down due to a corrupted Lucene index.</p>
+
+<p>Kentico CMS&rsquo;s SmartSearch is built on top of Lucene.Net. Kentico 7 comes with Lucene.Net 2.1.0.3, a very old version. One of the things I tried was to upgrade Lucene.Net.</p>
+
+<p>Although the latest version is 3.0.3, I decided to go with 2.9.4.1.</p>
+
+<p><code>nuget install Lucene.Net -Version 2.9.4.1</code></p>
+
+<p>Then I replaced Kentico&rsquo;s Lucene.Net.dll and dependency ICSharpCode.SharpZipLib.dll.</p>
+
+<p>As expected, Kentico throws an error &ldquo;Could not load file or assembly &lsquo;Lucene.Net, Version=2.1.0.3, Culture=neutral, PublicKeyToken=d846ee227f01c7a1&rsquo; or one of its dependencies. The located assembly&rsquo;s manifest definition does not match the assembly reference.&rdquo;</p>
+
+<p>Trying to work around it, I added the following to web.config:</p>
+
+<pre><code>   &lt;runtime&gt;
+      &lt;assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1"&gt;
+    &lt;dependentAssembly&gt;
+        &lt;assemblyIdentity name="Lucene.Net" publicKeyToken="d846ee227f01c7a1"/&gt;
+        &lt;bindingRedirect oldVersion="2.1.0.3" newVersion="2.9.4.1"/&gt;
+    &lt;/dependentAssembly&gt;
+      &lt;/assemblyBinding&gt;
+   &lt;/runtime&gt;
+</code></pre>
+
+<p>Unfortunately, it didn&rsquo;t help. A closer look at the error message shows the except was thrown by CMS.LicenseProvider.LicenseHelper.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Online Contrast Ratio Checker]]></title>
