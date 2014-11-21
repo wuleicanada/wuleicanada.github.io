@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-11-21T16:52:10+00:00</updated>
+  <updated>2014-11-21T16:53:44+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -18,7 +18,7 @@
     <link href="http://wuleicanada.github.io/blog/2014/11/21/maintenance-page-for-net-applications-using-app-offline-dot-htm/"/>
     <updated>2014-11-21T16:15:30+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2014/11/21/maintenance-page-for-net-applications-using-app-offline-dot-htm</id>
-    <content type="html"><![CDATA[<p>The easiest way to create a maintenance page for a .Net applications is creating a static html page called
+    <content type="html"><![CDATA[<p>The easiest way to create a maintenance page for a .Net application is creating a static html page called
 app_offline.htm and saving it to the root directory.</p>
 
 <p>When IIS detects the existence of app_offline.htm, it will not only display the maintenance page, but also
