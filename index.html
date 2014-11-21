@@ -195,15 +195,26 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
 
 <p>Trying to work around it, I added the following to web.config:</p>
 
-<pre><code class="XML">   &lt;runtime&gt;
-      &lt;assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1"&gt;
-        &lt;dependentAssembly&gt;
-            &lt;assemblyIdentity name="Lucene.Net" publicKeyToken="d846ee227f01c7a1"/&gt;
-            &lt;bindingRedirect oldVersion="2.1.0.3" newVersion="2.9.4.1"/&gt;
-        &lt;/dependentAssembly&gt;
-      &lt;/assemblyBinding&gt;
-   &lt;/runtime&gt;
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>   <span class="nt">&lt;runtime&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;assemblyBinding</span> <span class="na">xmlns=</span><span class="s">&quot;urn:schemas-microsoft-com:asm.v1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;dependentAssembly&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&quot;Lucene.Net&quot;</span> <span class="na">publicKeyToken=</span><span class="s">&quot;d846ee227f01c7a1&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;bindingRedirect</span> <span class="na">oldVersion=</span><span class="s">&quot;2.1.0.3&quot;</span> <span class="na">newVersion=</span><span class="s">&quot;2.9.4.1&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/dependentAssembly&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/assemblyBinding&gt;</span>
+</span><span class='line'>   <span class="nt">&lt;/runtime&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>Unfortunately, it didn&rsquo;t help. A closer look at the error message shows the except was thrown by CMS.LicenseProvider.LicenseHelper.</p>
 </div>
