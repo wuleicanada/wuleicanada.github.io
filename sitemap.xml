@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2014/11/21/maintenance-page-for-net-application-using-app-offline-dot-htm/</loc>
+    <lastmod>2014-11-21T16:15:30+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7/</loc>
     <lastmod>2014-11-19T15:42:57+00:00</lastmod>
     <priority>0.8</priority>
@@ -41,14 +47,14 @@
   
   <url>
     <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2014-11-19T16:09:26+00:00</lastmod>
+    <lastmod>2014-11-21T16:50:05+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2014-11-19T16:09:26+00:00</lastmod>
+    <lastmod>2014-11-21T16:50:05+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
