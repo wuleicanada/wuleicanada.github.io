@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2014-11-21T17:34:04+00:00</updated>
+  <updated>2014-12-12T19:44:27+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -123,7 +123,7 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
     <id>http://wuleicanada.github.io/blog/2014/11/05/online-contrast-ratio-checker</id>
     <content type="html"><![CDATA[<p>While working on a web accessibility project, I came across this online contrast ratio checker:</p>
 
-<p><a href="http://leaverou.github.io/">http://leaverou.github.io/</a></p>
+<p><a href="http://leaverou.github.io/contrast-ratio/">http://leaverou.github.io/contrast-ratio/</a></p>
 
 <p>It lets you enter background colour and text colour (as RGB, hex, HSLA, colour names, etc.), and calculates the contrast.</p>
 ]]></content>
