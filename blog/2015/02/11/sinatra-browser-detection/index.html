@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Load Test With Gatling - Lei Wu, Web Developer</title>
+  <title>Sinatra Browser Detection - Lei Wu, Web Developer</title>
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="Recently I discovered Gatling, a load testing framework written in Scala, and used it to test a Kentico 7 web site.
-I love it so much that I&rsquo;ll &hellip;">
+  <meta name="description" content="One way to detect browsers is the &lsquo;browser&rsquo; gem available at https://github.com/fnando/browser This is how to set it up in Sinatra (which &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ I love it so much that I&rsquo;ll &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling">
+  <link rel="canonical" href="http://wuleicanada.github.io/blog/2015/02/11/sinatra-browser-detection">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Lei Wu, Web Developer" type="application/atom+xml">
@@ -69,7 +68,7 @@ I love it so much that I&rsquo;ll &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Load Test With Gatling</h1>
+      <h1 class="entry-title">Sinatra Browser Detection</h1>
     
     
       <p class="meta">
@@ -85,33 +84,21 @@ I love it so much that I&rsquo;ll &hellip;">
   
 
 
-<time datetime="2014-08-25T14:25:09+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-02-11T19:29:40+00:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>, and used it to test a Kentico 7 web site.
-I love it so much that I&rsquo;ll ditch Apache JMeter from now on.</p>
+<div class="entry-content"><p>One way to detect browsers is the &lsquo;browser&rsquo; gem available at <a href="https://github.com/fnando/browser">https://github.com/fnando/browser</a></p>
 
-<p>While both have a GUI to record tests, the major difference between them is JMeter tests are saved as .jmx files (XML),
-but Gatling tests are .scala scripts written in Scala-based DSL.</p>
+<p>This is how to set it up in Sinatra (which isn&rsquo;t so obvious in the gem&rsquo;s README):</p>
 
-<p>Another interesting option would be <a href="https://github.com/flood-io/ruby-jmeter">Ruby JMeter</a>, but I haven&rsquo;t had a chance to try it yet.</p>
+<pre><code class="ruby">require "browser"
 
-<p>This <a href="https://flood.io/blog/13-stress-testing-jmeter-and-gatling">blog from flood.io</a> points out that Gatling outperformances JMeter with over 20,000 concurrent users.</p>
-
-<p>I must admit, however, that Gatling stil has a few rough edges, at least on Windows.
-For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;s file name was too long for Windows (260 characters maximum).</p>
-
-<p>Additionally, Gatling&rsquo;s QuickStart documentation warns:</p>
-
-<ul>
-<li>We ask you to not use a path containing spaces, as this can cause issues.</li>
-<li>For Windows users, we also recommend that you do not place Gatling in the Programs folder as there may be permission issues.</li>
-</ul>
-
+browser = Browser.new(:ua =&gt; request.user_agent)
+</code></pre>
 </div>
 
 
@@ -134,7 +121,7 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
   
 
 
-<time datetime="2014-08-25T14:25:09+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-02-11T19:29:40+00:00" pubdate data-updated="true"></time>
       
 
 
@@ -142,7 +129,7 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2014/08/25/load-test-with-gatling/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2015/02/11/sinatra-browser-detection/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2015/02/11/sinatra-browser-detection/" >Tweet</a>
   
   
   
@@ -151,10 +138,8 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/20/blogging-with-github/" title="Previous Post: Blogging with GitHub, Octopress and Cloud 9">&laquo; Blogging with GitHub, Octopress and Cloud 9</a>
+        <a class="basic-alignment left" href="/blog/2014/11/21/maintenance-page-for-net-applications-using-app-offline-dot-htm/" title="Previous Post: Maintenance page for .NET applications using app_offline.htm">&laquo; Maintenance page for .NET applications using app_offline.htm</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/10/07/logging-real-client-ips-in-iis-7/" title="Next Post: Logging real client IPs in IIS 7">Logging real client IPs in IIS 7 &raquo;</a>
       
     </p>
   </footer>
