@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="One way to detect browsers is the &lsquo;browser&rsquo; gem available at https://github.com/fnando/browser This is how to set it up in Sinatra (which &hellip;">
+  <meta name="description" content="Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off. Tried using Puma instead of Thin, but it didn&rsquo;t &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-05T19:00:48+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off.</p>
+
+<p>Tried using Puma instead of Thin, but it didn&rsquo;t work (although the page got cut off at a different place).</p>
+
+<p>The solution is to compress the content.</p>
+
+<p><code>use Rack::Deflater</code></p>
+
+<p>Not sure about the exact reason, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -813,6 +857,10 @@ run Sinatra::Application
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a>
       </li>
     
@@ -826,10 +874,6 @@ run Sinatra::Application
     
       <li class="post">
         <a href="/blog/2014/11/05/online-contrast-ratio-checker/">Online Contrast Ratio Checker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/07/logging-real-client-ips-in-iis-7/">Logging Real Client IPs in IIS 7</a>
       </li>
     
   </ul>

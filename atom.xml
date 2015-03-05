@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-02-11T19:35:50+00:00</updated>
+  <updated>2015-03-05T19:12:17+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Heroku Cuts Off Page Due to Content-Length Limit]]></title>
+    <link href="http://wuleicanada.github.io/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/"/>
+    <updated>2015-03-05T19:00:48+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit</id>
+    <content type="html"><![CDATA[<p>Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off.</p>
+
+<p>Tried using Puma instead of Thin, but it didn&rsquo;t work (although the page got cut off at a different place).</p>
+
+<p>The solution is to compress the content.</p>
+
+<p><code>use Rack::Deflater</code></p>
+
+<p>Not sure about the exact reason, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sinatra Browser Detection]]></title>
