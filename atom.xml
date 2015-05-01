@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-05-01T20:10:47+00:00</updated>
+  <updated>2015-05-01T20:11:45+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -74,9 +74,9 @@
         &lt;/rule&gt;
 </code></pre>
 
-<p>Better yet, let&rsquo;s add support for cookies. And now our web.config file looks like this:
-<code>xml
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<p>Better yet, let&rsquo;s add support for cookies. And now our web.config file looks like this:</p>
+
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;configuration&gt;
   &lt;system.webServer&gt;
         &lt;rewrite&gt;
@@ -113,7 +113,7 @@
         &lt;/rewrite&gt;   
     &lt;/system.webServer&gt;
 &lt;/configuration&gt;
-</code></p>
+</code></pre>
 ]]></content>
   </entry>
   
