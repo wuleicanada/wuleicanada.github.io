@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off. Tried using Puma instead of Thin, but it didn&rsquo;t &hellip;">
+  <meta name="description" content="Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off. Tried using Puma instead of Thin, but it still didn&rsquo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -93,13 +93,13 @@
 
 <div class="entry-content"><p>Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off.</p>
 
-<p>Tried using Puma instead of Thin, but it didn&rsquo;t work (although the page got cut off at a different place).</p>
+<p>Tried using Puma instead of Thin, but it still didn&rsquo;t work (although the page got cut off at a different place).</p>
 
 <p>The solution is to compress the content.</p>
 
 <p><code>use Rack::Deflater</code></p>
 
-<p>Not sure about the exact reason, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
+<p>Not sure about the exact cause, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
 </div>
 
 
@@ -142,6 +142,8 @@
         <a class="basic-alignment left" href="/blog/2015/02/11/sinatra-browser-detection/" title="Previous Post: Sinatra Browser Detection">&laquo; Sinatra Browser Detection</a>
       
       
+        <a class="basic-alignment right" href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/" title="Next Post: Detect and redirect mobile users with IIS URL Rewrite">Detect and redirect mobile users with IIS URL Rewrite &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -153,6 +155,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/">Detect and Redirect Mobile Users With IIS URL Rewrite</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a>
@@ -168,10 +174,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7/">Failed Attempt to Upgrade Lucene.Net for Kentico 7</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/05/online-contrast-ratio-checker/">Online Contrast Ratio Checker</a>
       </li>
     
   </ul>
