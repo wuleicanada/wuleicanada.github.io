@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-06-17T15:03:38+00:00</updated>
+  <updated>2015-06-17T15:07:36+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -24,7 +24,8 @@
 
 <p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
 
-<p><code>varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'</code></p>
+<pre><code class="Shell">varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'
+</code></pre>
 ]]></content>
   </entry>
   

@@ -100,7 +100,8 @@
 
 <p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
 
-<p><code>varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'</code></p>
+<pre><code class="Shell">varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'
+</code></pre>
 </div>
   
   
