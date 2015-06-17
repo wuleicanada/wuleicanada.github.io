@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="If your mobile site uses &ldquo;Separate URLs&rdquo; instead of &ldquo;Responsive web design&rdquo; or &ldquo;Dynamic serving&rdquo; (as defined by &hellip;">
+  <meta name="description" content="In Varnish 4.0, the command varnishncsa let you display logs in Apache style format. By default, the log format is %h %l %u %t "%r" %s %b "%{Referer} &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/">Use X-Forwarded-For in Varnish Apache/NCSA Logs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-17T14:56:29+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In Varnish 4.0, the command <code>varnishncsa</code> let you display logs in Apache style format.</p>
+
+<p>By default, the log format is <code>%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"</code>.</p>
+
+<p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
+
+<p><code>varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'</code></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -654,328 +696,9 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/18/sinatra-jboss-jdbc-activerecord/">Sinatra, JBoss 6, JDBC and ActiveRecord</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-18T17:58:17+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The article describes how to create a JRuby Sinatra web application and deploy it on JBoss 6.</p>
-
-<p>It covers these key points:</p>
-
-<ul>
-<li>ActiveRecord (including validation)</li>
-<li>JDBC (including JBoss connection pool)</li>
-<li>SQL Server</li>
-<li>Form Helpers</li>
-<li>tux</li>
-<li>Warbler</li>
-</ul>
-
-
-<p>We also use a little bit of Twitter Bootstrap for our views.</p>
-
-<p>The source code of the application is available on GitHub at <a href="https://github.com/wuleicanada/myapp">https://github.com/wuleicanada/myapp</a> .</p>
-
-<h2>Set up dev environment on Windows 7</h2>
-
-<h3>Install JRuby</h3>
-
-<p>For Windows 7, just download and install the <code>exe(x64)</code> executable.</p>
-
-<h2>Create the App</h2>
-
-<p>Let&rsquo;s create a folder with the same name of our JBoss application context.</p>
-
-<p><code>md myapp</code></p>
-
-<p><code>cd myapp</code></p>
-
-<h3>Install necessary gems</h3>
-
-<p>First things first, install Bundler <code>jruby --command gem install bundler</code>.</p>
-
-<p>Now we&rsquo;ll create the Gemfile with the following content:</p>
-
-<pre><code class="ruby">source "http://rubygems.org"
-
-gem "sinatra"
-gem "activerecord"
-gem "sinatra-activerecord"
-gem 'activerecord-jdbc-adapter'
-gem 'sinatra-formhelpers-ng'
-
-
-group :development do
-  gem "tux"
-end
-</code></pre>
-
-<p>And then run <code>jruby --command bundle install</code> to get the gems ready.</p>
-
-<p>Note: The <code>tux</code> gem works as a console to interact with my Sinatra application. I would also love to have the <code>shotgun</code> gem, but unfortuantely it&rsquo;s unavaible for JRuby.</p>
-
-<p>The JDBC driver (<code>sqljdbc4.jar</code>) for SQL Server is included in the source code, but if you prefer, you can also get it from Microsoft&rsquo;s web site. We&rsquo;ll just save it to our application root.</p>
-
-<h3>SQL Server table</h3>
-
-<p>Our application will use one table called &ldquo;users&rdquo;.</p>
-
-<pre><code class="sql">CREATE TABLE [users](
-    [id] [int] IDENTITY(1,1) NOT NULL,
-    [firstname] [varchar](32) NULL,
-    [lastname] [varchar](32) NULL,
-    [email] [varchar](64) NULL,
- CONSTRAINT [PK_users] PRIMARY KEY CLUSTERED 
-(
-    [id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-</code></pre>
-
-<p>Let&rsquo;s insert a user <code>insert users (firstname, lastname, email) values ('John', 'Smith', 'john@smith.com')</code></p>
-
-<h3>Code the application</h3>
-
-<p>Our classic style Sinatra application consists of the following files:</p>
-
-<p><em>config.ru</em></p>
-
-<pre><code class="ruby">require File.join(File.dirname(__FILE__), 'app')
-run Sinatra::Application
-</code></pre>
-
-<p><em>app.rb</em></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;sinatra&quot;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;sinatra/activerecord&quot;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;sinatra/form_helpers&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_record&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_record/connection_adapters/jdbc_adapter&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;sqljdbc4.jar&#39;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">config_dev</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;jdbc&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:driver</span> <span class="o">=&gt;</span> <span class="s2">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="s2">&quot;jdbc:sqlserver://SERVER:1433;databaseName=DB_NAME&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="s2">&quot;USER&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;PASS&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># JBoss connectoin pool. Need to set up datasource in JBoss</span>
-</span><span class='line'><span class="n">config_jboss</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;jdbc&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:driver</span> <span class="o">=&gt;</span> <span class="s2">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:jndi</span> <span class="o">=&gt;</span> <span class="s2">&quot;DATASOURCE_NAME&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># On JBoss $servlet_context is defined</span>
-</span><span class='line'><span class="n">config</span> <span class="o">=</span> <span class="n">defined?</span><span class="p">(</span><span class="vg">$servlet_context</span><span class="p">)</span> <span class="p">?</span> <span class="n">config_jboss</span> <span class="p">:</span> <span class="n">config_dev</span>
-</span><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:consent</span><span class="p">,</span> <span class="ss">acceptance</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:firstname</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:lastname</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="p">{</span> <span class="ss">with</span><span class="p">:</span> <span class="sr">/\A[^@]+@([^@\.]+\.)+[^@\.]+\z/</span> <span class="p">}</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">helpers</span> <span class="k">do</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-</span><span class='line'>      <span class="no">Rack</span><span class="o">::</span><span class="no">Utils</span><span class="o">.</span><span class="n">escape_html</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">get</span> <span class="s2">&quot;/users&quot;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">erb</span> <span class="ss">:&quot;users/index&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">get</span> <span class="s2">&quot;/users/:id&quot;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">erb</span> <span class="ss">:&quot;users/show&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">put</span> <span class="s2">&quot;/users/:id&quot;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">redirect</span> <span class="s1">&#39;/users&#39;</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>      <span class="n">erb</span> <span class="ss">:&quot;users/show&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Our layouts and templates sit in the <em>views</em> folder with the following content.</p>
-
-<p><em>layout.erb</em></p>
-
-<pre><code class="ruby">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;MyApp&lt;/title&gt;
-    &lt;link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"&gt;
-    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
-    &lt;script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"&gt;&lt;/script&gt;   
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;%= yield %&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p><em>users/index.erb</em></p>
-
-<pre><code class="ruby">&lt;%= h @users %&gt;
-</code></pre>
-
-<p><em>users/show.erb</em></p>
-
-<pre><code class="ruby">&lt;%= form('/users/' + @user.id.to_s, :put) %&gt;
-    &lt;div&gt;First Name: &lt;%= input(:user, :firstname, :value=&gt;h(@user.firstname), :size=&gt;20)%&gt;&lt;/div&gt;
-    &lt;div&gt;Last Name: &lt;%= input(:user, :lastname, :value=&gt;h(@user.lastname), :size=&gt;20)%&gt;&lt;/div&gt;
-    &lt;div&gt;Email: &lt;%= input(:user, :email, :value=&gt;h(@user.email), :size=&gt;40, :disabled=&gt;:disabled)%&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;%= checkbox(:user, :consent, '1', :label=&gt; false) %&gt;&lt;/span&gt; Yes! I accept the term of service.&lt;/div&gt;
-    &lt;button type="submit" class="btn btn-default"&gt;Submit&lt;/button&gt;
-&lt;/form&gt;
-</code></pre>
-
-<h3>Start our dev server</h3>
-
-<p>Run <code>jruby app.rb</code> and now our wonderful little app will be available at <a href="http://localhost:4567/users/">http://localhost:4567/users/</a></p>
-
-<h2>Deploy to JBoss 6</h2>
-
-<h3>Create WAR file using Warbler</h3>
-
-<p>Let&rsquo;s get started by installing Warbler as a gem <code>jruby --command gem install warbler</code>. Next, we need to configure Warbler:</p>
-
-<ul>
-<li>Create a new folder called <code>config</code> under our application root</li>
-<li>Run <code>jruby --command warble config</code>, which generates a configuration template called <code>warble.rb</code> under the <code>config</code> folder</li>
-<li>Edit <code>config\warble.rb</code> and update these lines:</li>
-</ul>
-
-
-<pre><code class="ruby">    # Application directories to be included in the webapp.
-    config.dirs = %w(views)
-
-    # Additional files/directories to include, above those in config.dirs
-    config.includes = FileList['app.rb', 'sqljdbc4.jar']
-
-    # Uncomment this if you don't want to package rails gem.
-    config.gems -= ["rails"]
-</code></pre>
-
-<p>Now we&rsquo;re ready to package our app: <code>jruby --command warble</code></p>
-
-<p>A war file will be created as myapp.war.</p>
-
-<h3>Deploy the WAR file</h3>
-
-<p>I tried the JBoss 6 Admin console first, but got an Out of Memory error. I worked around it by copying the WAR file to the deploy folder (in my case
-<code>/usr/jboss6/server/default/deploy/</code>) and restarting JBoss. And voila, our application is live on JBoss at <a href="http://jboss_address/myapp">http://jboss_address/myapp</a> .</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -986,6 +709,10 @@ run Sinatra::Application
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/">Use X-Forwarded-For in Varnish Apache/NCSA Logs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/">Detect and Redirect Mobile Users With IIS URL Rewrite</a>
@@ -1001,10 +728,6 @@ run Sinatra::Application
     
       <li class="post">
         <a href="/blog/2014/11/21/maintenance-page-for-net-applications-using-app-offline-dot-htm/">Maintenance Page for .NET Applications Using app_offline.htm</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7/">Failed Attempt to Upgrade Lucene.Net for Kentico 7</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-05-01T20:11:45+00:00</updated>
+  <updated>2015-06-17T15:03:38+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Use X-Forwarded-For in Varnish Apache/NCSA Logs]]></title>
+    <link href="http://wuleicanada.github.io/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/"/>
+    <updated>2015-06-17T14:56:29+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs</id>
+    <content type="html"><![CDATA[<p>In Varnish 4.0, the command <code>varnishncsa</code> let you display logs in Apache style format.</p>
+
+<p>By default, the log format is <code>%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"</code>.</p>
+
+<p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
+
+<p><code>varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Detect and Redirect Mobile Users With IIS URL Rewrite]]></title>

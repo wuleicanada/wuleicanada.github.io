@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/</loc>
+    <lastmod>2015-06-17T14:56:29+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/</loc>
     <lastmod>2015-05-01T18:44:17+00:00</lastmod>
     <priority>0.8</priority>
@@ -64,17 +70,17 @@
   
   
   <url>
-    <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2015-05-01T20:11:45+00:00</lastmod>
+    <loc>http://wuleicanada.github.io/blog/archives/</loc>
+    <lastmod>2015-06-17T15:03:38+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2015-05-01T20:11:45+00:00</lastmod>
+    <loc>http://wuleicanada.github.io/</loc>
+    <lastmod>2015-06-17T15:03:38+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>1.0</priority>
   </url>
   
   
