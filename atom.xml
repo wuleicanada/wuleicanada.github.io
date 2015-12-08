@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-08T18:29:10+00:00</updated>
+  <updated>2015-12-08T18:33:41+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -43,7 +43,7 @@
 I did try a text-based browser called <a href="http://lynx.browser.org/">Lynx</a> but unfortunately the FreePBX admin interface requires JavaScript, which Lynx
 doesn&rsquo;t support.</p>
 
-<p>Next, I tried to access the Admin interface <a href="http://10.0.2.15">http://10.0.2.15</a> from my Windows host, but it was unreachable.</p>
+<p>Next, I tried to access the Admin interface <code>http://10.0.2.15</code> from my Windows host, but it was unreachable.</p>
 
 <p>Then I realized 10.0.2.15 was just a VirtualBox IP. The solution is quite simple, just change the network adapter
 from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &ldquo;Machine&rdquo; -> &ldquo;Settings&rdquo; -> &ldquo;Network&rdquo;.</p>
@@ -52,7 +52,7 @@ from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &
 
 <h2>Create a Conference in FreePBX</h2>
 
-<p>Go to FreePBX admin GUI at <a href="http://IP_OF_YOUR_ASTERISK,">http://IP_OF_YOUR_ASTERISK,</a> then click &ldquo;Applications&rdquo; -> &ldquo;Conferences&rdquo; to add a new conference.</p>
+<p>Go to FreePBX admin GUI at <code>http://IP_OF_YOUR_ASTERISK</code>, then click &ldquo;Applications&rdquo; -> &ldquo;Conferences&rdquo; to add a new conference.</p>
 
 <h2>Sign up a CallCentric free account</h2>
 
