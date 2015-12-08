@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Asterisk, | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/asterisk/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-08T18:50:12+00:00</updated>
+  <updated>2015-12-08T18:51:53+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -38,7 +38,7 @@
 <h2>Change VirtualBox network settings</h2>
 
 <p>FreePBX is web based admin GUI for Asterisk. Since my VirtualBox guest system is only a terminal without GUI, I can&rsquo;t access any web pages from the VM.
-I did try a text-based browser called <a href="http://lynx.browser.org/">Lynx</a>{:target=&ldquo;_blank&rdquo;} but unfortunately the FreePBX admin interface requires JavaScript, which Lynx
+I did try a text-based browser called <a href="http://lynx.browser.org/">Lynx</a> but unfortunately the FreePBX admin interface requires JavaScript, which Lynx
 doesn&rsquo;t support.</p>
 
 <p>Next, I tried to access the Admin interface <code>http://10.0.2.15</code> from my Windows host, but it was unreachable.</p>
@@ -54,13 +54,13 @@ from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &
 
 <h2>Sign up a CallCentric free account</h2>
 
-<p>DID numbers are not free at CallCentric, but <a href="http://www.inum.net">iNum</a>{:target=&ldquo;_blank&rdquo;} numbers are. Callers can reach my conference room by calling the iNum number.</p>
+<p>DID numbers are not free at CallCentric, but <a href="http://www.inum.net">iNum</a> numbers are. Callers can reach my conference room by calling the iNum number.</p>
 
 <p>There are three ways to reach an iNum number:</p>
 
 <ul>
 <li>If your phone provider supports it (such as CallCentric, voip.ms, etc.), you can dial it like <code>+883 510 xxxxxxxxx</code>. In the United States and Canada, + means 011.</li>
-<li>Use one of the <a href="http://www.inum.net/what-is-inum-2/local-access-numbers/">local dial in numbers</a>{:target=&ldquo;_blank&rdquo;}</li>
+<li>Use one of the <a href="http://www.inum.net/what-is-inum-2/local-access-numbers/">local dial in numbers</a></li>
 <li>Use SIP URI <code>8835100xxxxxxxx@sip.inum.net</code></li>
 </ul>
 
@@ -69,14 +69,14 @@ from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &
 
 <ul>
 <li>SIP peering if your provider supports it, <code>**275 *462 1777xxxxxxx</code></li>
-<li><a href="http://sipbroker.com/">SipBroker</a>{:target=&ldquo;_blank&rdquo;} (code *462)</li>
+<li><a href="http://sipbroker.com/">SipBroker</a> (code *462)</li>
 <li>SIP URI <code>1777xxxxxxx@in.callcentric.com</code></li>
 </ul>
 
 
 <h2>Set up CallCentric in FreePBX</h2>
 
-<p>Follow the <a href="http://www.callcentric.com/support/device/freepbx">official instructions from CallCentric</a>{:target=&ldquo;_blank&rdquo;} to set it up in FreePBX.</p>
+<p>Follow the <a href="http://www.callcentric.com/support/device/freepbx">official instructions from CallCentric</a> to set it up in FreePBX.</p>
 
 <p>In my case, I only need to configure trunk (Step 1) and inbound route. I don&rsquo;t really care about outbound route or extension.</p>
 
