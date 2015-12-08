@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Virtualbox | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/virtualbox/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-08T21:18:47+00:00</updated>
+  <updated>2015-12-08T21:20:57+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -26,13 +26,14 @@
 
 <h2>Install VirtualBox</h2>
 
-<p>Asterisk, the open source PBX system with built-in conference features, only lives on Linux. But I only have a Windows 7 laptop available for this endeavour. Hence VirtualBox.</p>
+<p>Asterisk, the open source PBX system with built-in conference features, only lives on Linux.
+But I just have a Windows 7 laptop at my disposal for this endeavour. Hence VirtualBox.</p>
 
-<p>After downloading it from <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> , installation is straightforward.</p>
+<p>After downloading it from <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> , the installation is straightforward.</p>
 
 <h2>Install AsteriskNow</h2>
 
-<p>AsteriskNow is a combined distro of Centos, Asterisk and FreePBX. Get it from here and follow the instructions:
+<p>AsteriskNow is a bundled distro of Centos, Asterisk and FreePBX. Get it from here and follow the instructions:
 <a href="https://wiki.asterisk.org/wiki/display/AST/Installing+AsteriskNOW">https://wiki.asterisk.org/wiki/display/AST/Installing+AsteriskNOW</a></p>
 
 <h2>Change VirtualBox network settings</h2>
