@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="In Varnish 4.0, the command varnishncsa let you display logs in Apache style format. By default, the log format is %h %l %u %t "%r" %s %b "%{Referer} &hellip;">
+  <meta name="description" content="I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX. I signed up a free account at CallCentric so &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,114 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/08/building-a-free-conference-call-system/">Building a Free Conference Call System</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-12-08T15:30:55+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX.</p>
+
+<p>I signed up a free account at CallCentric so that callers can dial in using iNum or SIP.</p>
+
+<p>It&rsquo;s more of a hobby. Since I&rsquo;m familiar with all the pieces, one day I thought &ldquo;Why not put them together to make something interesting?&rdquo;</p>
+
+<p>So here we go.</p>
+
+<h2>Install VirtualBox</h2>
+
+<p>Asterisk, the open source PBX system with built-in conference features, only lives on Linux. But I only have a Windows 7 laptop available for this project. Therefore VirtualBox.</p>
+
+<p>After downloading it from <a href="https://www.virtualbox.org/wiki/Downloads,">https://www.virtualbox.org/wiki/Downloads,</a> installation is straightforward.</p>
+
+<h2>Install AsteriskNow</h2>
+
+<p>AsteriskNow is a combined distro of Centos, Asterisk and FreePBX. Get it from here and follow the instructions:
+<a href="https://wiki.asterisk.org/wiki/display/AST/Installing+AsteriskNOW">https://wiki.asterisk.org/wiki/display/AST/Installing+AsteriskNOW</a></p>
+
+<h2>Change VirtualBox network settings</h2>
+
+<p>FreePBX is web based admin GUI for Asterisk. Since my VirtualBox guest system is only a terminal without GUI, I can&rsquo;t access any web pages from the VM.
+I did try a text-based browser called <a href="http://lynx.browser.org/">Lynx</a> but unfortunately the FreePBX admin interface requires JavaScript, which Lynx
+doesn&rsquo;t support.</p>
+
+<p>Next, I tried to access the Admin interface <a href="http://10.0.2.15">http://10.0.2.15</a> from my Windows host, but it was unreachable.</p>
+
+<p>Then I realized 10.0.2.15 was just a VirtualBox IP. The solution is quite simple, just change the network adapter
+from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &ldquo;Machine&rdquo; -> &ldquo;Settings&rdquo; -> &ldquo;Network&rdquo;.</p>
+
+<p>Now my guest system has a real IP, accessible from my Windows hosts.</p>
+
+<h2>Create a Conference in FreePBX</h2>
+
+<p>Go to FreePBX admin GUI at <a href="http://IP_OF_YOUR_ASTERISK,">http://IP_OF_YOUR_ASTERISK,</a> then click &ldquo;Applications&rdquo; -> &ldquo;Conferences&rdquo; to add a new conference.</p>
+
+<h2>Sign up a CallCentric free account</h2>
+
+<p>DID numbers are not free at CallCentric, but <a href="http://www.inum.net">iNum</a> numbers are. Callers can reach my conference room by calling the iNum number.</p>
+
+<p>There are three ways to reach an iNum number:</p>
+
+<ul>
+<li>If your phone provider supports it (such as CallCentric, voip.ms, etc.), you can dial it like +883 510 xxxxxxxxx. In North America, + means 011.</li>
+<li>Use one of the <a href="http://www.inum.net/what-is-inum-2/local-access-numbers/">local dial in numbers</a></li>
+<li>Use SIP URI sip:8835100<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#120;&#120;&#120;&#120;&#120;&#x78;&#120;&#x78;&#x40;&#115;&#x69;&#x70;&#x2e;&#x69;&#110;&#117;&#x6d;&#46;&#x6e;&#x65;&#116;">&#x78;&#120;&#120;&#x78;&#120;&#x78;&#x78;&#120;&#x40;&#115;&#105;&#112;&#46;&#105;&#110;&#x75;&#x6d;&#x2e;&#110;&#x65;&#116;</a></li>
+</ul>
+
+
+<p>Alternatively, because CallCentric support SIP calls, it&rsquo;s also possible to call your CallCentric number 1777xxxxxxx using one of the following methods:</p>
+
+<ul>
+<li>SIP peering if your provider supports it, <em>*275 </em>462 1777xxxxxxx</li>
+<li><a href="http://sipbroker.com/">SipBroker</a> (code *462)</li>
+<li>SIP URI sip:1777<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#x78;&#120;&#120;&#120;&#120;&#120;&#x78;&#x40;&#x69;&#x6e;&#x2e;&#x63;&#x61;&#x6c;&#x6c;&#x63;&#101;&#x6e;&#116;&#x72;&#105;&#x63;&#46;&#99;&#111;&#x6d;">&#120;&#120;&#x78;&#120;&#120;&#120;&#120;&#64;&#105;&#x6e;&#46;&#x63;&#97;&#x6c;&#108;&#x63;&#101;&#x6e;&#116;&#x72;&#105;&#99;&#46;&#x63;&#x6f;&#109;</a></li>
+</ul>
+
+
+<h2>Set up CallCentric in FreePBX</h2>
+
+<p>Follow the <a href="http://www.callcentric.com/support/device/freepbx">official instructions from CallCentric</a> to set it up in FreePBX.</p>
+
+<p>In my case, I only need to configure trunk (Step 1) and inbound route. I don&rsquo;t really care about outbound route or extension.</p>
+
+<p>My Asterisk version is 13, so I used the configuration for the latest Asterisk in the PEER Details section.</p>
+
+<p>I also route all incoming calls to the Conference I created earlier.</p>
+
+<h2>Conclusion</h2>
+
+<p>My conference room is up and running!</p>
+
+<p>Asterisk is very powerful, enough for serious business usage. I&rsquo;m just using a fraction of it and the result is always stunning.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -619,84 +727,6 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/20/blogging-with-github/">Blogging With GitHub, Octopress and Cloud 9</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-20T15:08:03+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This blog is hosted by <a href="https://pages.github.com/">GitHub Pages</a> and built with <a href="http://octopress.org/">Octopress</a>.</p>
-
-<p>I&rsquo;m using <a href="https://c9.io/">Cloud 9</a> as a web-based IDE.</p>
-
-<p>As a Ubuntu user and a Ruby enthusiast who prefers simple solutions, they&rsquo;re a perfect combo.</p>
-
-<p>I was just about to blog on how to set them up, when I found out <a href="http://www.vaccinekeeper.com/blog/2013/08/22/octopress-with-github-pages-and-cloud9/">this guy&rsquo;s post</a> beat me by a year. :-)
-It&rsquo;s a great post with step by step instructions.</p>
-
-<p>I have just the following to add:</p>
-
-<ol>
-<li><p>To set up your SSH key authentication, you can locate you Cloud 9 SSH key by going to &ldquo;Your Account&rdquo;, and then &ldquo;Show SSH Key&rdquo; under &ldquo;Account Settings&rdquo; on the right hand side.
-Copy that key, click the Settings icon on the top right corner of your GitHub page, and then &ldquo;SSH Keys&rdquo; on the left side. Click &ldquo;Add SSH Key&rdquo; on the right to add your Cloud 9 SSH Key.</p></li>
-<li><p>In case you use non-ASCII characters, for example, if you&rsquo;re writing in German, you may get the followoing error when you run <code>rake generate</code>:</p></li>
-</ol>
-
-
-<pre><code>YAML Exception reading 2014-06-11-learn-german.markdown: invalid byte sequence in US-ASCII
-/home/ubuntu/workspace/octopress/plugins/backtick_code_block.rb:13:in `gsub': invalid byte sequence in US-ASCII (ArgumentError)
-        from /home/ubuntu/workspace/octopress/plugins/backtick_code_block.rb:13:in `render_code_block'
-        from /home/ubuntu/workspace/octopress/plugins/octopress_filters.rb:12:in `pre_filter'
-        from /home/ubuntu/workspace/octopress/plugins/octopress_filters.rb:28:in `pre_render'
-        from /home/ubuntu/workspace/octopress/plugins/post_filters.rb:112:in `block in pre_render'
-        from /home/ubuntu/workspace/octopress/plugins/post_filters.rb:111:in `each'
-        from /home/ubuntu/workspace/octopress/plugins/post_filters.rb:111:in `pre_render'
-        from /home/ubuntu/workspace/octopress/plugins/post_filters.rb:166:in `do_layout'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/gems/jekyll-0.12.0/lib/jekyll/post.rb:195:in `render'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/gems/jekyll-0.12.0/lib/jekyll/site.rb:200:in `block in render'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/gems/jekyll-0.12.0/lib/jekyll/site.rb:199:in `each'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/gems/jekyll-0.12.0/lib/jekyll/site.rb:199:in `render'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/gems/jekyll-0.12.0/lib/jekyll/site.rb:41:in `process'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/gems/jekyll-0.12.0/bin/jekyll:264:in `&lt;top (required)&gt;'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/bin/jekyll:23:in `load'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/bin/jekyll:23:in `&lt;main&gt;'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/bin/ruby_executable_hooks:15:in `eval'
-        from /usr/local/rvm/gems/ruby-2.1.1@rails4/bin/ruby_executable_hooks:15:in `&lt;main&gt;'
-</code></pre>
-
-<p>The solution is run <code>export LC_ALL=C.UTF-8</code> first. To save time, I would join the commands as <code>export LC_ALL=C.UTF-8 &amp;&amp; rake generate</code>.</p>
-
-<p>(Some posts on the web suggest <code>expoort LC_ALL=en_US.UTF-8</code>, but that won&rsquo;t work for the current version Cloud 9 at the time of writing.
-To be sure, you can run <code>locale -a</code> to get a list of available locales.)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -712,6 +742,10 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/08/building-a-free-conference-call-system/">Building a Free Conference Call System</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/">Use X-Forwarded-For in Varnish Apache/NCSA Logs</a>
       </li>
     
@@ -725,10 +759,6 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
     
       <li class="post">
         <a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/21/maintenance-page-for-net-applications-using-app-offline-dot-htm/">Maintenance Page for .NET Applications Using app_offline.htm</a>
       </li>
     
   </ul>

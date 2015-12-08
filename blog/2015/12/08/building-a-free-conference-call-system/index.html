@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Building a Free Conference Call System - Lei Wu, Web Developer</title>
+  <meta name="author" content="Lei Wu">
+
+  
+  <meta name="description" content="I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX. I signed up a free account at CallCentric so &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Lei Wu, Web Developer" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Lei Wu, Web Developer</a></h1>
+  
+    <h2>Keeping simple things simple.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:wuleicanada.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Building a Free Conference Call System</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-12-08T15:30:55+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX.</p>
+
+<p>I signed up a free account at CallCentric so that callers can dial in using iNum or SIP.</p>
+
+<p>It&rsquo;s more of a hobby. Since I&rsquo;m familiar with all the pieces, one day I thought &ldquo;Why not put them together to make something interesting?&rdquo;</p>
+
+<p>So here we go.</p>
+
+<h2>Install VirtualBox</h2>
+
+<p>Asterisk, the open source PBX system with built-in conference features, only lives on Linux. But I only have a Windows 7 laptop available for this project. Therefore VirtualBox.</p>
+
+<p>After downloading it from <a href="https://www.virtualbox.org/wiki/Downloads,">https://www.virtualbox.org/wiki/Downloads,</a> installation is straightforward.</p>
+
+<h2>Install AsteriskNow</h2>
+
+<p>AsteriskNow is a combined distro of Centos, Asterisk and FreePBX. Get it from here and follow the instructions:
+<a href="https://wiki.asterisk.org/wiki/display/AST/Installing+AsteriskNOW">https://wiki.asterisk.org/wiki/display/AST/Installing+AsteriskNOW</a></p>
+
+<h2>Change VirtualBox network settings</h2>
+
+<p>FreePBX is web based admin GUI for Asterisk. Since my VirtualBox guest system is only a terminal without GUI, I can&rsquo;t access any web pages from the VM.
+I did try a text-based browser called <a href="http://lynx.browser.org/">Lynx</a> but unfortunately the FreePBX admin interface requires JavaScript, which Lynx
+doesn&rsquo;t support.</p>
+
+<p>Next, I tried to access the Admin interface <a href="http://10.0.2.15">http://10.0.2.15</a> from my Windows host, but it was unreachable.</p>
+
+<p>Then I realized 10.0.2.15 was just a VirtualBox IP. The solution is quite simple, just change the network adapter
+from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &ldquo;Machine&rdquo; -> &ldquo;Settings&rdquo; -> &ldquo;Network&rdquo;.</p>
+
+<p>Now my guest system has a real IP, accessible from my Windows hosts.</p>
+
+<h2>Create a Conference in FreePBX</h2>
+
+<p>Go to FreePBX admin GUI at <a href="http://IP_OF_YOUR_ASTERISK,">http://IP_OF_YOUR_ASTERISK,</a> then click &ldquo;Applications&rdquo; -> &ldquo;Conferences&rdquo; to add a new conference.</p>
+
+<h2>Sign up a CallCentric free account</h2>
+
+<p>DID numbers are not free at CallCentric, but <a href="http://www.inum.net">iNum</a> numbers are. Callers can reach my conference room by calling the iNum number.</p>
+
+<p>There are three ways to reach an iNum number:</p>
+
+<ul>
+<li>If your phone provider supports it (such as CallCentric, voip.ms, etc.), you can dial it like +883 510 xxxxxxxxx. In North America, + means 011.</li>
+<li>Use one of the <a href="http://www.inum.net/what-is-inum-2/local-access-numbers/">local dial in numbers</a></li>
+<li>Use SIP URI sip:8835100<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#120;&#120;&#120;&#120;&#120;&#x78;&#120;&#x78;&#x40;&#115;&#x69;&#x70;&#x2e;&#x69;&#110;&#117;&#x6d;&#46;&#x6e;&#x65;&#116;">&#x78;&#120;&#120;&#x78;&#120;&#x78;&#x78;&#120;&#x40;&#115;&#105;&#112;&#46;&#105;&#110;&#x75;&#x6d;&#x2e;&#110;&#x65;&#116;</a></li>
+</ul>
+
+
+<p>Alternatively, because CallCentric support SIP calls, it&rsquo;s also possible to call your CallCentric number 1777xxxxxxx using one of the following methods:</p>
+
+<ul>
+<li>SIP peering if your provider supports it, <em>*275 </em>462 1777xxxxxxx</li>
+<li><a href="http://sipbroker.com/">SipBroker</a> (code *462)</li>
+<li>SIP URI sip:1777<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#x78;&#120;&#120;&#120;&#120;&#120;&#x78;&#x40;&#x69;&#x6e;&#x2e;&#x63;&#x61;&#x6c;&#x6c;&#x63;&#101;&#x6e;&#116;&#x72;&#105;&#x63;&#46;&#99;&#111;&#x6d;">&#120;&#120;&#x78;&#120;&#120;&#120;&#120;&#64;&#105;&#x6e;&#46;&#x63;&#97;&#x6c;&#108;&#x63;&#101;&#x6e;&#116;&#x72;&#105;&#99;&#46;&#x63;&#x6f;&#109;</a></li>
+</ul>
+
+
+<h2>Set up CallCentric in FreePBX</h2>
+
+<p>Follow the <a href="http://www.callcentric.com/support/device/freepbx">official instructions from CallCentric</a> to set it up in FreePBX.</p>
+
+<p>In my case, I only need to configure trunk (Step 1) and inbound route. I don&rsquo;t really care about outbound route or extension.</p>
+
+<p>My Asterisk version is 13, so I used the configuration for the latest Asterisk in the PEER Details section.</p>
+
+<p>I also route all incoming calls to the Conference I created earlier.</p>
+
+<h2>Conclusion</h2>
+
+<p>My conference room is up and running!</p>
+
+<p>Asterisk is very powerful, enough for serious business usage. I&rsquo;m just using a fraction of it and the result is always stunning.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Lei Wu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-12-08T15:30:55+00:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/asterisk/'>asterisk,</a>, <a class='category' href='/blog/categories/centos/'>centos,</a>, <a class='category' href='/blog/categories/virtualbox/'>virtualbox</a>, <a class='category' href='/blog/categories/voip/'>voip,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/" title="Previous Post: Use X-Forwarded-For in Varnish Apache/NCSA logs">&laquo; Use X-Forwarded-For in Varnish Apache/NCSA logs</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/building-a-free-conference-call-system/">Building a Free Conference Call System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/">Use X-Forwarded-For in Varnish Apache/NCSA Logs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/">Detect and Redirect Mobile Users With IIS URL Rewrite</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  
+  <a href="https://github.com/wuleicanada">@wuleicanada</a> on GitHub
+  
+  
+  
+  <!--
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'wuleicanada',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+  -->
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Lei Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
