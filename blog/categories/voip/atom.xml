@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Voip, | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/voip/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-08T18:09:10+00:00</updated>
+  <updated>2015-12-08T18:11:17+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -30,7 +30,7 @@
 
 <p>Asterisk, the open source PBX system with built-in conference features, only lives on Linux. But I only have a Windows 7 laptop available for this project. Therefore VirtualBox.</p>
 
-<p>After downloading it from <a href="https://www.virtualbox.org/wiki/Downloads,">https://www.virtualbox.org/wiki/Downloads,</a> installation is straightforward.</p>
+<p>After downloading it from <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> , installation is straightforward.</p>
 
 <h2>Install AsteriskNow</h2>
 
@@ -63,7 +63,7 @@ from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &
 <ul>
 <li>If your phone provider supports it (such as CallCentric, voip.ms, etc.), you can dial it like +883 510 xxxxxxxxx. In North America, + means 011.</li>
 <li>Use one of the <a href="http://www.inum.net/what-is-inum-2/local-access-numbers/">local dial in numbers</a></li>
-<li>Use SIP URI sip:8835100<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x78;&#x78;&#x78;&#120;&#120;&#120;&#120;&#x78;&#64;&#x73;&#x69;&#x70;&#46;&#x69;&#110;&#x75;&#109;&#x2e;&#110;&#101;&#116;">&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#120;&#x78;&#64;&#x73;&#105;&#x70;&#46;&#105;&#x6e;&#117;&#109;&#x2e;&#110;&#x65;&#116;</a></li>
+<li>Use SIP URI sip:8835100<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x78;&#120;&#x78;&#x78;&#x78;&#x78;&#120;&#120;&#x40;&#x73;&#x69;&#112;&#x2e;&#105;&#x6e;&#117;&#109;&#46;&#110;&#x65;&#x74;">&#120;&#x78;&#120;&#x78;&#x78;&#120;&#120;&#120;&#64;&#x73;&#x69;&#x70;&#46;&#x69;&#110;&#x75;&#x6d;&#46;&#x6e;&#101;&#x74;</a></li>
 </ul>
 
 
@@ -72,7 +72,7 @@ from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &
 <ul>
 <li>SIP peering if your provider supports it, <em>*275 </em>462 1777xxxxxxx</li>
 <li><a href="http://sipbroker.com/">SipBroker</a> (code *462)</li>
-<li>SIP URI sip:1777<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x78;&#x78;&#120;&#120;&#x78;&#x78;&#x78;&#64;&#x69;&#110;&#x2e;&#x63;&#x61;&#x6c;&#x6c;&#x63;&#x65;&#110;&#116;&#x72;&#x69;&#99;&#x2e;&#x63;&#111;&#109;">&#x78;&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#x40;&#x69;&#x6e;&#46;&#x63;&#x61;&#108;&#x6c;&#99;&#x65;&#110;&#x74;&#114;&#x69;&#99;&#x2e;&#x63;&#x6f;&#109;</a></li>
+<li>SIP URI sip:1777<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#120;&#x78;&#120;&#120;&#120;&#120;&#120;&#x40;&#105;&#110;&#46;&#x63;&#x61;&#x6c;&#108;&#x63;&#101;&#110;&#x74;&#x72;&#105;&#99;&#46;&#x63;&#x6f;&#109;">&#x78;&#120;&#120;&#120;&#x78;&#x78;&#x78;&#x40;&#x69;&#110;&#46;&#x63;&#x61;&#108;&#108;&#x63;&#x65;&#x6e;&#x74;&#x72;&#x69;&#x63;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 </ul>
 
 
