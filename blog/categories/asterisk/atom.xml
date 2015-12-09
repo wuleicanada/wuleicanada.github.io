@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Asterisk, | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/asterisk/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-09T15:17:20+00:00</updated>
+  <updated>2015-12-09T15:21:26+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -20,7 +20,7 @@
     <id>http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system</id>
     <content type="html"><![CDATA[<p>I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX. A free account at CallCentric allows callers to dial in using iNum or SIP.</p>
 
-<p>It&rsquo;s more of a hobbyist project. Since I&rsquo;m familiar with all the pieces, one one gloomy winter day I said to myself: &ldquo;Why not put them together to make something fun?&rdquo;</p>
+<p>It&rsquo;s a pure hobbyist project. Since I&rsquo;m familiar with all the pieces, one one gloomy winter day I said to myself: &ldquo;Why not put them together to make something fun?&rdquo;</p>
 
 <h2>Install VirtualBox</h2>
 
