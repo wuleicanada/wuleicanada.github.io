@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Asterisk, | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/asterisk/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-09T18:48:32+00:00</updated>
+  <updated>2015-12-12T22:26:03+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -85,6 +85,17 @@ from &ldquo;NAT&rdquo; to &ldquo;Bridged Adapter&rdquo;. This can be done from &
 <p>My Asterisk version is 13, so I used the configuration for the latest Asterisk in the PEER Details section.</p>
 
 <p>I also route all incoming calls to the Conference I created earlier.</p>
+
+<h2>Sign up a GetOnSIP account</h2>
+
+<p>Unfortunately, the free CallCentric line only allows 2 channels, which means only two callers can dial in. That wouldn&rsquo;t much use for a conference call.</p>
+
+<p>To allow more callers, I signed up a GetOnSIP account to be used a new trunk in FreePBX. Follow these <a href="https://support.onsip.com/hc/en-us/articles/203675264-FreePBX-Configuration-for-OnSIP-Trunking-">offical instructions</a>.</p>
+
+<h2>Sign up a IPKall account</h2>
+
+<p>To allow callers to reach my GetOnSIP account using PSTN (regular phone line), I signed up an account at IPKall, which assigns a 206 area code
+phone number to be forwarded to my GetOnSIP SIP address.</p>
 
 <h2>Conclusion</h2>
 
