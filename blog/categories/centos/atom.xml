@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Centos, | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/centos/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-14T15:35:17+00:00</updated>
+  <updated>2015-12-14T15:37:51+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -111,7 +111,7 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
 <p>Sadly, the free plan from CallCentric only include two channels, meaning only two callers can dial in simultaneously. And additional channels are quite expansive.</p>
 
-<p>But I had to stop it there. It&rsquo;s not perfect, but at least two callers can avoid long distance charges.</p>
+<p>But I had to stop it there. It&rsquo;s not perfect, but at least two DID callers can avoid long distance.</p>
 
 <h2>Conclusion</h2>
 
