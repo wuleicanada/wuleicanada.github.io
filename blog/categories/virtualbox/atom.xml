@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Virtualbox | Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/blog/categories/virtualbox/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-14T15:42:36+00:00</updated>
+  <updated>2015-12-14T15:44:01+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -63,7 +63,7 @@ Follow these <a href="https://support.onsip.com/hc/en-us/articles/203675264-Free
 
 <h2>Sign up a IPKall account</h2>
 
-<p>To allow callers to reach my GetOnSIP account using PSTN (or DID, or regular phone line), I signed up an account at IPKall, which assigns a 206 Washington state area code
+<p>To allow callers to reach my GetOnSIP account using PSTN (or DID, or regular phone line), I created an account at IPKall, which assigned a 206 Washington state area code
 phone number to be forwarded to my GetOnSIP SIP address.</p>
 
 <p>I&rsquo;m still not quite satisfied with my work yet. It would be nice if I can offer local dial in numbers to avoid long distance charges.</p>
