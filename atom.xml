@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-14T15:37:51+00:00</updated>
+  <updated>2015-12-14T15:42:36+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -18,7 +18,8 @@
     <link href="http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system/"/>
     <updated>2015-12-08T15:30:55+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system</id>
-    <content type="html"><![CDATA[<p>I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX. A free account at CallCentric allows callers to dial in using iNum or SIP.</p>
+    <content type="html"><![CDATA[<p>I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX. The combination of GetOnSIP and IPKall offers PSTN access.
+And a free account at CallCentric allows callers to dial in using iNum or SIP.</p>
 
 <p>It&rsquo;s a pure hobbyist project. Since I&rsquo;m familiar with all the pieces, on one gloomy winter day I said to myself: &ldquo;Why not put them together to make something fun?&rdquo;</p>
 
@@ -97,9 +98,9 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 </ul>
 
 
-<h2>Set up CallCentric in FreePBX</h2>
+<h2>Adding CallCentric to FreePBX</h2>
 
-<p>Follow the <a href="http://www.callcentric.com/support/device/freepbx">official instructions from CallCentric</a> to set it up in FreePBX.</p>
+<p>Follow the <a href="http://www.callcentric.com/support/device/freepbx">official instructions from CallCentric</a> to set it up as a new trunk in FreePBX.</p>
 
 <p>In my case, I only need to configure trunk (Step 1) and inbound route (Step 4). I don&rsquo;t really care about outbound route or extension.</p>
 
