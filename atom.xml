@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2015-12-14T15:44:33+00:00</updated>
+  <updated>2016-03-01T18:58:19+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Accelerated Mobile Pages(AMP): First Impression as a Developer]]></title>
+    <link href="http://wuleicanada.github.io/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/"/>
+    <updated>2016-02-29T19:48:53+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer</id>
+    <content type="html"><![CDATA[<p>Two days ago I started developing my first AMP project for a mobile web site.</p>
+
+<p>Obviously I&rsquo;m still a beginner, but I thought it would be helpful to for other people to document some of my experience from a developer&rsquo;s perspective.</p>
+
+<h2>AMP is simplified, but highly regulated HTML</h2>
+
+<p>One such example is CSS. You can only use one internal stylesheet in the header:
+<code>&lt;style amp-custom&gt;</code></p>
+
+<p>External CSS files are not allowed, neither are Inline style attributes in tags.</p>
+
+<p><code>&lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;</code> (Not allowed)
+<code>&lt;div style="margin-left:30px;"&gt;</code> (Not allowed)</p>
+
+<h2>Validation is easy, but the error messages aren&rsquo;t</h2>
+
+<p>You can append <code>#development=1</code> to your URL, and then go to Chrome DevTools console to see the validation results. As simple as that.</p>
+
+<p>However, the error messsages can be very confusing. Some examples are:</p>
+
+<p>If you have <code>&lt;amp-img src="http://wuleicanada.github.io/logo.png" /&gt;</code>, you will get
+<code>The implied layout 'CONTAINER' is not supported by tag 'amp-img'.</code>
+where the actual cause is the missing height attribute, which is mandatory for the <amp-img> tag. (You use <amp-img> instead of <img>, by the way.)</p>
+
+<p>If you mistakenly added an external stylesheet file as in <code>&lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;</code>, you will be presented with a mysterious
+<code>The attribute 'href' in tag 'link rel=stylesheet for fonts' is set to the invalid value 'css/bootstrap.min.css'.</code>
+That&rsquo;s because <link ref> can only be used for fonts.</p>
+
+<h2>How do I see AMP in Google search results</h2>
+
+<p>A few days ago, I was able to see AMP in Google mobile search results. But not any more as of today.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building a Free Conference Call System]]></title>

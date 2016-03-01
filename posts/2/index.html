@@ -9,7 +9,8 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="This blog is hosted by GitHub Pages and built with Octopress. I&rsquo;m using Cloud 9 as a web-based IDE. As a Ubuntu user and a Ruby enthusiast who &hellip;">
+  <meta name="description" content="Recently I discovered Gatling, a load testing framework written in Scala, and used it to test a Kentico 7 web site.
+I love it so much that I&rsquo;ll &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/25/load-test-with-gatling/">Load Test With Gatling</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T14:25:09+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>, and used it to test a Kentico 7 web site.
+I love it so much that I&rsquo;ll ditch Apache JMeter from now on.</p>
+
+<p>While both have a GUI to record tests, the major difference between them is JMeter tests are saved as .jmx files (XML),
+but Gatling tests are .scala scripts written in Scala-based DSL.</p>
+
+<p>Another interesting option would be <a href="https://github.com/flood-io/ruby-jmeter">Ruby JMeter</a>, but I haven&rsquo;t had a chance to try it yet.</p>
+
+<p>This <a href="https://flood.io/blog/13-stress-testing-jmeter-and-gatling">blog from flood.io</a> points out that Gatling outperformances JMeter with over 20,000 concurrent users.</p>
+
+<p>I must admit, however, that Gatling stil has a few rough edges, at least on Windows.
+For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;s file name was too long for Windows (260 characters maximum).</p>
+
+<p>Additionally, Gatling&rsquo;s QuickStart documentation warns:</p>
+
+<ul>
+<li>We ask you to not use a path containing spaces, as this can cause issues.</li>
+<li>For Windows users, we also recommend that you do not place Gatling in the Programs folder as there may be permission issues.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -480,6 +536,10 @@ run Sinatra::Application
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/">Accelerated Mobile Pages(AMP): First Impression as a Developer</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/08/building-a-free-conference-call-system/">Building a Free Conference Call System</a>
       </li>
     
@@ -493,10 +553,6 @@ run Sinatra::Application
     
       <li class="post">
         <a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a>
       </li>
     
   </ul>
@@ -546,7 +602,7 @@ run Sinatra::Application
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Lei Wu -
+  Copyright &copy; 2016 - Lei Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

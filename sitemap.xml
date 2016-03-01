@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/</loc>
+    <lastmod>2016-02-29T19:48:53+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2015/12/08/building-a-free-conference-call-system/</loc>
     <lastmod>2015-12-08T15:30:55+00:00</lastmod>
     <priority>0.8</priority>
@@ -76,17 +82,17 @@
   
   
   <url>
-    <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2015-12-14T15:44:33+00:00</lastmod>
+    <loc>http://wuleicanada.github.io/</loc>
+    <lastmod>2016-03-01T18:58:19+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2015-12-14T15:44:33+00:00</lastmod>
+    <loc>http://wuleicanada.github.io/blog/archives/</loc>
+    <lastmod>2016-03-01T18:58:19+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.7</priority>
   </url>
   
   

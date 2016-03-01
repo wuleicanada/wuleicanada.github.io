@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="I built a conference call system on my Windows 7 laptop, using Oracle VirtualBox, Asterisk and FreePBX. The combination of GetOnSIP and IPKall offers &hellip;">
+  <meta name="description" content="Two days ago I started developing my first AMP project for a mobile web site. Obviously I&rsquo;m still a beginner, but I thought it would be helpful &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/">Accelerated Mobile Pages(AMP): First Impression as a Developer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-29T19:48:53+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Two days ago I started developing my first AMP project for a mobile web site.</p>
+
+<p>Obviously I&rsquo;m still a beginner, but I thought it would be helpful to for other people to document some of my experience from a developer&rsquo;s perspective.</p>
+
+<h2>AMP is simplified, but highly regulated HTML</h2>
+
+<p>One such example is CSS. You can only use one internal stylesheet in the header:
+<code>&lt;style amp-custom&gt;</code></p>
+
+<p>External CSS files are not allowed, neither are Inline style attributes in tags.</p>
+
+<p><code>&lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;</code> (Not allowed)
+<code>&lt;div style="margin-left:30px;"&gt;</code> (Not allowed)</p>
+
+<h2>Validation is easy, but the error messages aren&rsquo;t</h2>
+
+<p>You can append <code>#development=1</code> to your URL, and then go to Chrome DevTools console to see the validation results. As simple as that.</p>
+
+<p>However, the error messsages can be very confusing. Some examples are:</p>
+
+<p>If you have <code>&lt;amp-img src="/logo.png" /&gt;</code>, you will get
+<code>The implied layout 'CONTAINER' is not supported by tag 'amp-img'.</code>
+where the actual cause is the missing height attribute, which is mandatory for the <amp-img> tag. (You use <amp-img> instead of <img>, by the way.)</p>
+
+<p>If you mistakenly added an external stylesheet file as in <code>&lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;</code>, you will be presented with a mysterious
+<code>The attribute 'href' in tag 'link rel=stylesheet for fonts' is set to the invalid value 'css/bootstrap.min.css'.</code>
+That&rsquo;s because <link ref> can only be used for fonts.</p>
+
+<h2>How do I see AMP in Google search results</h2>
+
+<p>A few days ago, I was able to see AMP in Google mobile search results. But not any more as of today.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -700,61 +766,6 @@ to determine the origin of your visitors.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/25/load-test-with-gatling/">Load Test With Gatling</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-25T14:25:09+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently I discovered <a href="http://gatling.io/">Gatling</a>, a load testing framework written in <a href="http://www.scala-lang.org/">Scala</a>, and used it to test a Kentico 7 web site.
-I love it so much that I&rsquo;ll ditch Apache JMeter from now on.</p>
-
-<p>While both have a GUI to record tests, the major difference between them is JMeter tests are saved as .jmx files (XML),
-but Gatling tests are .scala scripts written in Scala-based DSL.</p>
-
-<p>Another interesting option would be <a href="https://github.com/flood-io/ruby-jmeter">Ruby JMeter</a>, but I haven&rsquo;t had a chance to try it yet.</p>
-
-<p>This <a href="https://flood.io/blog/13-stress-testing-jmeter-and-gatling">blog from flood.io</a> points out that Gatling outperformances JMeter with over 20,000 concurrent users.</p>
-
-<p>I must admit, however, that Gatling stil has a few rough edges, at least on Windows.
-For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;s file name was too long for Windows (260 characters maximum).</p>
-
-<p>Additionally, Gatling&rsquo;s QuickStart documentation warns:</p>
-
-<ul>
-<li>We ask you to not use a path containing spaces, as this can cause issues.</li>
-<li>For Windows users, we also recommend that you do not place Gatling in the Programs folder as there may be permission issues.</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -770,6 +781,10 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/">Accelerated Mobile Pages(AMP): First Impression as a Developer</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/08/building-a-free-conference-call-system/">Building a Free Conference Call System</a>
       </li>
     
@@ -783,10 +798,6 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
     
       <li class="post">
         <a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a>
       </li>
     
   </ul>
@@ -836,7 +847,7 @@ For example, some of my tests couldn&rsquo;t finish because a report file&rsquo;
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Lei Wu -
+  Copyright &copy; 2016 - Lei Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
