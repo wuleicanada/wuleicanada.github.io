@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-03-01T18:58:19+00:00</updated>
+  <updated>2016-03-01T18:59:43+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -20,7 +20,7 @@
     <id>http://wuleicanada.github.io/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer</id>
     <content type="html"><![CDATA[<p>Two days ago I started developing my first AMP project for a mobile web site.</p>
 
-<p>Obviously I&rsquo;m still a beginner, but I thought it would be helpful to for other people to document some of my experience from a developer&rsquo;s perspective.</p>
+<p>Obviously I&rsquo;m still a beginner, but I thought it would be helpful for other people if I document some of my experience from a developer&rsquo;s perspective.</p>
 
 <h2>AMP is simplified, but highly regulated HTML</h2>
 
