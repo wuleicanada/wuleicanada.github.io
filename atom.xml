@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-03-01T19:01:09+00:00</updated>
+  <updated>2016-03-08T19:23:34+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -48,7 +48,9 @@ That&rsquo;s because <code>&lt;link ref&gt;</code> can only be used for fonts.</
 
 <h2>How do I see AMP in Google search results</h2>
 
-<p>A few days ago, I was able to see AMP in Google mobile search results. But not any more as of today.</p>
+<p>It&rsquo;s not live in regular Google search yet. Currently you can view the demo at <a href="http://g.co/ampdemo">http://g.co/ampdemo</a></p>
+
+<p>Search for some popular keywords, such as one of my favourite, &ldquo;Electric car&rdquo;.</p>
 ]]></content>
   </entry>
   
