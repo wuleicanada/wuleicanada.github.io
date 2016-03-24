@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Heroku Cuts Off Page Due to Content-Length Limit - Lei Wu, Web Developer</title>
+  <title>Accelerated Mobile Pages(AMP): Week 3 - Lei Wu, Web Developer</title>
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off. Tried using Puma instead of Thin, but it still didn&rsquo &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wuleicanada.github.io/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit">
+  <link rel="canonical" href="http://wuleicanada.github.io/blog/2016/03/18/accelerated-mobile-pages-amp-week-3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Lei Wu, Web Developer" type="application/atom+xml">
@@ -68,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Heroku Cuts Off Page Due to Content-Length Limit</h1>
+      <h1 class="entry-title">Accelerated Mobile Pages(AMP): Week 3</h1>
     
     
       <p class="meta">
@@ -84,22 +85,14 @@
   
 
 
-<time datetime="2015-03-05T19:00:48+00:00" pubdate data-updated="true"></time>
+<time datetime="2016-03-18T15:53:52+00:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off.</p>
-
-<p>Tried using Puma instead of Thin, but it still didn&rsquo;t work (although the page got cut off at a different place).</p>
-
-<p>The solution is to compress the content.</p>
-
-<p><code>use Rack::Deflater</code></p>
-
-<p>Not sure about the exact cause, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
+<div class="entry-content">
 </div>
 
 
@@ -122,7 +115,7 @@
   
 
 
-<time datetime="2015-03-05T19:00:48+00:00" pubdate data-updated="true"></time>
+<time datetime="2016-03-18T15:53:52+00:00" pubdate data-updated="true"></time>
       
 
 
@@ -130,7 +123,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/" >Tweet</a>
   
   
   
@@ -139,10 +132,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/02/11/sinatra-browser-detection/" title="Previous Post: Sinatra Browser Detection">&laquo; Sinatra Browser Detection</a>
+        <a class="basic-alignment left" href="/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/" title="Previous Post: Accelerated Mobile Pages(AMP): First Impression As a Developer">&laquo; Accelerated Mobile Pages(AMP): First Impression As a Developer</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/" title="Next Post: Detect and redirect mobile users with IIS URL Rewrite">Detect and redirect mobile users with IIS URL Rewrite &raquo;</a>
       
     </p>
   </footer>

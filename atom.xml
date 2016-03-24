@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-03-08T19:23:34+00:00</updated>
+  <updated>2016-03-24T17:39:25+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Accelerated Mobile Pages(AMP): Week 3]]></title>
+    <link href="http://wuleicanada.github.io/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/"/>
+    <updated>2016-03-18T15:53:52+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2016/03/18/accelerated-mobile-pages-amp-week-3</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Accelerated Mobile Pages(AMP): First Impression as a Developer]]></title>
@@ -415,7 +424,7 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
 
 <p></p>
 
-<p>Unfortunately, it didn&rsquo;t help. A closer look at the error message shows the except was thrown by CMS.LicenseProvider.LicenseHelper.</p>
+<p>Unfortunately, it didn&rsquo;t help. A closer look at the error message shows the exception was thrown by CMS.LicenseProvider.LicenseHelper.</p>
 ]]></content>
   </entry>
   
