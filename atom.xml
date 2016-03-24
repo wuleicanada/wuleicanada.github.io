@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-03-24T18:17:05+00:00</updated>
+  <updated>2016-03-24T18:26:28+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -22,7 +22,8 @@
 
 <h2>Top Stories with AMP</h2>
 
-<p>Google has already taken AMP to the next level. &ldquo;<a href="https://developers.google.com/structured-data/carousels/top-stories">Top Stories with AMP</a>&rdquo; is a kind of <em>enhanced</em> AMP, so to speak. They will be shown as a carousel in Google Search results.</p>
+<p>Google has already taken AMP to the next level. &ldquo;<a href="https://developers.google.com/structured-data/carousels/top-stories">Top Stories with AMP</a>&rdquo; is a kind of <em>enhanced</em> AMP, so to speak.
+They will be shown as a carousel in Google Search results.</p>
 
 <p>In order qualify for Top Stories, your AMP needs to meet some additional specs. It must have a Structured Data Markup that include the following mandatory information:</p>
 
@@ -30,8 +31,13 @@
 <li>An image at least 696 pixels wide</li>
 <li>Publisher information (including a logo no bigger than 600x60)</li>
 <li>Author. Although Google&rsquo;s official guidelines require a type of schema.org/Person, I noticed schema.org/Organization also passes the <a href="https://developers.google.com/structured-data/testing-tool/">Structured Data validation</a></li>
+<li>datePublished in ISO 8601 format</li>
 </ul>
 
+
+<h2>SVG image</h2>
+
+<p>Other than <amp-img>, inline SVG is allowed, although only a subset of attributes are supported.</p>
 ]]></content>
   </entry>
   
