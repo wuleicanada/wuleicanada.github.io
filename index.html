@@ -97,48 +97,86 @@ Unfortunately their mobile site http://m.thestar.com is probably one of the &hel
 
   <div class="entry-content"><p>The Toronto Star is one of my favourite web sites that I visit daily.
 Unfortunately their mobile site <a href="http://m.thestar.com">http://m.thestar.com</a> is probably one of the slowest in the world. It takes at least 5 seconds for my Android phone to load the home page.
-Worse yet, after you finish reading an article and you hit the back button to return to the home page, it takes another 5 seconds, and this time
+Worse yet, after you finish reading an article and hit the back button to return to the home page, it takes another 5 seconds, and this time
 without the Please-Wait spining icon. I often find myself hitting the back button twice and leave their site altogether.</p>
 
 <p>They&rsquo;re current rolling out a beta of a new design. But the load time doesn&rsquo;t improve much.</p>
 
-<p>So I wrote this Sinatra site and deployed to Heroku at <a href="http://mstar.herokuapp.com/">http://mstar.herokuapp.com/</a> :-)</p>
+<p>Looking at the source, I notice the home page has a lot of fancy stuff in Angular. The bad news is that until my Android
+phone has the power of a desktop computer, it will never load faster enough.</p>
 
-<pre><code class="ruby">require 'sinatra'
-require 'httpclient'
-require 'json'
+<p>So I decided to tackle this myself, and deployed the following Sinatra site on Heroku at <a href="http://mstar.herokuapp.com/">http://mstar.herokuapp.com/</a> :-)</p>
 
-get '/' do
-    @items = JSON.parse(HTTPClient.new.get_content 'http://m.thestar.com/content/TheStarMobile/home.jsonp.html')['items']
-    haml :index
-end
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;httpclient&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">get</span> <span class="s1">&#39;/&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="vi">@items</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">HTTPClient</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">get_content</span> <span class="s1">&#39;http://m.thestar.com/content/TheStarMobile/home.jsonp.html&#39;</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;items&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">haml</span> <span class="ss">:index</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>And here&rsquo;s the HAML template:
-<code>haml
-!!!
-%html{:lang =&gt; "en"}
-  %head
-    %meta{:charset =&gt; "utf-8"}/
-    %meta{:name =&gt; "viewport", :content =&gt; "width=device-width, initial-scale=1"}/
-    %title Toronto Star
-    %link{:href =&gt; "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css", :rel =&gt; "stylesheet"}/
-    %base{:href =&gt; "//m.thestar.com"}/
-  %body
-    .container
-      - @items.each do |i|
-        %hr
-          - i['assets'].each do |as|            
-            %a{:href =&gt; "/#/article/#{as['asset']['url']}"}
-              = as['asset']['headline']
-            %br
-            %img{:src =&gt; "#{as['asset']['image']['url']}", :width =&gt; "50%", :height =&gt; "50%"}
-            %div
-              = as['asset']['abstract']            
-            %hr
-      %footer
-        %p &amp;copy; The Toronto Star 2016
-</code></p>
+
+<p>And here&rsquo;s the HAML template:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nn">!!!</span>
+</span><span class='line'><span class="nt">%html</span><span class="p">{</span><span class="ss">:lang</span> <span class="o">=&gt;</span> <span class="s2">&quot;ruby&quot;</span><span class="p">}</span>
+</span><span class='line'>  <span class="nt">%head</span>
+</span><span class='line'>    <span class="nt">%meta</span><span class="p">{</span><span class="ss">:charset</span> <span class="o">=&gt;</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">}/</span>
+</span><span class='line'>    <span class="nt">%meta</span><span class="p">{</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;viewport&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="s2">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">}/</span>
+</span><span class='line'>    <span class="nt">%title</span> Toronto Star
+</span><span class='line'>    <span class="nt">%link</span><span class="p">{</span><span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css&quot;</span><span class="p">,</span> <span class="ss">:rel</span> <span class="o">=&gt;</span> <span class="s2">&quot;stylesheet&quot;</span><span class="p">}/</span>
+</span><span class='line'>    <span class="nt">%base</span><span class="p">{</span><span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&quot;//m.thestar.com&quot;</span><span class="p">}/</span>
+</span><span class='line'>  <span class="nt">%body</span>
+</span><span class='line'>    <span class="nc">.container</span>
+</span><span class='line'>      <span class="p">-</span> <span class="vi">@items</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>        <span class="nt">%hr</span>
+</span><span class='line'>          <span class="p">-</span> <span class="n">i</span><span class="o">[</span><span class="s1">&#39;assets&#39;</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">as</span><span class="o">|</span>
+</span><span class='line'>            <span class="nt">%a</span><span class="p">{</span><span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&quot;/#/article/</span><span class="si">#{</span><span class="n">as</span><span class="o">[</span><span class="s1">&#39;asset&#39;</span><span class="o">][</span><span class="s1">&#39;url&#39;</span><span class="o">]</span><span class="si">}</span>&quot;}
+</span><span class='line'>              <span class="p">=</span> <span class="n">as</span><span class="o">[</span><span class="s1">&#39;asset&#39;</span><span class="o">][</span><span class="s1">&#39;headline&#39;</span><span class="o">]</span>
+</span><span class='line'>            <span class="nt">%br</span>
+</span><span class='line'>            <span class="nt">%img</span><span class="p">{</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">as</span><span class="o">[</span><span class="s1">&#39;asset&#39;</span><span class="o">][</span><span class="s1">&#39;image&#39;</span><span class="o">][</span><span class="s1">&#39;url&#39;</span><span class="o">]</span><span class="si">}</span>&quot;, :width =&gt; &quot;50%&quot;, :height =&gt; &quot;50%&quot;}
+</span><span class='line'>            <span class="nt">%div</span>
+</span><span class='line'>              <span class="p">=</span> <span class="n">as</span><span class="o">[</span><span class="s1">&#39;asset&#39;</span><span class="o">][</span><span class="s1">&#39;abstract&#39;</span><span class="o">]</span>
+</span><span class='line'>            <span class="nt">%hr</span>
+</span><span class='line'>      <span class="nt">%footer</span>
+</span><span class='line'>        <span class="nt">%p</span> &amp;copy; The Toronto Star 2016
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Although the load speed of my alternative home page is just as abysimal due to the number of images, at least it loads instantly
+on repeat view.</p>
 </div>
   
   
