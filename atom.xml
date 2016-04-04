@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-03-24T18:26:28+00:00</updated>
+  <updated>2016-04-04T20:19:31+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Read the Toronto Star on Your Phone... As a Web Developer]]></title>
+    <link href="http://wuleicanada.github.io/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/"/>
+    <updated>2016-04-04T20:08:00+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer</id>
+    <content type="html"><![CDATA[<p>The Toronto Star is one of my favourite web sites that I visit daily.
+Unfortunately their mobile site <a href="http://m.thestar.com">http://m.thestar.com</a> is probably one of the slowest in the world. It takes at least 5 seconds for my Android phone to load the home page.
+Worse yet, after you finish reading an article and you hit the back button to return to the home page, it takes another 5 seconds, and this time
+without the Please-Wait spining icon. I often find myself hitting the back button twice and leave their site altogether.</p>
+
+<p>They&rsquo;re current rolling out a beta of a new design. But the load time doesn&rsquo;t improve much.</p>
+
+<p>So I wrote this Sinatra site and deployed to Heroku at <a href="http://mstar.herokuapp.com/">http://mstar.herokuapp.com/</a> :-)</p>
+
+<pre><code class="ruby">require 'sinatra'
+require 'httpclient'
+require 'json'
+
+get '/' do
+    @items = JSON.parse(HTTPClient.new.get_content 'http://m.thestar.com/content/TheStarMobile/home.jsonp.html')['items']
+    haml :index
+end
+</code></pre>
+
+<p>And here&rsquo;s the HAML template:
+<code>haml
+!!!
+%html{:lang =&gt; "en"}
+  %head
+    %meta{:charset =&gt; "utf-8"}/
+    %meta{:name =&gt; "viewport", :content =&gt; "width=device-width, initial-scale=1"}/
+    %title Toronto Star
+    %link{:href =&gt; "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css", :rel =&gt; "stylesheet"}/
+    %base{:href =&gt; "//m.thestar.com"}/
+  %body
+    .container
+      - @items.each do |i|
+        %hr
+          - i['assets'].each do |as|            
+            %a{:href =&gt; "/#/article/#{as['asset']['url']}"}
+              = as['asset']['headline']
+            %br
+            %img{:src =&gt; "#{as['asset']['image']['url']}", :width =&gt; "50%", :height =&gt; "50%"}
+            %div
+              = as['asset']['abstract']            
+            %hr
+      %footer
+        %p &amp;copy; The Toronto Star 2016
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Accelerated Mobile Pages(AMP): Week 3]]></title>

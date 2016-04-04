@@ -9,7 +9,8 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="Here are some notes from last week. Week 3 working on AMP. Top Stories with AMP Google has already taken AMP to the next level. &ldquo;Top Stories &hellip;">
+  <meta name="description" content="The Toronto Star is one of my favourite web sites that I visit daily.
+Unfortunately their mobile site http://m.thestar.com is probably one of the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/">How to Read the Toronto Star on Your Phone&#8230; As a Web Developer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-04T20:08:00+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The Toronto Star is one of my favourite web sites that I visit daily.
+Unfortunately their mobile site <a href="http://m.thestar.com">http://m.thestar.com</a> is probably one of the slowest in the world. It takes at least 5 seconds for my Android phone to load the home page.
+Worse yet, after you finish reading an article and you hit the back button to return to the home page, it takes another 5 seconds, and this time
+without the Please-Wait spining icon. I often find myself hitting the back button twice and leave their site altogether.</p>
+
+<p>They&rsquo;re current rolling out a beta of a new design. But the load time doesn&rsquo;t improve much.</p>
+
+<p>So I wrote this Sinatra site and deployed to Heroku at <a href="http://mstar.herokuapp.com/">http://mstar.herokuapp.com/</a> :-)</p>
+
+<pre><code class="ruby">require 'sinatra'
+require 'httpclient'
+require 'json'
+
+get '/' do
+    @items = JSON.parse(HTTPClient.new.get_content 'http://m.thestar.com/content/TheStarMobile/home.jsonp.html')['items']
+    haml :index
+end
+</code></pre>
+
+<p>And here&rsquo;s the HAML template:
+<code>haml
+!!!
+%html{:lang =&gt; "en"}
+  %head
+    %meta{:charset =&gt; "utf-8"}/
+    %meta{:name =&gt; "viewport", :content =&gt; "width=device-width, initial-scale=1"}/
+    %title Toronto Star
+    %link{:href =&gt; "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css", :rel =&gt; "stylesheet"}/
+    %base{:href =&gt; "//m.thestar.com"}/
+  %body
+    .container
+      - @items.each do |i|
+        %hr
+          - i['assets'].each do |as|            
+            %a{:href =&gt; "/#/article/#{as['asset']['url']}"}
+              = as['asset']['headline']
+            %br
+            %img{:src =&gt; "#{as['asset']['image']['url']}", :width =&gt; "50%", :height =&gt; "50%"}
+            %div
+              = as['asset']['abstract']            
+            %hr
+      %footer
+        %p &amp;copy; The Toronto Star 2016
+</code></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -743,46 +823,6 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/05/online-contrast-ratio-checker/">Online Contrast Ratio Checker</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-05T19:39:54+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While working on a web accessibility project, I came across this online contrast ratio checker:</p>
-
-<p><a href="http://leaverou.github.io/contrast-ratio/">http://leaverou.github.io/contrast-ratio/</a></p>
-
-<p>It lets you enter background colour and text colour (as RGB, hex, HSLA, colour names, etc.), and calculates the contrast.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -798,6 +838,10 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/">How to Read the Toronto Star on Your Phone&#8230; As a Web Developer</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/">Accelerated Mobile Pages(AMP): Week 3</a>
       </li>
     
@@ -811,10 +855,6 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
     
       <li class="post">
         <a href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/">Use X-Forwarded-For in Varnish Apache/NCSA Logs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/">Detect and Redirect Mobile Users With IIS URL Rewrite</a>
       </li>
     
   </ul>
