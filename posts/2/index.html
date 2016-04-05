@@ -414,9 +414,13 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
 
 <p><em>config.ru</em></p>
 
-<pre><code class="ruby">require File.join(File.dirname(__FILE__), 'app')
-run Sinatra::Application
-</code></pre>
+<figure class='code'><figcaption><span>config.ru </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="s1">&#39;app&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">run</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Application</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><em>app.rb</em></p>
 

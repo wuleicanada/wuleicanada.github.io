@@ -479,8 +479,10 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
 <p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
 
-<pre><code class="Shell">varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>varnishncsa -F <span class="s1">&#39;%{X-Forwarded-For}i %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; &quot;%{User-agent}i&quot;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   

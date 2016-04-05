@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-04-05T15:44:25+00:00</updated>
+  <updated>2016-04-05T15:48:57+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -294,8 +294,10 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
 <p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
 
-<pre><code class="Shell">varnishncsa -F '%{X-Forwarded-For}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"'
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>varnishncsa -F <span class="s1">&#39;%{X-Forwarded-For}i %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; &quot;%{User-agent}i&quot;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
@@ -756,9 +758,13 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
 
 <p><em>config.ru</em></p>
 
-<pre><code class="ruby">require File.join(File.dirname(__FILE__), 'app')
-run Sinatra::Application
-</code></pre>
+<figure class='code'><figcaption><span>config.ru </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="s1">&#39;app&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">run</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Application</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><em>app.rb</em></p>
 
