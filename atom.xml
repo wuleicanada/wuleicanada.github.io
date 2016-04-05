@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-04-05T15:16:48+00:00</updated>
+  <updated>2016-04-05T15:40:43+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -868,37 +868,65 @@ run Sinatra::Application
 
 <p><em>layout.erb</em></p>
 
-<pre><code class="ruby">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;MyApp&lt;/title&gt;
-    &lt;link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"&gt;
-    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
-    &lt;script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"&gt;&lt;/script&gt;   
-&lt;/head&gt;
-&lt;body&gt;
+<figure class='code'><figcaption><span>layout.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;!</span><span class="no">DOCTYPE</span> <span class="n">html</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="no">MyApp</span><span class="o">&lt;</span><span class="sr">/title&gt;</span>
+</span><span class='line'><span class="sr"> &lt;link rel=&quot;stylesheet&quot; href=&quot;/</span><span class="o">/</span><span class="n">maxcdn</span><span class="o">.</span><span class="n">bootstrapcdn</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">/</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">css</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">css</span><span class="s2">&quot;&gt;</span>
+</span><span class='line'><span class="s2"> &lt;script src=&quot;</span><span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">ajax</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ajax</span><span class="o">/</span><span class="n">libs</span><span class="o">/</span><span class="n">jquery</span><span class="o">/</span><span class="mi">1</span><span class="o">.</span><span class="mi">8</span><span class="o">.</span><span class="mi">3</span><span class="o">/</span><span class="n">jquery</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">js</span><span class="s2">&quot;&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="s2"> &lt;script src=&quot;</span><span class="o">//</span><span class="n">maxcdn</span><span class="o">.</span><span class="n">bootstrapcdn</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">/</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">js</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">js</span><span class="s2">&quot;&gt;&lt;/script&gt;    </span>
+</span><span class='line'><span class="s2">&lt;/head&gt;</span>
+</span><span class='line'><span class="s2">&lt;body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;%= yield %&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;/body&gt;</span>
+</span><span class='line'><span class="s2">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;%= yield %&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
 
 <p><em>users/index.erb</em></p>
 
-<pre><code class="ruby">&lt;%= h @users %&gt;
-</code></pre>
+<figure class='code'><figcaption><span>users/index.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">h</span> <span class="vi">@users</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><em>users/show.erb</em></p>
 
-<pre><code class="ruby">&lt;%= form('/users/' + @user.id.to_s, :put) %&gt;
-    &lt;div&gt;First Name: &lt;%= input(:user, :firstname, :value=&gt;h(@user.firstname), :size=&gt;20)%&gt;&lt;/div&gt;
-    &lt;div&gt;Last Name: &lt;%= input(:user, :lastname, :value=&gt;h(@user.lastname), :size=&gt;20)%&gt;&lt;/div&gt;
-    &lt;div&gt;Email: &lt;%= input(:user, :email, :value=&gt;h(@user.email), :size=&gt;40, :disabled=&gt;:disabled)%&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;%= checkbox(:user, :consent, '1', :label=&gt; false) %&gt;&lt;/span&gt; Yes! I accept the term of service.&lt;/div&gt;
-    &lt;button type="submit" class="btn btn-default"&gt;Submit&lt;/button&gt;
-&lt;/form&gt;
-</code></pre>
+<figure class='code'><figcaption><span>users/show.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= form(&#39;/users/&#39; + @user.id.to_s, :put) %&gt;</span>
+</span><span class='line'><span class="sx"> &lt;div&gt;First Name: &lt;%=</span> <span class="n">input</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">:firstname</span><span class="p">,</span> <span class="ss">:value</span><span class="o">=&gt;</span><span class="n">h</span><span class="p">(</span><span class="vi">@user</span><span class="o">.</span><span class="n">firstname</span><span class="p">),</span> <span class="ss">:size</span><span class="o">=&gt;</span><span class="mi">20</span><span class="p">)</span><span class="sx">%&gt;&lt;/div&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span><span class="no">Last</span> <span class="ss">Name</span><span class="p">:</span> <span class="o">&lt;</span><span class="sx">%= input(:user, :lastname, :value=</span><span class="o">&gt;</span><span class="n">h</span><span class="p">(</span><span class="vi">@user</span><span class="o">.</span><span class="n">lastname</span><span class="p">),</span> <span class="ss">:size</span><span class="o">=&gt;</span><span class="mi">20</span><span class="p">)</span><span class="sx">%&gt;&lt;/div&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span><span class="ss">Email</span><span class="p">:</span> <span class="o">&lt;</span><span class="sx">%= input(:user, :email, :value=</span><span class="o">&gt;</span><span class="n">h</span><span class="p">(</span><span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">),</span> <span class="ss">:size</span><span class="o">=&gt;</span><span class="mi">40</span><span class="p">,</span> <span class="ss">:disabled</span><span class="o">=&gt;</span><span class="ss">:disabled</span><span class="p">)</span><span class="sx">%&gt;&lt;/div&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;&lt;</span><span class="sx">%= checkbox(:user, :consent, &#39;1&#39;, :label=</span><span class="o">&gt;</span> <span class="kp">false</span><span class="p">)</span> <span class="sx">%&gt;&lt;/span&gt;</span> <span class="no">Yes</span><span class="o">!</span> <span class="n">I</span> <span class="n">accept</span> <span class="n">the</span> <span class="n">term</span> <span class="n">of</span> <span class="n">service</span><span class="o">.</span><span class="n">&lt;</span><span class="sr">/div&gt;</span>
+</span><span class='line'><span class="sr"> &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Submit&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Start our dev server</h3>
 
@@ -913,19 +941,29 @@ run Sinatra::Application
 <ul>
 <li>Create a new folder called <code>config</code> under our application root</li>
 <li>Run <code>jruby --command warble config</code>, which generates a configuration template called <code>warble.rb</code> under the <code>config</code> folder</li>
-<li>Edit <code>config\warble.rb</code> and update these lines:</li>
+<li>Edit <code>config/warble.rb</code> and update these lines:</li>
 </ul>
 
 
-<pre><code class="ruby">    # Application directories to be included in the webapp.
-    config.dirs = %w(views)
+<figure class='code'><figcaption><span>config/warble.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="c1"># Application directories to be included in the webapp.</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">dirs</span> <span class="o">=</span> <span class="sx">%w(views)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Additional files/directories to include, above those in config.dirs</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">includes</span> <span class="o">=</span> <span class="no">FileList</span><span class="o">[</span><span class="s1">&#39;app.rb&#39;</span><span class="p">,</span> <span class="s1">&#39;sqljdbc4.jar&#39;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Uncomment this if you don&#39;t want to package rails gem.</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">gems</span> <span class="o">-=</span> <span class="o">[</span><span class="s2">&quot;rails&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    # Additional files/directories to include, above those in config.dirs
-    config.includes = FileList['app.rb', 'sqljdbc4.jar']
-
-    # Uncomment this if you don't want to package rails gem.
-    config.gems -= ["rails"]
-</code></pre>
 
 <p>Now we&rsquo;re ready to package our app: <code>jruby --command warble</code></p>
 
