@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-04-04T23:04:14+00:00</updated>
+  <updated>2016-04-05T13:35:41+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -26,7 +26,7 @@ without the Please-Wait spining icon. I often find myself hitting the back butto
 <p>They&rsquo;re current rolling out a beta of a new design. But the load time doesn&rsquo;t improve much.</p>
 
 <p>Looking at the source, I notice the home page has a lot of fancy stuff in Angular. The bad news is that until my Android
-phone has the power of a desktop computer, it will never load faster enough.</p>
+phone has the power of a desktop computer, it will never be able to load at a decent speed.</p>
 
 <p>So I decided to tackle this myself, and deployed the following Sinatra site on Heroku at <a href="http://mstar.herokuapp.com/">http://mstar.herokuapp.com/</a> :-)</p>
 
