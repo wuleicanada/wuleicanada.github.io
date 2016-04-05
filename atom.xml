@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-04-05T13:40:26+00:00</updated>
+  <updated>2016-04-05T13:43:17+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -18,7 +18,7 @@
     <link href="http://wuleicanada.github.io/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/"/>
     <updated>2016-04-04T20:08:00+00:00</updated>
     <id>http://wuleicanada.github.io/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer</id>
-    <content type="html"><![CDATA[<p>The Toronto Star is one of my favourite web sites that I visit daily.
+    <content type="html"><![CDATA[<p><em>The Toronto Star</em> is one of my favourite web sites that I visit daily.
 Unfortunately their mobile site <a href="http://m.thestar.com">http://m.thestar.com</a> is probably one of the slowest in the world. It takes at least 5 seconds for my Android phone to load the home page.
 Worse yet, after you finish reading an article and hit the back button to return to the home page, it takes another 5 seconds, and this time
 without the Please-Wait spining icon. I often find myself hitting the back button twice and leave their site altogether.</p>
