@@ -129,19 +129,33 @@
 
 <p>Now we&rsquo;ll create the Gemfile with the following content:</p>
 
-<pre><code class="ruby">source "http://rubygems.org"
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Gemfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s2">&quot;http://rubygems.org&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;sinatra&quot;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;activerecord&quot;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;sinatra-activerecord&quot;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activerecord-jdbc-adapter&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sinatra-formhelpers-ng&#39;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s2">&quot;tux&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-gem "sinatra"
-gem "activerecord"
-gem "sinatra-activerecord"
-gem 'activerecord-jdbc-adapter'
-gem 'sinatra-formhelpers-ng'
-
-
-group :development do
-  gem "tux"
-end
-</code></pre>
 
 <p>And then run <code>jruby --command bundle install</code> to get the gems ready.</p>
 
@@ -153,17 +167,28 @@ end
 
 <p>Our application will use one table called &ldquo;users&rdquo;.</p>
 
-<pre><code class="sql">CREATE TABLE [users](
-    [id] [int] IDENTITY(1,1) NOT NULL,
-    [firstname] [varchar](32) NULL,
-    [lastname] [varchar](32) NULL,
-    [email] [varchar](64) NULL,
- CONSTRAINT [PK_users] PRIMARY KEY CLUSTERED 
-(
-    [id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-</code></pre>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">users</span><span class="p">](</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="k">IDENTITY</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">firstname</span><span class="p">]</span> <span class="p">[</span><span class="nb">varchar</span><span class="p">](</span><span class="mi">32</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">lastname</span><span class="p">]</span> <span class="p">[</span><span class="nb">varchar</span><span class="p">](</span><span class="mi">32</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">email</span><span class="p">]</span> <span class="p">[</span><span class="nb">varchar</span><span class="p">](</span><span class="mi">64</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'> <span class="k">CONSTRAINT</span> <span class="p">[</span><span class="n">PK_users</span><span class="p">]</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">CLUSTERED</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="k">ASC</span>
+</span><span class='line'><span class="p">)</span><span class="k">WITH</span> <span class="p">(</span><span class="n">PAD_INDEX</span>  <span class="o">=</span> <span class="k">OFF</span><span class="p">,</span> <span class="n">STATISTICS_NORECOMPUTE</span>  <span class="o">=</span> <span class="k">OFF</span><span class="p">,</span> <span class="n">IGNORE_DUP_KEY</span> <span class="o">=</span> <span class="k">OFF</span><span class="p">,</span> <span class="n">ALLOW_ROW_LOCKS</span>  <span class="o">=</span> <span class="k">ON</span><span class="p">,</span> <span class="n">ALLOW_PAGE_LOCKS</span>  <span class="o">=</span> <span class="k">ON</span><span class="p">)</span> <span class="k">ON</span> <span class="p">[</span><span class="k">PRIMARY</span><span class="p">]</span>
+</span><span class='line'><span class="p">)</span> <span class="k">ON</span> <span class="p">[</span><span class="k">PRIMARY</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 
 <p>Let&rsquo;s insert a user <code>insert users (firstname, lastname, email) values ('John', 'Smith', 'john@smith.com')</code></p>
 
@@ -179,7 +204,8 @@ run Sinatra::Application
 
 <p><em>app.rb</em></p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app.rb</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
