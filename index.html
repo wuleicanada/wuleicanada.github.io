@@ -568,8 +568,7 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
 <p>The culprit was the RegEx in the second condition, which exceeded some kind of the maximum length allowed for URL Rewrite. I worked around it by splitting it into multiple conditions, like this:</p>
 
-<figure class='code'><figcaption><span>linenos:false </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -598,8 +597,7 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
 <p>To make it happen, a new rule is needed.</p>
 
-<figure class='code'><figcaption><span>linenos:false </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -618,7 +616,7 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
 <p>Better yet, let&rsquo;s add support for cookies. And now our web.config file looks like this:</p>
 
-<figure class='code'><figcaption><span>web.config linenos:false </span></figcaption>
+<figure class='code'><figcaption><span>web.config </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
