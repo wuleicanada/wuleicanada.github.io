@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2016/04/07/display-rss-feed-using-jquery/</loc>
+    <lastmod>2016-04-07T17:27:08+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/</loc>
     <lastmod>2016-04-04T20:08:00+00:00</lastmod>
     <priority>0.8</priority>
@@ -95,14 +101,14 @@
   
   <url>
     <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2016-04-05T16:06:18+00:00</lastmod>
+    <lastmod>2016-04-07T17:33:53+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2016-04-05T16:06:18+00:00</lastmod>
+    <lastmod>2016-04-07T17:33:53+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

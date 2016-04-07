@@ -9,8 +9,27 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="The Toronto Star is one of my favourite web sites that I visit daily.
-Unfortunately their mobile site http://m.thestar.com is probably one of the &hellip;">
+  <meta name="description" content="While working on a static site using Middleman, I need to display an RSS feed using JavaScript. 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +85,95 @@ Unfortunately their mobile site http://m.thestar.com is probably one of the &hel
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/07/display-rss-feed-using-jquery/">Display RSS Feed Using JQuery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-07T17:27:08+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While working on a static site using Middleman, I need to display an RSS feed using JavaScript.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;/newsfeed.rss&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">dataType</span><span class="o">:</span> <span class="s1">&#39;xml&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">liHTML_template</span> <span class="o">=</span> <span class="s1">&#39;&lt;li&gt;&lt;div class=&quot;media&quot;&gt;&lt;div class=&quot;media-ele&quot;&gt;&lt;/div&gt;&lt;div class=&quot;media-bd&quot;&gt;&lt;div class=&quot;box&quot;&gt;&lt;div class=&quot;box-hd box-hd_min threeLines&quot;&gt;&lt;h4 class=&quot;hdg&quot;&gt;&lt;a href=&quot;{link}&quot; target=&quot;_blank&quot;&gt;{title}&lt;/a&gt;&lt;/h4&gt;&lt;/div&gt;&lt;div class=&quot;box-ft&quot;&gt;&lt;p class=&quot;txt_miniscule&quot;&gt;{pubDate}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">ulHTML</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">$</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;item&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">pubDate</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;pubDate&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="nx">ulHTML</span> <span class="o">+=</span> <span class="nx">liHTML_template</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;{title}&#39;</span><span class="p">,</span> <span class="nx">title</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;{link}&#39;</span><span class="p">,</span> <span class="nx">link</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;{pubDate}&#39;</span><span class="p">,</span> <span class="nx">pubDate</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#FeedContainer &gt; div &gt; div.feed-bd &gt; ul&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">ulHTML</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">jqXHR</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errorThrown</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -875,77 +983,6 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/19/failed-attempt-to-upgrade-lucene-dot-net-for-kentico-7/">Failed Attempt to Upgrade Lucene.Net for Kentico 7</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-19T15:42:57+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A web site I&rsquo;m working on uses Kentico CMS version 7. Occasionally its search function would break down due to a corrupted Lucene index.</p>
-
-<p>Kentico CMS&rsquo;s SmartSearch is built on top of Lucene.Net. Kentico 7 comes with Lucene.Net 2.1.0.3, a very old version. One of the things I tried was to upgrade Lucene.Net.</p>
-
-<p>Although the latest version is 3.0.3, I decided to go with 2.9.4.1.</p>
-
-<p><code>nuget install Lucene.Net -Version 2.9.4.1</code></p>
-
-<p>Then I replaced Kentico&rsquo;s Lucene.Net.dll and dependency ICSharpCode.SharpZipLib.dll.</p>
-
-<p>As expected, Kentico throws an error &ldquo;Could not load file or assembly &lsquo;Lucene.Net, Version=2.1.0.3, Culture=neutral, PublicKeyToken=d846ee227f01c7a1&rsquo; or one of its dependencies. The located assembly&rsquo;s manifest definition does not match the assembly reference.&rdquo;</p>
-
-<p>Trying to work around it, I added the following to web.config:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>   <span class="nt">&lt;runtime&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;assemblyBinding</span> <span class="na">xmlns=</span><span class="s">&quot;urn:schemas-microsoft-com:asm.v1&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;dependentAssembly&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;assemblyIdentity</span> <span class="na">name=</span><span class="s">&quot;Lucene.Net&quot;</span> <span class="na">publicKeyToken=</span><span class="s">&quot;d846ee227f01c7a1&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;bindingRedirect</span> <span class="na">oldVersion=</span><span class="s">&quot;2.1.0.3&quot;</span> <span class="na">newVersion=</span><span class="s">&quot;2.9.4.1&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/dependentAssembly&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/assemblyBinding&gt;</span>
-</span><span class='line'>   <span class="nt">&lt;/runtime&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Unfortunately, it didn&rsquo;t help. A closer look at the error message shows the exception was thrown by CMS.LicenseProvider.LicenseHelper.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -961,6 +998,10 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/07/display-rss-feed-using-jquery/">Display RSS Feed Using JQuery</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/">How to Read the Toronto Star on Your Phone&#8230; As a Web Developer</a>
       </li>
     
@@ -974,10 +1015,6 @@ from indexing the maintenance message as your site&rsquo;s content.</p>
     
       <li class="post">
         <a href="/blog/2015/12/08/building-a-free-conference-call-system/">Building a Free Conference Call System</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/">Use X-Forwarded-For in Varnish Apache/NCSA Logs</a>
       </li>
     
   </ul>
