@@ -149,6 +149,8 @@ phone has the power of a desktop computer, it will never be able to load at a de
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">!!!</span>
 </span><span class='line'><span class="o">%</span><span class="n">html</span><span class="p">{</span><span class="ss">:lang</span> <span class="o">=&gt;</span> <span class="s2">&quot;en&quot;</span><span class="p">}</span>
 </span><span class='line'>  <span class="o">%</span><span class="n">head</span>
@@ -160,6 +162,8 @@ phone has the power of a desktop computer, it will never be able to load at a de
 </span><span class='line'>  <span class="o">%</span><span class="n">body</span>
 </span><span class='line'>    <span class="o">.</span><span class="n">container</span>
 </span><span class='line'>      <span class="o">-</span> <span class="vi">@items</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>        <span class="o">.</span><span class="n">bg</span><span class="o">-</span><span class="n">primary</span>
+</span><span class='line'>          <span class="o">=</span><span class="n">i</span><span class="o">[</span><span class="s1">&#39;sectiontitle&#39;</span><span class="o">]</span>
 </span><span class='line'>        <span class="o">%</span><span class="n">hr</span>
 </span><span class='line'>          <span class="o">-</span> <span class="n">i</span><span class="o">[</span><span class="s1">&#39;assets&#39;</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">as</span><span class="o">|</span>
 </span><span class='line'>            <span class="o">%</span><span class="n">a</span><span class="p">{</span><span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&quot;/#/article/</span><span class="si">#{</span><span class="n">as</span><span class="o">[</span><span class="s1">&#39;asset&#39;</span><span class="o">][</span><span class="s1">&#39;url&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
