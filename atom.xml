@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-05-08T12:42:29+00:00</updated>
+  <updated>2016-05-16T18:23:41+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Optimize Your Images With Lossless Compression]]></title>
+    <link href="http://wuleicanada.github.io/blog/2016/05/16/optimize-your-images-with-lossless-compression/"/>
+    <updated>2016-05-16T18:12:13+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2016/05/16/optimize-your-images-with-lossless-compression</id>
+    <content type="html"><![CDATA[<p>One way to make your web pages load faster is to use lossless compression.</p>
+
+<p>On Linux there&rsquo;s a tool called &ldquo;jpegoptim&rdquo; to losslessly optimize JPEG files. You can install using apt-get or yum.</p>
+
+<p>Here&rsquo;s how to optimize all jpg files in a directory:</p>
+
+<p><code>find /jpg_directory/ -maxdepth 1 -type f -name "*.jpg" -exec jpegoptim --strip-all {} \;</code></p>
+
+<p>You can remove <code>-maxdepth 1</code> if you want to process the JPEGs in the subfolders recursively.</p>
+
+<p>Similarly, the tool to optimize PNG files is &ldquo;optipng&rdquo;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Display RSS Feed Using JQuery]]></title>

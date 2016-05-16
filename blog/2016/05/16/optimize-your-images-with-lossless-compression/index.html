@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Use X-Forwarded-For in Varnish Apache/NCSA Logs - Lei Wu, Web Developer</title>
+  <title>Optimize Your Images With Lossless Compression - Lei Wu, Web Developer</title>
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="In Varnish 4.0, the command varnishncsa let you display logs in Apache style format. By default, the log format is %h %l %u %t "%r" %s %b "%{Referer} &hellip;">
+  <meta name="description" content="One way to make your web pages load faster is to use lossless compression. On Linux there&rsquo;s a tool called &ldquo;jpegoptim&rdquo; to losslessly &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wuleicanada.github.io/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs">
+  <link rel="canonical" href="http://wuleicanada.github.io/blog/2016/05/16/optimize-your-images-with-lossless-compression">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Lei Wu, Web Developer" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Use X-Forwarded-For in Varnish Apache/NCSA Logs</h1>
+      <h1 class="entry-title">Optimize Your Images With Lossless Compression</h1>
     
     
       <p class="meta">
@@ -84,23 +84,24 @@
   
 
 
-<time datetime="2015-06-17T14:56:29+00:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-16T18:12:13+00:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>In Varnish 4.0, the command <code>varnishncsa</code> let you display logs in Apache style format.</p>
+<div class="entry-content"><p>One way to make your web pages load faster is to use lossless compression.</p>
 
-<p>By default, the log format is <code>%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"</code>.</p>
+<p>On Linux there&rsquo;s a tool called &ldquo;jpegoptim&rdquo; to losslessly optimize JPEG files. You can install using apt-get or yum.</p>
 
-<p>But if you need to use &ldquo;X-Forwarded-For&rdquo; IP instead of %h (Remote host), this is how:</p>
+<p>Here&rsquo;s how to optimize all jpg files in a directory:</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>varnishncsa -F <span class="s1">&#39;%{X-Forwarded-For}i %l %u %t &quot;%r&quot; %s %b &quot;%{Referer}i&quot; &quot;%{User-agent}i&quot;&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><code>find /jpg_directory/ -maxdepth 1 -type f -name "*.jpg" -exec jpegoptim --strip-all {} \;</code></p>
 
+<p>You can remove <code>-maxdepth 1</code> if you want to process the JPEGs in the subfolders recursively.</p>
+
+<p>Similarly, the tool to optimize PNG files is &ldquo;optipng&rdquo;.</p>
 </div>
 
 
@@ -123,7 +124,7 @@
   
 
 
-<time datetime="2015-06-17T14:56:29+00:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-16T18:12:13+00:00" pubdate data-updated="true"></time>
       
 
 
@@ -131,7 +132,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2015/06/17/use-x-forwarded-for-in-varnish-ncsa-logs/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2016/05/16/optimize-your-images-with-lossless-compression/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2016/05/16/optimize-your-images-with-lossless-compression/" >Tweet</a>
   
   
   
@@ -140,10 +141,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/05/01/detect-and-redirect-mobile-users-with-iis-url-rewrite/" title="Previous Post: Detect and redirect mobile users with IIS URL Rewrite">&laquo; Detect and redirect mobile users with IIS URL Rewrite</a>
+        <a class="basic-alignment left" href="/blog/2016/04/07/display-rss-feed-using-jquery/" title="Previous Post: Display RSS feed using JQuery">&laquo; Display RSS feed using JQuery</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/12/08/building-a-free-conference-call-system/" title="Next Post: Building a free conference call system">Building a free conference call system &raquo;</a>
       
     </p>
   </footer>

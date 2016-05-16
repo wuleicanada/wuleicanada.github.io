@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2016/05/16/optimize-your-images-with-lossless-compression/</loc>
+    <lastmod>2016-05-16T18:12:13+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2016/04/07/display-rss-feed-using-jquery/</loc>
     <lastmod>2016-04-07T17:27:08+00:00</lastmod>
     <priority>0.8</priority>
@@ -101,14 +107,14 @@
   
   <url>
     <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2016-05-08T12:42:29+00:00</lastmod>
+    <lastmod>2016-05-16T18:23:41+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2016-05-08T12:42:29+00:00</lastmod>
+    <lastmod>2016-05-16T18:23:41+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
