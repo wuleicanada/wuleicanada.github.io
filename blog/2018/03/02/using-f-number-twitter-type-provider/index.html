@@ -102,25 +102,44 @@ Twitter account.</p>
 
 <p>F# Twitter Type Provider to the rescue.</p>
 
-<pre><code class="fsharp">#if INTERACTIVE
-#I @"..\packages\FSharp.Data.Toolbox.Twitter.0.19\lib\net40\"
-#I @"..\packages\FSharp.Data.2.4.2\lib\net45\"
-#r "FSharp.Data.Toolbox.Twitter.dll"
-#r "FSharp.Data.dll"
-#else
-module Twitter
-#endif
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">#</span><span class="k">if</span> <span class="n">INTERACTIVE</span>
+</span><span class='line'><span class="o">#</span><span class="n">I</span> <span class="s">@&quot;..\packages\FSharp.Data.Toolbox.Twitter.0.19\lib\net40\&quot;</span>
+</span><span class='line'><span class="o">#</span><span class="n">I</span> <span class="s">@&quot;..\packages\FSharp.Data.2.4.2\lib\net45\&quot;</span>
+</span><span class='line'><span class="o">#</span><span class="n">r</span> <span class="s">&quot;FSharp.Data.Toolbox.Twitter.dll&quot;</span>
+</span><span class='line'><span class="o">#</span><span class="n">r</span> <span class="s">&quot;FSharp.Data.dll&quot;</span>
+</span><span class='line'><span class="o">#</span><span class="k">else</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">Twitter</span>
+</span><span class='line'><span class="o">#</span><span class="n">endif</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">open</span> <span class="nn">FSharp.Data.Toolbox.Twitter</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">key</span> <span class="o">=</span> <span class="s">&quot;...&quot;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">secret</span> <span class="o">=</span> <span class="s">&quot;...&quot;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">accessToken</span> <span class="o">=</span> <span class="s">&quot;...&quot;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">oauthToken</span> <span class="o">=</span> <span class="s">&quot;...&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">twitter</span> <span class="o">=</span> <span class="nn">Twitter</span><span class="p">.</span><span class="n">AuthenticateAppSingleUser</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">secret</span><span class="o">,</span> <span class="n">accessToken</span><span class="o">,</span> <span class="n">oauthToken</span><span class="o">)</span>
+</span><span class='line'><span class="n">twitter</span><span class="o">.</span><span class="n">RequestRawData</span><span class="o">(</span><span class="s">&quot;https://api.twitter.com/1.1/account/verify_credentials.json&quot;</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">|&gt;</span> <span class="n">printfn</span> <span class="s">&quot;%A&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-open FSharp.Data.Toolbox.Twitter
-
-let key = "..."
-let secret = "..."
-let accessToken = "..."
-let oauthToken = "..."
-
-let twitter = Twitter.AuthenticateAppSingleUser(key, secret, accessToken, oauthToken)
-twitter.RequestRawData("https://api.twitter.com/1.1/account/verify_credentials.json", []) |&gt; printfn "%A"
-</code></pre>
 </div>
 
 
