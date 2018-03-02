@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2016-05-16T18:23:41+00:00</updated>
+  <updated>2018-03-02T17:21:51+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using F# Twitter Type Provider]]></title>
+    <link href="http://wuleicanada.github.io/blog/2018/03/02/using-f-number-twitter-type-provider/"/>
+    <updated>2018-03-02T16:18:38+00:00</updated>
+    <id>http://wuleicanada.github.io/blog/2018/03/02/using-f-number-twitter-type-provider</id>
+    <content type="html"><![CDATA[<p>Recently I have been using F# a lot at work.</p>
+
+<p>One of the things I love most about F# is Type Providers. Combined with Intellisense in Visual Studio, it&rsquo;s very convenient for certain tasks, such as accessing
+Twitter account.</p>
+
+<p>Today I need to find out the account information of a given Twitter account. But I only have the following information from a C# application:</p>
+
+<p>ConsumerKey, ConsumerSecret, AccessToken, OAuthToken.</p>
+
+<p>F# Twitter Type Provider to the rescue.</p>
+
+<pre><code class="fsharp">#if INTERACTIVE
+#I @"..\packages\FSharp.Data.Toolbox.Twitter.0.19\lib\net40\"
+#I @"..\packages\FSharp.Data.2.4.2\lib\net45\"
+#r "FSharp.Data.Toolbox.Twitter.dll"
+#r "FSharp.Data.dll"
+#else
+module Twitter
+#endif
+
+open FSharp.Data.Toolbox.Twitter
+
+let key = "..."
+let secret = "..."
+let accessToken = "..."
+let oauthToken = "..."
+
+let twitter = Twitter.AuthenticateAppSingleUser(key, secret, accessToken, oauthToken)
+twitter.RequestRawData("https://api.twitter.com/1.1/account/verify_credentials.json", []) |&gt; printfn "%A"
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Optimize Your Images With Lossless Compression]]></title>

@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="One way to make your web pages load faster is to use lossless compression. On Linux there&rsquo;s a tool called &ldquo;jpegoptim&rdquo; to losslessly &hellip;">
+  <meta name="description" content="Recently I have been using F# a lot at work. One of the things I love most about F# is Type Providers. Combined with Intellisense in Visual Studio, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/03/02/using-f-number-twitter-type-provider/">Using F# Twitter Type Provider</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-03-02T16:18:38+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I have been using F# a lot at work.</p>
+
+<p>One of the things I love most about F# is Type Providers. Combined with Intellisense in Visual Studio, it&rsquo;s very convenient for certain tasks, such as accessing
+Twitter account.</p>
+
+<p>Today I need to find out the account information of a given Twitter account. But I only have the following information from a C# application:</p>
+
+<p>ConsumerKey, ConsumerSecret, AccessToken, OAuthToken.</p>
+
+<p>F# Twitter Type Provider to the rescue.</p>
+
+<pre><code class="fsharp">#if INTERACTIVE
+#I @"..\packages\FSharp.Data.Toolbox.Twitter.0.19\lib\net40\"
+#I @"..\packages\FSharp.Data.2.4.2\lib\net45\"
+#r "FSharp.Data.Toolbox.Twitter.dll"
+#r "FSharp.Data.dll"
+#else
+module Twitter
+#endif
+
+open FSharp.Data.Toolbox.Twitter
+
+let key = "..."
+let secret = "..."
+let accessToken = "..."
+let oauthToken = "..."
+
+let twitter = Twitter.AuthenticateAppSingleUser(key, secret, accessToken, oauthToken)
+twitter.RequestRawData("https://api.twitter.com/1.1/account/verify_credentials.json", []) |&gt; printfn "%A"
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -883,49 +948,6 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-02-11T19:29:40+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One way to detect browsers is the &lsquo;browser&rsquo; gem available at <a href="https://github.com/fnando/browser">https://github.com/fnando/browser</a></p>
-
-<p>This is how to set it up in Sinatra (which isn&rsquo;t so obvious in the gem&rsquo;s README):</p>
-
-<pre><code class="ruby">require "browser"
-
-browser = Browser.new(:ua =&gt; request.user_agent)
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -941,6 +963,10 @@ browser = Browser.new(:ua =&gt; request.user_agent)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/03/02/using-f-number-twitter-type-provider/">Using F# Twitter Type Provider</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/16/optimize-your-images-with-lossless-compression/">Optimize Your Images With Lossless Compression</a>
       </li>
     
@@ -954,10 +980,6 @@ browser = Browser.new(:ua =&gt; request.user_agent)
     
       <li class="post">
         <a href="/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/">Accelerated Mobile Pages(AMP): Week 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/">Accelerated Mobile Pages(AMP): First Impression as a Developer</a>
       </li>
     
   </ul>
@@ -1007,7 +1029,7 @@ browser = Browser.new(:ua =&gt; request.user_agent)
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Lei Wu -
+  Copyright &copy; 2018 - Lei Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

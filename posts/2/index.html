@@ -9,8 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="The easiest way to create a maintenance page for a .Net application is creating a static html page called
-app_offline.htm and saving it to the root &hellip;">
+  <meta name="description" content="One way to detect browsers is the &lsquo;browser&rsquo; gem available at https://github.com/fnando/browser This is how to set it up in Sinatra (which &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,49 @@ app_offline.htm and saving it to the root &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/11/sinatra-browser-detection/">Sinatra Browser Detection</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-11T19:29:40+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One way to detect browsers is the &lsquo;browser&rsquo; gem available at <a href="https://github.com/fnando/browser">https://github.com/fnando/browser</a></p>
+
+<p>This is how to set it up in Sinatra (which isn&rsquo;t so obvious in the gem&rsquo;s README):</p>
+
+<pre><code class="ruby">require "browser"
+
+browser = Browser.new(:ua =&gt; request.user_agent)
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -841,6 +883,10 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/03/02/using-f-number-twitter-type-provider/">Using F# Twitter Type Provider</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/16/optimize-your-images-with-lossless-compression/">Optimize Your Images With Lossless Compression</a>
       </li>
     
@@ -854,10 +900,6 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
     
       <li class="post">
         <a href="/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/">Accelerated Mobile Pages(AMP): Week 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/29/accelerated-mobile-pages-amp-first-impression-as-a-developer/">Accelerated Mobile Pages(AMP): First Impression as a Developer</a>
       </li>
     
   </ul>
@@ -907,7 +949,7 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Lei Wu -
+  Copyright &copy; 2018 - Lei Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
