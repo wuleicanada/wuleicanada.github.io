@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2018-08-21T14:54:59+00:00</updated>
+  <updated>2018-08-21T18:13:17+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -82,6 +82,16 @@
 <span class='line-number'>47</span>
 <span class='line-number'>48</span>
 <span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
 </pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">#</span><span class="k">if</span> <span class="n">INTERACTIVE</span>
 </span><span class='line'><span class="o">#</span><span class="n">r</span> <span class="s">@&quot;..\..\packages\FSharp.Data\lib\net45\FSharp.Data.dll&quot;</span>
 </span><span class='line'><span class="o">#</span><span class="k">else</span>
@@ -90,24 +100,34 @@
 </span><span class='line'>
 </span><span class='line'><span class="k">open</span> <span class="nn">FSharp.Data</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``</span> <span class="o">=</span>
-</span><span class='line'>    <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">[&lt;</span><span class="n">Literal</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">Url_a_f</span> <span class="o">=</span> <span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span>
+</span><span class='line'><span class="o">[&lt;</span><span class="n">Literal</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">Url_g_m</span> <span class="o">=</span> <span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span>
+</span><span class='line'><span class="o">[&lt;</span><span class="n">Literal</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">Url_n_z</span> <span class="o">=</span> <span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="n">Url_a_f</span><span class="o">&gt;</span>
 </span><span class='line'><span class="k">let</span> <span class="nv">colours_a_f</span> <span class="o">=</span>
-</span><span class='line'>    <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>    <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="n">Url_a_f</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Rows</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``</span> <span class="o">=</span>
-</span><span class='line'>    <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``</span> <span class="o">=</span>  <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="n">Url_g_m</span><span class="o">&gt;</span>
 </span><span class='line'><span class="k">let</span> <span class="nv">colours_g_m</span> <span class="o">=</span>
-</span><span class='line'>    <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>    <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="n">Url_g_m</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Rows</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``</span> <span class="o">=</span>
-</span><span class='line'>    <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="n">Url_n_z</span><span class="o">&gt;</span>
 </span><span class='line'><span class="k">let</span> <span class="nv">colours_n_z</span> <span class="o">=</span>
-</span><span class='line'>    <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>    <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="n">Url_n_z</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Rows</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Combine the three</span>
-</span><span class='line'><span class="k">let</span> <span class="nv">colours</span> <span class="o">=</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_g_m</span> <span class="n">colours_n_z</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_a_f</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours</span> <span class="o">=</span>
+</span><span class='line'>    <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_g_m</span> <span class="n">colours_n_z</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_a_f</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">cache</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">let</span> <span class="nv">distance</span> <span class="n">c1</span> <span class="n">c2</span> <span class="o">=</span>
 </span><span class='line'>
