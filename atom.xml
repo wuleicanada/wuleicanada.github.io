@@ -4,7 +4,7 @@
   <title><![CDATA[Lei Wu, Web Developer]]></title>
   <link href="http://wuleicanada.github.io/atom.xml" rel="self"/>
   <link href="http://wuleicanada.github.io/"/>
-  <updated>2018-08-21T18:13:17+00:00</updated>
+  <updated>2018-08-21T18:18:22+00:00</updated>
   <id>http://wuleicanada.github.io/</id>
   <author>
     <name><![CDATA[Lei Wu]]></name>
@@ -92,6 +92,7 @@
 <span class='line-number'>57</span>
 <span class='line-number'>58</span>
 <span class='line-number'>59</span>
+<span class='line-number'>60</span>
 </pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">#</span><span class="k">if</span> <span class="n">INTERACTIVE</span>
 </span><span class='line'><span class="o">#</span><span class="n">r</span> <span class="s">@&quot;..\..\packages\FSharp.Data\lib\net45\FSharp.Data.dll&quot;</span>
 </span><span class='line'><span class="o">#</span><span class="k">else</span>
@@ -125,7 +126,8 @@
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Combine the three</span>
 </span><span class='line'><span class="k">let</span> <span class="nv">colours</span> <span class="o">=</span>
-</span><span class='line'>    <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_g_m</span> <span class="n">colours_n_z</span>
+</span><span class='line'>    <span class="n">colours_n_z</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_g_m</span>
 </span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_a_f</span>
 </span><span class='line'>    <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">cache</span>
 </span><span class='line'>
