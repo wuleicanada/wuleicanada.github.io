@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Find the Name of Your Colour... With F# Html Type Provider - Lei Wu, Web Developer</title>
+  <meta name="author" content="Lei Wu">
+
+  
+  <meta name="description" content="How many colour names are there in the world? Wikipedia lists a whopping 1,500 of them: https://en.wikipedia.org/wiki/List_of_colors_(compact) The &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://wuleicanada.github.io/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Lei Wu, Web Developer" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Lei Wu, Web Developer</a></h1>
+  
+    <h2>Keeping simple things simple.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:wuleicanada.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Find the Name of Your Colour... With F# Html Type Provider</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-08-21T14:23:12+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>How many colour names are there in the world? Wikipedia lists a whopping 1,500 of them: <a href="https://en.wikipedia.org/wiki/List_of_colors_">https://en.wikipedia.org/wiki/List_of_colors_</a>(compact)</p>
+
+<p>The following F# script, given any hexidecimal colour value, returns the closet match. For example, it tells you &ldquo;#FFFFF1&rdquo; matches &ldquo;Ivory #FFFFF0&rdquo;.</p>
+
+<p>The script uses Html Type Provider to query the following three pages and generates a list of colour names:</p>
+
+<ul>
+<li>Colours A-F: <a href="https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F">https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F</a></li>
+<li>Colours G-M: <a href="https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M">https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M</a></li>
+<li>Colours N-Z: <a href="https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z">https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z</a></li>
+</ul>
+
+
+<p>It then calculates the shortest 3-D distance between your colour and the colours in the list.</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">#</span><span class="k">if</span> <span class="n">INTERACTIVE</span>
+</span><span class='line'><span class="o">#</span><span class="n">r</span> <span class="s">@&quot;\Users\leiwuu\Documents\Visual Studio Code\FSharp\src\Colours\packages\FSharp.Data\lib\net45\FSharp.Data.dll&quot;</span>
+</span><span class='line'><span class="o">#</span><span class="k">else</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">Colours</span>
+</span><span class='line'><span class="o">#</span><span class="n">endif</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">open</span> <span class="nn">FSharp.Data</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours_a_f</span> <span class="o">=</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours_g_m</span> <span class="o">=</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours_n_z</span> <span class="o">=</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Combine the three</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours</span> <span class="o">=</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_g_m</span> <span class="n">colours_n_z</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_a_f</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">distance</span> <span class="n">c1</span> <span class="n">c2</span> <span class="o">=</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="nv">hexToInt</span> <span class="n">s</span> <span class="o">=</span>
+</span><span class='line'>        <span class="nn">System</span><span class="p">.</span><span class="nn">Convert</span><span class="p">.</span><span class="n">ToInt32</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="mi">16</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// convert hex string to (R:int * G:int * B:int)</span>
+</span><span class='line'>    <span class="c1">// e.g. &quot;#FFFFFF&quot; to (255, 255, 255)</span>
+</span><span class='line'>    <span class="k">let</span> <span class="nv">getRGB</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span><span class="kt">string</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>        <span class="k">let</span> <span class="nv">r</span> <span class="o">=</span> <span class="n">c</span><span class="o">.[</span><span class="mi">1</span><span class="o">..</span><span class="mi">2</span><span class="o">]</span> <span class="o">|&gt;</span> <span class="n">hexToInt</span>
+</span><span class='line'>        <span class="k">let</span> <span class="nv">g</span> <span class="o">=</span> <span class="n">c</span><span class="o">.[</span><span class="mi">3</span><span class="o">..</span><span class="mi">4</span><span class="o">]</span> <span class="o">|&gt;</span> <span class="n">hexToInt</span>
+</span><span class='line'>        <span class="k">let</span> <span class="nv">b</span> <span class="o">=</span> <span class="n">c</span><span class="o">.[</span><span class="mi">5</span><span class="o">..</span><span class="mi">6</span><span class="o">]</span> <span class="o">|&gt;</span> <span class="n">hexToInt</span>
+</span><span class='line'>        <span class="o">(</span><span class="n">r</span><span class="o">,</span> <span class="n">g</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="o">(</span><span class="n">r1</span><span class="o">,</span> <span class="n">g1</span><span class="o">,</span> <span class="n">b1</span><span class="o">)</span> <span class="o">=</span> <span class="n">getRGB</span> <span class="n">c1</span>
+</span><span class='line'>    <span class="k">let</span> <span class="o">(</span><span class="n">r2</span><span class="o">,</span> <span class="n">g2</span><span class="o">,</span> <span class="n">b2</span><span class="o">)</span> <span class="o">=</span> <span class="n">getRGB</span> <span class="n">c2</span>
+</span><span class='line'>    <span class="o">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="o">)*(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">g1</span> <span class="o">-</span> <span class="n">g2</span><span class="o">)*(</span><span class="n">g1</span> <span class="o">-</span> <span class="n">g2</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">b1</span> <span class="o">-</span> <span class="n">b2</span><span class="o">)*(</span><span class="n">b1</span> <span class="o">-</span> <span class="n">b2</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">matchColour</span> <span class="n">colour</span> <span class="o">=</span>
+</span><span class='line'>    <span class="n">colours</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">minBy</span> <span class="o">(</span><span class="k">fun</span> <span class="n">c</span> <span class="o">-&gt;</span> <span class="n">distance</span> <span class="n">colour</span> <span class="o">(</span><span class="n">snd</span> <span class="n">c</span><span class="o">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">colours</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">length</span> <span class="o">|&gt;</span> <span class="n">printfn</span> <span class="s">&quot;Total number of colours: %i&quot;</span>
+</span><span class='line'><span class="s">&quot;#FFFFF1&quot;</span> <span class="o">|&gt;</span> <span class="n">matchColour</span> <span class="o">|&gt;</span> <span class="n">printfn</span> <span class="s">&quot;Best match for your colour: %A&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Lei Wu</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-08-21T14:23:12+00:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://wuleicanada.github.io/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/" data-via="" data-counturl="http://wuleicanada.github.io/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2018/03/02/using-f-number-twitter-type-provider/" title="Previous Post: Using F# Twitter Type Provider">&laquo; Using F# Twitter Type Provider</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/">Find the Name of Your Colour... With F# Html Type Provider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/03/02/using-f-number-twitter-type-provider/">Using F# Twitter Type Provider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/16/optimize-your-images-with-lossless-compression/">Optimize Your Images With Lossless Compression</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/07/display-rss-feed-using-jquery/">Display RSS Feed Using JQuery</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/">How to Read the Toronto Star on Your Phone... As a Web Developer</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  
+  <a href="https://github.com/wuleicanada">@wuleicanada</a> on GitHub
+  
+  
+  
+  <!--
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'wuleicanada',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+  -->
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Lei Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

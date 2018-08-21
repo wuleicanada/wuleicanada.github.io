@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="One way to detect browsers is the &lsquo;browser&rsquo; gem available at https://github.com/fnando/browser This is how to set it up in Sinatra (which &hellip;">
+  <meta name="description" content="Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off. Tried using Puma instead of Thin, but it still didn&rsquo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-05T19:00:48+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off.</p>
+
+<p>Tried using Puma instead of Thin, but it still didn&rsquo;t work (although the page got cut off at a different place).</p>
+
+<p>The solution is to compress the content.</p>
+
+<p><code>use Rack::Deflater</code></p>
+
+<p>Not sure about the exact cause, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -883,6 +927,10 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/">Find the Name of Your Colour&#8230; With F# Html Type Provider</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/03/02/using-f-number-twitter-type-provider/">Using F# Twitter Type Provider</a>
       </li>
     
@@ -896,10 +944,6 @@ To be sure, you can run <code>locale -a</code> to get a list of available locale
     
       <li class="post">
         <a href="/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/">How to Read the Toronto Star on Your Phone&#8230; As a Web Developer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/">Accelerated Mobile Pages(AMP): Week 3</a>
       </li>
     
   </ul>

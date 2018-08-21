@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wuleicanada.github.io/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/</loc>
+    <lastmod>2018-08-21T14:23:12+00:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wuleicanada.github.io/blog/2018/03/02/using-f-number-twitter-type-provider/</loc>
     <lastmod>2018-03-02T16:18:38+00:00</lastmod>
     <priority>0.8</priority>
@@ -113,14 +119,14 @@
   
   <url>
     <loc>http://wuleicanada.github.io/blog/archives/</loc>
-    <lastmod>2018-03-02T17:51:47+00:00</lastmod>
+    <lastmod>2018-08-21T14:44:16+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://wuleicanada.github.io/</loc>
-    <lastmod>2018-03-02T17:51:47+00:00</lastmod>
+    <lastmod>2018-08-21T14:44:16+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

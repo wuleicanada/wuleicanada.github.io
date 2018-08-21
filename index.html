@@ -9,7 +9,7 @@
   <meta name="author" content="Lei Wu">
 
   
-  <meta name="description" content="Recently I have been using F# a lot at work. One of the things I love most about F# is Type Providers. Combined with Intellisense in Visual Studio, &hellip;">
+  <meta name="description" content="How many colour names are there in the world? Wikipedia lists a whopping 1,500 of them: https://en.wikipedia.org/wiki/List_of_colors_(compact) The &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,144 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/">Find the Name of Your Colour&#8230; With F# Html Type Provider</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-08-21T14:23:12+00:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How many colour names are there in the world? Wikipedia lists a whopping 1,500 of them: <a href="https://en.wikipedia.org/wiki/List_of_colors_">https://en.wikipedia.org/wiki/List_of_colors_</a>(compact)</p>
+
+<p>The following F# script, given any hexidecimal colour value, returns the closet match. For example, it tells you &ldquo;#FFFFF1&rdquo; matches &ldquo;Ivory #FFFFF0&rdquo;.</p>
+
+<p>The script uses Html Type Provider to query the following three pages and generates a list of colour names:</p>
+
+<ul>
+<li>Colours A-F: <a href="https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F">https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F</a></li>
+<li>Colours G-M: <a href="https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M">https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M</a></li>
+<li>Colours N-Z: <a href="https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z">https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z</a></li>
+</ul>
+
+
+<p>It then calculates the shortest 3-D distance between your colour and the colours in the list.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">#</span><span class="k">if</span> <span class="n">INTERACTIVE</span>
+</span><span class='line'><span class="o">#</span><span class="n">r</span> <span class="s">@&quot;\Users\leiwuu\Documents\Visual Studio Code\FSharp\src\Colours\packages\FSharp.Data\lib\net45\FSharp.Data.dll&quot;</span>
+</span><span class='line'><span class="o">#</span><span class="k">else</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">Colours</span>
+</span><span class='line'><span class="o">#</span><span class="n">endif</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">open</span> <span class="nn">FSharp.Data</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours_a_f</span> <span class="o">=</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours_g_m</span> <span class="o">=</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_G%E2%80%93M&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">G</span><span class="o">-</span><span class="n">M</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``</span> <span class="o">=</span> <span class="n">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours_n_z</span> <span class="o">=</span> <span class="o">``</span><span class="n">Colours</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Load</span><span class="o">(</span><span class="s">&quot;https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z&quot;</span><span class="o">).</span><span class="n">Tables</span><span class="o">.``</span><span class="n">Colors</span> <span class="k">in</span> <span class="n">alphabetical</span> <span class="n">order</span> <span class="n">N</span><span class="o">-</span><span class="n">Z</span><span class="o">``.</span><span class="n">Rows</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">map</span><span class="o">(</span><span class="k">fun</span> <span class="n">r</span> <span class="o">-&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">Name</span><span class="o">,</span> <span class="n">r</span><span class="o">.``</span><span class="n">Hex</span> <span class="o">(</span><span class="n">RGB</span><span class="o">)``)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Combine the three</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">colours</span> <span class="o">=</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_g_m</span> <span class="n">colours_n_z</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">append</span> <span class="n">colours_a_f</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">distance</span> <span class="n">c1</span> <span class="n">c2</span> <span class="o">=</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="nv">hexToInt</span> <span class="n">s</span> <span class="o">=</span>
+</span><span class='line'>        <span class="nn">System</span><span class="p">.</span><span class="nn">Convert</span><span class="p">.</span><span class="n">ToInt32</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="mi">16</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// convert hex string to (R:int * G:int * B:int)</span>
+</span><span class='line'>    <span class="c1">// e.g. &quot;#FFFFFF&quot; to (255, 255, 255)</span>
+</span><span class='line'>    <span class="k">let</span> <span class="nv">getRGB</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span><span class="kt">string</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>        <span class="k">let</span> <span class="nv">r</span> <span class="o">=</span> <span class="n">c</span><span class="o">.[</span><span class="mi">1</span><span class="o">..</span><span class="mi">2</span><span class="o">]</span> <span class="o">|&gt;</span> <span class="n">hexToInt</span>
+</span><span class='line'>        <span class="k">let</span> <span class="nv">g</span> <span class="o">=</span> <span class="n">c</span><span class="o">.[</span><span class="mi">3</span><span class="o">..</span><span class="mi">4</span><span class="o">]</span> <span class="o">|&gt;</span> <span class="n">hexToInt</span>
+</span><span class='line'>        <span class="k">let</span> <span class="nv">b</span> <span class="o">=</span> <span class="n">c</span><span class="o">.[</span><span class="mi">5</span><span class="o">..</span><span class="mi">6</span><span class="o">]</span> <span class="o">|&gt;</span> <span class="n">hexToInt</span>
+</span><span class='line'>        <span class="o">(</span><span class="n">r</span><span class="o">,</span> <span class="n">g</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">let</span> <span class="o">(</span><span class="n">r1</span><span class="o">,</span> <span class="n">g1</span><span class="o">,</span> <span class="n">b1</span><span class="o">)</span> <span class="o">=</span> <span class="n">getRGB</span> <span class="n">c1</span>
+</span><span class='line'>    <span class="k">let</span> <span class="o">(</span><span class="n">r2</span><span class="o">,</span> <span class="n">g2</span><span class="o">,</span> <span class="n">b2</span><span class="o">)</span> <span class="o">=</span> <span class="n">getRGB</span> <span class="n">c2</span>
+</span><span class='line'>    <span class="o">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="o">)*(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">g1</span> <span class="o">-</span> <span class="n">g2</span><span class="o">)*(</span><span class="n">g1</span> <span class="o">-</span> <span class="n">g2</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">b1</span> <span class="o">-</span> <span class="n">b2</span><span class="o">)*(</span><span class="n">b1</span> <span class="o">-</span> <span class="n">b2</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">matchColour</span> <span class="n">colour</span> <span class="o">=</span>
+</span><span class='line'>    <span class="n">colours</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">minBy</span> <span class="o">(</span><span class="k">fun</span> <span class="n">c</span> <span class="o">-&gt;</span> <span class="n">distance</span> <span class="n">colour</span> <span class="o">(</span><span class="n">snd</span> <span class="n">c</span><span class="o">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">colours</span> <span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">length</span> <span class="o">|&gt;</span> <span class="n">printfn</span> <span class="s">&quot;Total number of colours: %i&quot;</span>
+</span><span class='line'><span class="s">&quot;#FFFFF1&quot;</span> <span class="o">|&gt;</span> <span class="n">matchColour</span> <span class="o">|&gt;</span> <span class="n">printfn</span> <span class="s">&quot;Best match for your colour: %A&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -923,50 +1061,6 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/05/heroku-cuts-off-page-due-to-content-length-limit/">Heroku Cuts Off Page Due to Content-Length Limit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-03-05T19:00:48+00:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Deployed a Sinatra application to Heroku and noticed one page (more than 980K) got cut off.</p>
-
-<p>Tried using Puma instead of Thin, but it still didn&rsquo;t work (although the page got cut off at a different place).</p>
-
-<p>The solution is to compress the content.</p>
-
-<p><code>use Rack::Deflater</code></p>
-
-<p>Not sure about the exact cause, but maybe it&rsquo;s somehow related to Heroku&rsquo;s limit on Response Buffer (<a href="https://devcenter.heroku.com/articles/http-routing#request-buffering">https://devcenter.heroku.com/articles/http-routing#request-buffering</a>)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -982,6 +1076,10 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/08/21/find-the-name-of-your-colour-with-f-sharp-html-type-provider/">Find the Name of Your Colour&#8230; With F# Html Type Provider</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/03/02/using-f-number-twitter-type-provider/">Using F# Twitter Type Provider</a>
       </li>
     
@@ -995,10 +1093,6 @@ The ENUM database will be queried by other VoIP services such as SIPBroker. The 
     
       <li class="post">
         <a href="/blog/2016/04/04/how-to-read-the-toronto-star-on-your-phone-dot-dot-dot-as-a-web-developer/">How to Read the Toronto Star on Your Phone&#8230; As a Web Developer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/18/accelerated-mobile-pages-amp-week-3/">Accelerated Mobile Pages(AMP): Week 3</a>
       </li>
     
   </ul>
