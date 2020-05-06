@@ -1,1 +1,0 @@
-{"version":3,"sources":["giggin/components/header.cljs"],"mappings":";;AAEA,AAAA,AAAMA;AAAN,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA","names":["nicholas.components.header/header"],"sourcesContent":["(ns nicholas.components.header)\r\n\r\n(defn header []\r\n  [:header\r\n   [:img.logo {:src \"img/giggin-logo.svg\" :alt \"Giggin logo\"}]])"]}
