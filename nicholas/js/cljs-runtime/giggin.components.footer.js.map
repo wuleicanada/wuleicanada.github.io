@@ -1,1 +1,0 @@
-{"version":3,"sources":["giggin/components/footer.cljs"],"mappings":";;AAEA,AAAA,AAAMA;AAAN,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA,AAAA","names":["nicholas.components.footer/footer"],"sourcesContent":["(ns nicholas.components.footer)\r\n\r\n(defn footer []\r\n  [:footer\r\n   [:img {:src \"img/giggin-icon.png\" :alt \"Giggin logo\"}]])"]}
