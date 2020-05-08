@@ -13,12 +13,10 @@
 
 (defn generate-a-b-op [min max]
   (let [span (- max min)
+        op (get-op)
         a (+ min (rand-int span))
-        b (+ min (rand-int span))
-        op (get-op)]
-    (if (and (= op -) (< a b))
-      (recur min max)
-      {:a a :b b :op op})))
+        b (if (= + op) (+ min (rand-int span)) (+ min (rand-int (- a min))))]
+      {:a a :b b :op op}))
 
 (defn format-number [num spaces]
   (let [padding (apply str (repeat spaces (char 160)))]
@@ -42,7 +40,7 @@
 (defn get-compliment []
   (let [compliments ["Good job!" "Great!" "Awesome!" "Excellent!" "You're so smart!" 
                      "Bon travail!" "Nice work!" "Gut gemacht!" "Ausgezeichnet!" "Well done!"
-                     "So proud of you!" "You're the best!"]]
+                     "So proud of you!" "You're the best!" "Yay!"]]
     (pick-one compliments)))
 
 (defn question [min max]
@@ -50,7 +48,7 @@
     {:keys [a b op]} @data]
     [:div.math.large
       [:p (format-number a 3)]
-      [:p (if (= 2 (op 1 1)) "+" "-") (format-number b 2)]
+      [:p (if (= + op) "+" "-") (format-number b 2)]
       [:hr]
       [:span (char 160)]     
       [:input.large.right 
