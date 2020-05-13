@@ -9,14 +9,18 @@
     (get col random-index)))
 
 (defn get-op []
-  (pick-one [+ -]))
+  (pick-one [+ - *]))
 
 (defn generate-a-b-op [min max]
   (let [span (- max min)
         op (get-op)
         a (+ min (rand-int span))
-        b (if (= + op) (+ min (rand-int span)) (+ min (rand-int (- a min))))]
-      {:a a :b b :op op}))
+        b (
+           condp = op
+             + (+ min (rand-int span)) 
+             - (+ min (rand-int (- a min)))
+             * (rand-int 3))]
+    {:a a :b b :op op}))
 
 (defn format-number [num spaces]
   (let [padding (apply str (repeat spaces (char 160)))]
@@ -48,7 +52,11 @@
     {:keys [a b op]} @data]
     [:div.math.large
       [:p (format-number a 3)]
-      [:p (if (= + op) "+" "-") (format-number b 2)]
+      [:p (condp = op
+            + "+" 
+            - "-"
+            * "×")
+        (format-number b 2)]
       [:hr]
       [:span (char 160)]     
       [:input.large.right 
