@@ -4,7 +4,7 @@
 
 (defn app []
   [:div.container
-   [m/question 0 10]])
+   [m/question 0 12]])
 
 (defn ^:export main []
   (rdom/render
