@@ -1,17 +1,10 @@
 (ns nicholas.math
   (:require [reagent.core :as r]))
 
-(defn pick-one
-  "Randomly pick one item from a collection"
-  [col]
-  (let [total (count col)
-        random-index (rand-int total)]
-    (get col random-index)))
+(defn- get-op []
+  (rand-nth [+ - *]))
 
-(defn get-op []
-  (pick-one [+ - *]))
-
-(defn generate-a-b-op [min max]
+(defn- generate-a-b-op [min max]
   (let [span (- max min)
         op (get-op)
         a (+ min (rand-int span))
@@ -22,16 +15,7 @@
              * (rand-int 3))]
     {:a a :b b :op op}))
 
-(defn format-number [num spaces]
-  (let [padding (apply str (repeat spaces (char 160)))]
-    (->> num
-    (str padding)
-    (reverse)
-    (take spaces)
-    (reverse)
-    (apply str))))
-
-(defn get-emoji []
+(defn- get-emoji []
   (let [emojis ["😀" "😃" "😄" "😁" "😆" "😅" "🤣" "😂" "🙂" "🙃" 
                 "😉" "😊" "😇" "😍" "😘" "😗" "😚" "😙" "😋" "😛" 
                 "😜" "🍇" "🍈" "🍉" "🍊" "🍋" "🍌" "🍍" "🍎" "🍏" 
@@ -40,13 +24,22 @@
                 "🧀" "🍖" "🍗" "🥓" "🍔" "🍟" "🍕" "🌭" "🌮" "⚽"
                 "❤️" "👍" "🖐️" "👨‍👨‍👧‍👦" "💡" "⛏️" "🛴" "🚲" "💯" "🏀"
                 "🌈" "⭐" "☀️" "🌎" "🍄" "🌻" "🐠" "🐼" "🐷" "🐶"]]
-    (pick-one emojis)))
+    (rand-nth emojis)))
 
-(defn get-compliment []
+(defn- get-compliment []
   (let [compliments ["Good job!" "Great!" "Awesome!" "Excellent!" "You're so smart!" 
                      "Bon travail!" "Nice work!" "Gut gemacht!" "Ausgezeichnet!" "Well done!"
                      "So proud of you!" "You're the best!" "Yay!"]]
-    (pick-one compliments)))
+    (rand-nth compliments)))
+
+(defn- format-number [num spaces]
+  (let [padding (apply str (repeat spaces (char 160)))]
+    (->> num
+    (str padding)
+    (reverse)
+    (take spaces)
+    (reverse)
+    (apply str))))
 
 (defn question [min max]
   (let [data (r/atom (generate-a-b-op min max))
