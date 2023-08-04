@@ -3,6 +3,761 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        var jQuery;
+var _url;
+var _title;
+var _width;
+var _height;
+
+function GetWidget(url, title) {
+    GNW_GetWidget(url, title);
+}
+
+
+function GNW_GetWidget(url, title) {
+    _url = url;
+    _title = title;
+
+    if (_url == '' || typeof (_url) === 'undefined') {
+        alert('Please make sure a data source is provided.');
+    }
+
+    var hostname = GNW_GetHost(url);
+
+    if (_title == '' || typeof (_title) === 'undefined') {
+        _title = 'GlobeNewswire News Widget';
+    }
+
+    /******** Load jQuery if not present *********/  //(window.jQuery === undefined || window.jQuery.fn.jquery !== '1.7.2')
+    if (window.jQuery === undefined || window.jQuery.fn.jquery !== '1.7.2') {
+            var scriptTag = document.createElement('script');
+            scriptTag.setAttribute("type", "text/javascript");
+            scriptTag.setAttribute("src", hostname +"Scripts/jquery-1.7.2.min.js");
+            if (scriptTag.readyState) {
+                scriptTag.onreadystatechange = function () { // For old versions of IE
+                    if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                        GNW_ScriptLoadHandler();
+                    }
+                };
+            } else {
+                scriptTag.onload = GNW_ScriptLoadHandler;
+            }
+            (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(scriptTag);
+        } else {
+            jQuery = window.jQuery;
+            GNW_Main();
+        }
+}
+
+var GNW_GetLocation = function (href) {
+    var l = document.createElement("a");
+    l.href = href;
+    return l;
+};
+
+function GNW_ScriptLoadHandler() {
+    jQuery = window.jQuery.noConflict(true);
+    GNW_Main();
+}
+
+function GNW_ConvertTo12Hrs(yourDateTime) {
+    var myDate = new Date(yourDateTime);
+    var dtObject = new Object();
+    var monthsCollection = { 0: "January", 1: "February", 2: "March", 3: "April", 4: "May", 5: "June", 6: "July", 7: "August", 8: "September", 9: "October", 10: "November", 11: "December" };
+    var monthsShortCollection = { 0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "Jun", 6: "Jul", 7: "Aug", 8: "Sep", 9: "Oct", 10: "Nov", 11: "Dec" };
+    var weekDayCollection = { 0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday" };
+    var weekDayShortCollection = { 0: "Sun", 1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat" };
+
+    dtObject.Year = myDate.getFullYear();
+    dtObject.Month = monthsCollection[myDate.getMonth()];
+    dtObject.MonthShort = monthsShortCollection[myDate.getMonth()];
+    dtObject.Day = (myDate.getDate() < 10) ? "0" + myDate.getDate() : myDate.getDate();
+    dtObject.WeekDay = weekDayCollection[myDate.getDay()];
+    dtObject.WeekDayShort = weekDayShortCollection[myDate.getDay()];
+    dtObject.Minutes = (myDate.getMinutes() < 10) ? "0" + myDate.getMinutes() : myDate.getMinutes();
+    dtObject.Seconds = (myDate.getSeconds() < 10) ? "0" + myDate.getSeconds() : myDate.getSeconds();
+    dtObject.DateTime = yourDateTime;
+    dtObject.AmPmSwitch = (myDate.getHours() > 12) ? "PM" : "AM";
+    dtObject.LongHour = myDate.getHours();
+    // Convert the hours
+    dtObject.ShortHour = (dtObject.LongHour > 12) ? dtObject.LongHour - 12 : myDate.getHours();
+
+    // Add the 0 as prefix if its less than 10
+    dtObject.ShortHour = (dtObject.ShortHour < 10) ? "0" + dtObject.ShortHour : dtObject.ShortHour;
+    
+    return dtObject;
+}
+
+function GNW_FormatJSONDate(jsonDate) {
+    var date = new Date(jsonDate);
+    var isValid = !isNaN(date.valueOf());
+    var newDate;
+    if (isValid) {
+        newDate = date;
+    }
+    else {
+        newDate = new Date(parseInt(jsonDate.substr(6)));
+    }
+    var dateTo12Hrs = GNW_ConvertTo12Hrs(newDate);
+    var widgetDateTime = dateTo12Hrs.WeekDayShort + " " + dateTo12Hrs.MonthShort + " " + dateTo12Hrs.Day + " " + dateTo12Hrs.Year + " " + dateTo12Hrs.ShortHour + ":" + dateTo12Hrs.Minutes + ":" + dateTo12Hrs.Seconds + " " + dateTo12Hrs.AmPmSwitch;
+    return widgetDateTime;
+
+}
+
+function GNW_GetHost(myurl) {
+    var hostname = GNW_GetLocation(myurl).hostname;
+    var protocal = document.location.protocol;
+    
+    var islocal = false;
+    if (hostname == 'localhost') {
+        islocal = true;
+    }
+    
+    if (GNW_GetLocation(myurl).port != null &&
+        GNW_GetLocation(myurl).port != "" && 
+        GNW_GetLocation(myurl).port != 80) {
+        hostname = protocal + "//" + hostname + ":" + GNW_GetLocation(myurl).port + "/";
+    } else {
+        hostname = protocal + "//" + hostname + "/";
+    }
+
+    if (islocal) {
+        //hostname = hostname + "Pnr.UI/";
+    }
+    var file = hostname.substr(0, 4);
+    if (file == 'file') {
+        hostname = hostname.replace('file', 'http');
+    }
+    return hostname;
+}
+function capitalise(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+function GNW_Main() {
+    jQuery(document).ready(function ($) {
+        var jsonpUrl = _url;
+        $.getJSON(jsonpUrl, function (data) {
+
+            $('#gnw_widget').html('<div class="gnw_title">' + _title + '</div>');
+            
+            var contentStr = '';
+
+            for (i = 0; i < data.length; i++) {
+                var valueIndex = i + 1;
+                var item = ' hide article-' + valueIndex;
+                if (i <= 4) {
+                    item = "";
+                }
+                if (i % 2 == 0) {
+                    if (i >= 5) {
+                        contentStr = contentStr + '<div id="gnwArticleRow_' + i  + '"' + ' class="gnw_content_evenrow hide article-' + valueIndex + '"' + '>';
+                    }
+                    else {
+                        contentStr = contentStr + '<div id="gnwArticleRow_' + i + '"' + '  class="gnw_content_evenrow">';
+                    }
+
+                } else {
+                    if (i >= 5) {
+                        contentStr = contentStr + '<div id="gnwArticleRow_' + i + '"' + '  class="gnw_content_oddrow hide article-' + valueIndex + '"' + '>';
+                    }
+                    else {
+                        contentStr = contentStr + '<div id="gnwArticleRow_' + i + '"' + '  class="gnw_content_oddrow">';
+                    }
+                }
+                
+                if (data[i].WidgetAttachment.length > 0) {
+                    contentStr = contentStr + '<div class="gnw_image_spacer"><div class="gnw_logo_image_box"><img class="gnw_logo_image_center" src=' + GNW_GetHost(_url) + data[i].WidgetAttachment[0].ImageUrl + ' /></div></div>';
+                }
+                else if (data[i].OrgLogo.ImageUrl != null) {
+                    contentStr = contentStr + '<div class="gnw_image_spacer"><div class="gnw_logo_image_box"><img class="gnw_logo_image_center" alt="' + data[i].OrgName + '" src=' + GNW_GetHost(_url) + data[i].OrgLogo.ImageUrl + ' /></div></div>';
+                }
+                if (data[i].OrgName != null) {
+                    contentStr = contentStr + '<p class="gnw_company_name">' + data[i].OrgName + '</p>';
+                }
+                contentStr = contentStr + '<p class="gnw_headline gnw_bold"><a href=' + data[i].Url + '>' + data[i].Title + '</a></p>';
+                //contentStr = contentStr + '<div class="gnw_margin"><p class="gnw_pubdate">' + GNW_FormatJSONDate(data[i].ReleaseDateTime) + '</p> </div>';
+                contentStr = contentStr + '<div class="gnw_margin"><p class="gnw_pubdate" id=pbDate' + i + '>' + GNW_FormatJSONDate(data[i].ReleaseDateTime) + '</p><input type="hidden" id="hdnpbDate'+i +'" ' + ' value='+ '"' + GNW_FormatJSONDate(data[i].ReleaseDateTime) + '" '  +' /> </div>';
+                if (data[i].IsFullTextRss == true && document.location.protocol == 'http:') {
+                    contentStr = contentStr + '<div class="gnw_margin"><p>' + data[i].Content + '</p></div>';
+                }
+
+                contentStr = contentStr +'</div>';
+            }
+
+            $('#gnw_widget').append(contentStr);
+            //--new code
+            if (($.trim($('#gnw_widget').html()).length) > 0) {
+                if ($("#widget-all-color").length) {
+                    $("#widget-all-color").spectrum({
+                        color: rgb2hex($(".gnw_headline a").css('color')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_content_container a').css('color', color.toRgbString());
+
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+                if ($("#headline-size").length) {
+                    $("#headline-size").val($(".gnw_headline").css('font-size').replace("px", ""));
+                }
+
+                if ($("#company-size").length) {
+                    $("#company-size").val($(".gnw_company_name").css('font-size').replace("px", ""));
+                }
+
+                if ($("#title-size").length) {
+                    $("#title-size").val($(".gnw_title").css('font-size').replace("px", ""));
+                }
+
+                if ($("#date-size").length) {
+                    $("#date-size").val($(".gnw_pubdate").css('font-size').replace("px", ""));
+                }
+
+                if ($("#widget-width-slider").length) {
+                    var articleWidth = $('.widget__width-height--container').css('width').replace("px", "");
+                    $("#widget-width-slider").slider('value', articleWidth);
+                    $("#widget-width-value").val(" " + $('.widget__width-height--container').css('width'));
+                }
+
+                if ($("#widget-height-slider").length) {
+                    var articleHeght = $('.widget__width-height--container').css('height').replace("px", "");
+                    $("#widget-height-slider").slider('value', articleHeght);
+                    $("#widget-height-value").val(" " + $('.widget__width-height--container').css('height'));
+                }
+
+                if ($("#widgetlineStyle").length) {
+                    var lineStyle = $(".gnw_content_evenrow").css('border-bottom-style');
+                    $("#widgetlineStyle").val(lineStyle);
+
+                    capitalise(string);
+
+                }
+
+                if ($("#widget-line-slider").length) {
+                    var sliderwidth = $('.gnw_content_oddrow').css('border-bottom-width').replace("px", "");
+                    $("#widget-line-slider").slider('value', sliderwidth);
+                    $("#widget-line-value").val(" " + $('.gnw_content_oddrow').css('border-bottom-width'));
+                }
+
+                if ($("#widget-hr-slider").length) {
+                    var sliderpadding = $('.gnw_content_oddrow').css('padding-bottom').replace("px", "");
+                    $("#widget-hr-slider").slider('value', sliderpadding);
+                    $("#widget-hr-value").val(" " + $('.gnw_content_oddrow').css('padding-bottom'));
+                }
+
+
+                if ($("#widgetnumberofArticleId").length) {
+                    $("#widgetnumberofArticleId").val($('.hideme').css('height').replace("px", ""));
+                    if ($("#widgetnumberofArticleId").val() > 5) {
+                        var countArticle = $("#widgetnumberofArticleId").val();
+                        //var countHide = $('.gnw_content_evenrow.hide').length + $('.gnw_content_oddrow.hide').length;
+                        var itemValueHide = parseInt(countArticle, 10);
+                        for (var i = 6 ; i <= countArticle ; i++) {
+                            $('.article-' + i).removeClass('hide');
+                        }
+                        $('.hideme').css({ "visibility": "false", "display": "none" });
+                    }
+                }
+                else
+                {
+                    var countArticle = $('.hideme').css('height').replace("px", "");
+                    if (countArticle > 5)
+                    {
+                        var itemValueHide = parseInt(countArticle, 10);
+                        for (var i = 6 ; i <= countArticle ; i++)
+                        {
+                            $('.article-' + i).removeClass('hide');
+                        }
+                        $('.hideme').css({ "visibility": "false", "display": "none" });
+                    }
+                }
+
+                if ($("#title-style").length) {
+                    var titlefontweight = $(".gnw_title").css('font-weight');
+                    var titlefontstyle = $(".gnw_title").css('font-style');
+                    var titleTextDdecoration = $(".gnw_title").css('text-decoration');
+                    if (titleTextDdecoration == "underline") {
+                        $("#title-style").val("underline");
+                    }
+                    else if (titlefontstyle == "italic" && titlefontweight == "bold") {
+                        $("#title-style").val("bolditalic");
+                    }
+                    else if (titlefontstyle == "normal" && titlefontweight == "bold") {
+                        $("#title-style").val("bold");
+                    }
+                    else if (titlefontstyle == "italic" && titlefontweight == "normal") {
+                        $("#title-style").val("italic");
+                    }
+                    else if (titlefontstyle == "normal" && titlefontweight == "normal") {
+                        $("#title-style").val("normal");
+                    }
+                    capitalise(string);
+                }
+                if ($("#headline-style").length) {
+                    var headlineFontweight = $(".gnw_headline").css('font-weight');
+                    var headlinefontstyle = $(".gnw_headline").css('font-style');
+                    var headlineTextDdecoration = $(".gnw_headline").css('text-decoration');
+
+                    if (headlineTextDdecoration == "underline") {
+                        $("#headline-style").val("underline");
+                    }
+                    else if (headlinefontstyle == "italic" && headlineFontweight == "bold") {
+                        $("#headline-style").val("bolditalic");
+                    }
+                    else if (headlinefontstyle == "normal" && headlineFontweight == "bold") {
+                        $("#headline-style").val("bold");
+                    }
+                    else if (headlinefontstyle == "italic" && headlineFontweight == "normal") {
+                        $("#headline-style").val("italic");
+                    }
+                    else if (headlinefontstyle == "normal" && headlineFontweight == "normal") {
+                        $("#headline-style").val("normal");
+                    }
+
+                    capitalise(string);
+
+                }
+
+                if ($("#company-style").length) {
+
+                    var companyFontweight = $(".gnw_company_name").css('font-weight');
+                    var companyFontstyle = $(".gnw_company_name").css('font-style');
+                    var companyTextDdecoration = $(".gnw_company_name").css('text-decoration');
+
+                    if (companyTextDdecoration == "underline") {
+                        $("#company-style").val("underline");
+                    }
+                    else if (companyFontstyle == "italic" && companyFontweight == "bold") {
+                        $("#company-style").val("bolditalic");
+                    }
+                    else if (companyFontstyle == "normal" && companyFontweight == "bold") {
+                        $("#company-style").val("bold");
+                    }
+                    else if (companyFontstyle == "italic" && companyFontweight == "normal") {
+                        $("#company-style").val("italic");
+                    }
+                    else if (companyFontstyle == "normal" && companyFontweight == "normal") {
+                        $("#company-style").val("normal");
+                    }
+                    capitalise(string);
+
+                }
+
+                if ($("#date-style").length) {
+                    var dateFontweight = $(".gnw_pubdate").css('font-weight');
+                    var dateFontstyle = $(".gnw_pubdate").css('font-style');
+                    var dateTextDdecoration = $(".gnw_pubdate").css('text-decoration');
+                    if (dateTextDdecoration == "underline") {
+                        $("#date-style").val("underline");
+                    }
+                    else if (dateFontstyle == "italic" && dateFontweight == "bold") {
+                        $("#date-style").val("bolditalic");
+                    }
+                    else if (dateFontstyle == "normal" && dateFontweight == "bold") {
+                        $("#date-style").val("bold");
+                    }
+                    else if (dateFontstyle == "italic" && dateFontweight == "normal") {
+                        $("#date-style").val("italic");
+                    }
+                    else if (dateFontstyle == "normal" && dateFontweight == "normal") {
+                        $("#date-style").val("normal");
+                    }
+
+                    capitalise(string);
+                }
+
+
+                if ($("#widget-background-color").length) {
+                    $("#widget-background-color").spectrum({
+                        color: rgb2hex($(".gnw_content_evenrow").css('backgroundColor')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_content_evenrow').css('background', color.toRgbString());
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#widget-alt-background-color").length) {
+                    $("#widget-alt-background-color").spectrum({
+                        color: rgb2hex($(".gnw_content_oddrow").css('backgroundColor')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_content_oddrow').css('background', color.toRgbString());
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#line-color").length) {
+                    $("#line-color").spectrum({
+                        color: rgb2hex($(".gnw_content_oddrow").css('border-bottom-color')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_content_evenrow').css('border-bottom-color', color.toRgbString());
+                            $('.gnw_content_oddrow').css('border-bottom-color', color.toRgbString());
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#title-color").length) {
+                    $("#title-color").spectrum({
+                        color: rgb2hex($(".gnw_title").css('color')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_title').css('color', color.toRgbString());
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#header-color").length) {
+                    $("#header-color").spectrum({
+                        color: rgb2hex($(".gnw_headline a").css('color')),  //gnw_headline a
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_headline a').css('color', color.toRgbString());  //gnw_headline a
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#company-title-color").length) {
+                    $("#company-title-color").spectrum({
+                        color: rgb2hex($(".gnw_company_name").css('color')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_company_name').css('color', color.toRgbString());
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#date-color").length) {
+                    $("#date-color").spectrum({
+                        color: rgb2hex($(".gnw_pubdate").css('color')),
+                        showInput: true,
+                        showInitial: true,
+                        showPalette: true,
+                        showSelectionPalette: true,
+                        maxPaletteSize: 10,
+                        preferredFormat: "hex",
+                        change: function (color) {
+                            $('.gnw_pubdate').css('color', color.toRgbString());
+                            $("#save_css").attr("disabled", false).css("cursor", "pointer");
+                            $("#save_css").addClass('submit-default');
+
+                        },
+                        palette: [
+                            ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
+                            "rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
+                            ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                            "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                            ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                            "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                            "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                            "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                            "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                            "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                            "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                            "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                            "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                            "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                        ]
+                    });
+                }
+
+                if ($("#date-format").length) {
+                    $("#date-format").val($('.hidePbDate').css('height').replace("px", ""));
+                    $('.hidePbDate').css({ "visibility": "false", "display": "none" });
+                    SetPublishDate();
+                }
+                else {
+                    var itemDate = $('.hidePbDate').css('height').replace("px", "");
+                    SetWidgetDate();
+                    $('.hidePbDate').css({ "visibility": "false", "display": "none" });
+                    function SetWidgetDate() {
+                        var countpbRows = $('.gnw_content_evenrow').length + $('.gnw_content_oddrow').length;
+                        if (countpbRows > 0) {
+                            for (var x = 0; x < countpbRows; x++) {
+                                var bpDate = $("#hdnpbDate" + x).val();
+                                if (bpDate.length > 0) {
+                                    var seVal = itemDate;
+                                    var strSplit = bpDate.split(' ');
+                                    var dy;
+                                    var dt;
+                                    var year;
+                                    var mth;
+                                    var mthName;
+                                    var time;
+                                    var timeSplit;
+                                    var timeHH;
+                                    var timeMM;
+                                    var timeSS;
+                                    var amPM;
+                                    var finalDate;
+                                    var months = { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 };
+                                    for (var i = 0 ; i <= strSplit.length; i++) {
+                                        if (i == 0) {
+                                            dy = strSplit[i]
+                                        }
+                                        else if (i == 1) {
+                                            var mth = months[strSplit[i]];
+                                            var mthName = strSplit[i];
+                                        }
+                                        else if (i == 2) {
+                                            dt = strSplit[i]
+                                        }
+                                        else if (i == 3) {
+                                            year = strSplit[i]
+                                        }
+                                        else if (i == 4) {
+                                            time = strSplit[i]
+                                            timeSplit = time.split(':');
+                                            timeHH = timeSplit[0];
+                                            timeMM = timeSplit[1];
+                                            timeSS = timeSplit[2];
+                                        }
+                                        else if (i == 5) {
+                                            amPM = strSplit[i]
+                                        }
+                                    }
+                                    if (seVal == "1") {
+                                        finalDate = year + '/' + mth + '/' + dt;
+                                    }
+                                    else if (seVal == "2") {
+                                        finalDate = mth + '/' + dt + '/' + year;
+                                    }
+                                    else if (seVal == "3") {
+                                        finalDate = mth + '/' + dt + '/' + year + "  " + timeHH + ":" + timeMM + " " + amPM;
+                                    }
+                                    else if (seVal == "4") {
+                                        finalDate = timeHH + ":" + timeMM + " " + amPM + "  " + mth + '/' + dt + '/' + year;
+                                    }
+                                    else if (seVal == "5") {
+                                        finalDate = bpDate;
+                                    }
+                                    else if (seVal == "6") {
+                                        finalDate = timeHH + ":" + timeMM + ":" + timeSS + " " + amPM + " " + dy + "  " + mthName + " " + dt + " " + year;
+                                    }
+                                    else if (seVal == "7") {
+                                        finalDate = dy + "  " + mthName + " " + dt + " " + year;
+                                    }
+                                    else if (seVal == "8") {
+                                        finalDate = mthName + " " + dt + " " + year;
+                                    }
+                                    $("#pbDate" + x).html(finalDate);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if ($('#divFontTitle .font-select a span').length) {
+                    var defaultFont = $(".gnw_title").css('font-family');
+                    if (defaultFont != 'Helvetica, Arial, Verdana, sans-serif') {
+                        $('#divFontTitle .font-select a span').text($(".gnw_title").css('font-family'));
+                    }
+                }
+                if ($('#divFontHeadline .font-select a span').length) {
+                    var defaultFont = $(".gnw_headline").css('font-family');
+                    if (defaultFont != 'Arial, Helvetica, sans-serif') {
+                        $('#divFontHeadline .font-select a span').text($(".gnw_headline").css('font-family'));
+                    }
+                }
+                if ($('#divFontCompany .font-select a span').length) {
+                    var defaultFont = $(".gnw_company_name").css('font-family');
+                    if (defaultFont != 'Arial, Helvetica, sans-serif') {
+                        $('#divFontCompany .font-select a span').text($(".gnw_company_name").css('font-family'));
+                    }
+                }
+                if ($('#divFontDateFormat .font-select a span').length) {
+                    var defaultFont = $(".gnw_pubdate").css('font-family');
+                    if (defaultFont != 'Arial, Helvetica, sans-serif') {
+                        $('#divFontDateFormat .font-select a span').text($(".gnw_pubdate").css('font-family'));
+                    }
+                }
+            }
+        });        
+    });
+
+    jQuery = window.jQuery;
+    LogUserActivity();
+}
+
+
+//Logs JavaScript Widget user activity.
+function LogUserActivity() {
+    jQuery(document).ready(function ($) {
+        $.ajax({
+        cache: false,
+        url: window.userActivityUrl
+      });
+    });
+}
+
+    </script>
 </head>
 <body>
 
