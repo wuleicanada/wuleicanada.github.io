@@ -1,0 +1,58 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+            <meta charset="utf-8">
+            <title>Web</title>
+            <script type="text/javascript">
+
+                window.pnrApplicationSettings = {
+                    SelectedLocale: 'en-US',
+                    PnrHostUrl: "https://www.globenewswire.com",
+                    PnrArticleViewer: {
+                        articleData: JSON.parse('[{\"Headline\":\"Twister or Tornado?\",\"SubHeadline\":null,\"PublishedDateTime\":\"Your publication date and time will appear here.\",\"Body\":\"\\u003cp\\u003eToronto, May  01, 2025  (GLOBE NEWSWIRE) -- Twister or Tornado?\\u003c/p\\u003e  \\u003cp\\u003eAre they the same?\\u003c/p\\u003e \",\"LanguageCode\":\"eng\",\"PrimaryLogo\":\"https://ml.globenewswire.com/Resource/Download/1e87d479-34f4-4378-a73e-20b054f67771?size=3\",\"SecondaryLogos\":[],\"MediaResources\":[],\"FileResources\":[],\"RelatedLinks\":[],\"DocumentQuotes\":null,\"Tags\":[],\"CustomerName\":\"Advantest America, Inc.\",\"ArticleLanguages\":[{\"Code\":\"eng\",\"Name\":\"English\"}],\"ContactDetails\":null,\"HasContactDetails\":false,\"ContactInformationPreferenceCode\":\"Display\"}]')
+                    },
+                    ApplicationUrl: 'https://www.globenewswire.com',
+                     articleSideBarSettings: {
+                        isEnabled: true,
+                        isPreviewOnlyMode: true,
+                        orgDetails: JSON.parse('{\"name\":\"Advantest America, Inc.\",\"website\":\"http://www.advantest.co.jp/en-index.shtml\",\"location\":\"  San Jose, California, USA\",\"industryName\":null}'),
+                        pressReleaseActions: {}, //loaded in PNR
+                         releaseSummary: ""
+                    },
+                    IsClearMeVerified: 'false',
+                };
+
+                window.quoteCarouselSettings = {
+                    isEnabled: 'false',
+                    documentQuotes: 'null',
+                };
+
+            </script>
+        </head>
+        <body>
+            <div id="pnr-article-renderer-section"></div>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041"></script>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
+            <script>
+                    window.onload = function() {
+                        window.renderContextArticle("eng");
+
+                        if (window.quoteCarouselSettings.isEnabled === 'true' &&
+                            window.quoteCarouselSettings.documentQuotes &&
+                            window.quoteCarouselSettings.documentQuotes.length > 0) {
+
+                              window.setTimeout(function() {
+                                  window.renderQuoteCarousel(window.quoteCarouselSettings);
+
+                                  // this is call the function to place the carousel section
+                                  if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
+                                      window.pnrQuoteGalleryCarousel.placeCarouselSection();
+                                  }
+                              }, 100);
+                        }
+                    };
+            </script>
+        </body>
+    </html>
