@@ -33,17 +33,17 @@
         </head>
         <body>
             <div id="pnr-article-renderer-section"></div>
-            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041"></script>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041" onload="window.renderContextArticle('eng');"></script>
             <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
             <script>
-                    window.onload = function() {                       
+                    window.onload = function() {
+                        window.renderContextArticle("eng");
+
                         if (window.quoteCarouselSettings.isEnabled === 'true' &&
                             window.quoteCarouselSettings.documentQuotes &&
                             window.quoteCarouselSettings.documentQuotes.length > 0) {
 
                               window.setTimeout(function() {
-                                  window.renderQuoteCarousel(window.quoteCarouselSettings);
-
                                   // this is call the function to place the carousel section
                                   if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
                                       window.pnrQuoteGalleryCarousel.placeCarouselSection();
@@ -51,12 +51,6 @@
                               }, 100);
                         }
                     };
-
-                    
-                    window.addEventListener('DOMContentLoaded', function() {
-                        window.renderContextArticle("eng");
-                    });
-                   
             </script>
         </body>
     </html>
