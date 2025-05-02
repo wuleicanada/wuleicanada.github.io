@@ -36,9 +36,7 @@
             <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041"></script>
             <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
             <script>
-                    window.onload = function() {
-                        window.renderContextArticle("eng");
-
+                    window.onload = function() {                       
                         if (window.quoteCarouselSettings.isEnabled === 'true' &&
                             window.quoteCarouselSettings.documentQuotes &&
                             window.quoteCarouselSettings.documentQuotes.length > 0) {
@@ -53,6 +51,12 @@
                               }, 100);
                         }
                     };
+
+                    
+                    window.addEventListener('DOMContentLoaded', function() {
+                        window.renderContextArticle("eng");
+                    });
+                   
             </script>
         </body>
     </html>
