@@ -33,48 +33,30 @@
         </head>
         <body>
             <div id="pnr-article-renderer-section"></div>
-            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
-            <script>
-                const script = document.createElement('script');
-                script.src = 'https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041';
-                document.body.appendChild(script);
-
-                // Poll for the renderContextArticle function
-                const maxWaitTime = 5000; // 5 seconds timeout
-                const pollInterval = 50;
-                let waited = 0;
-
-                const interval = setInterval(() => {
-                if (typeof window.renderContextArticle === 'function') {
-                    clearInterval(interval);
-                    window.renderContextArticle('eng');
-                } else {
-                    waited += pollInterval;
-                    if (waited >= maxWaitTime) {
-                    clearInterval(interval);
-                    console.error('renderContextArticle still not available after timeout.');
-                    }
-                }
-                }, pollInterval);
-              </script>
-
-            
             <script>
                     window.onload = function() {
-                        //window.renderContextArticle("eng");
+                        
+                        // wait for the React javascript to load before calling the function
+                        window.setTimeout(function() {
+                            window.renderContextArticle("eng");
+                        }, 1000);
 
                         if (window.quoteCarouselSettings.isEnabled === 'true' &&
                             window.quoteCarouselSettings.documentQuotes &&
                             window.quoteCarouselSettings.documentQuotes.length > 0) {
 
                               window.setTimeout(function() {
+                                  window.renderQuoteCarousel(window.quoteCarouselSettings);
+
                                   // this is call the function to place the carousel section
                                   if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
                                       window.pnrQuoteGalleryCarousel.placeCarouselSection();
                                   }
-                              }, 100);
+                              }, 1500);
                         }
                     };
             </script>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041"></script>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
         </body>
     </html>
