@@ -33,30 +33,43 @@
         </head>
         <body>
             <div id="pnr-article-renderer-section"></div>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
+            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041"></script>
             <script>
                     window.onload = function() {
-                        
-                        // wait for the React javascript to load before calling the function
-                        window.setTimeout(function() {
-                            window.renderContextArticle("eng");
-                        }, 1000);
+                        //window.renderContextArticle("eng");                        
+                     
+                        // Poll for the renderContextArticle function
+                        const maxWaitTime = 5000; // 5 seconds timeout
+                        const pollInterval = 50;
+                        let waited = 0;
 
-                        if (window.quoteCarouselSettings.isEnabled === 'true' &&
-                            window.quoteCarouselSettings.documentQuotes &&
-                            window.quoteCarouselSettings.documentQuotes.length > 0) {
+                        const interval = setInterval(() => {
+                        if (typeof window.renderContextArticle === 'function') {
+                            clearInterval(interval);
+                            window.renderContextArticle('eng');
 
-                              window.setTimeout(function() {
-                                  window.renderQuoteCarousel(window.quoteCarouselSettings);
+                            if (window.quoteCarouselSettings.isEnabled === 'true' &&
+                                window.quoteCarouselSettings.documentQuotes &&
+                                window.quoteCarouselSettings.documentQuotes.length > 0) {
 
-                                  // this is call the function to place the carousel section
-                                  if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
-                                      window.pnrQuoteGalleryCarousel.placeCarouselSection();
-                                  }
-                              }, 1500);
+                                window.setTimeout(function() {
+                                    // this is call the function to place the carousel section
+                                    if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
+                                        window.pnrQuoteGalleryCarousel.placeCarouselSection();
+                                    }
+                                }, 100);
+                            }
+
+                        } else {
+                            waited += pollInterval;
+                            if (waited >= maxWaitTime) {
+                            clearInterval(interval);
+                            console.error('renderContextArticle still not available after timeout.');
+                            }
                         }
+                        }, pollInterval);   
                     };
             </script>
-            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-ui.js?v=20041"></script>
-            <script type="text/javascript" src="https://www.globenewswire.com/Scripts/React/dist/components/article-renderer/rss-article-renderer-vendor.js?v=20041"></script>
         </body>
     </html>
