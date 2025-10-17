@@ -56,7 +56,7 @@
 /* Roboto variable */
 @font-face {
     font-family: 'Roboto';
-    src: url('/Content/Fonts/font_roboto/Roboto-Regular.woff2') format('woff2');
+    src: url('https://globenewswire.com/Content/Fonts/font_roboto/Roboto-Regular.woff2') format('woff2');
     font-display: swap;
 }
 
